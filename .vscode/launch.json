@@ -1,0 +1,32 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Android Device (SM S928B)",
+      "cwd": "app",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main.dart",
+      "deviceId": "RQCX703GC5J",
+      "args": []
+    },
+    {
+      "name": "Android Device (Emulator)",
+      "cwd": "app",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main.dart",
+      "deviceId": "emulator-5554",
+      "args": []
+    },
+    {
+      "name": "iOS Simulator",
+      "cwd": "app",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main.dart",
+      "deviceId": "3ADB205F-5710-4FFD-A11B-F6FDE8184857",
+      "args": []
+    }
+  ]
+}

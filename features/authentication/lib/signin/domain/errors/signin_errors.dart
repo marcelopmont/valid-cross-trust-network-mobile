@@ -1,0 +1,1 @@
+enum SigninErrors { storageError, invalidDocument }

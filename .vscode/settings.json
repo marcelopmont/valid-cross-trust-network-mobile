@@ -1,0 +1,29 @@
+{
+  "workbench.editor.enablePreview": false,
+  "workbench.editor.enablePreviewFromQuickOpen": false,
+  "dart.runPubGetOnPubspecChanges": "never",
+  "dart.lineLength": 80,
+  "[dart]": {
+    "editor.rulers": [
+      80,
+      120
+    ]
+  },
+  "dart.analysisExcludedFolders": [
+    "**/.dart_tool",
+    "**/build"
+  ],
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "dart.flutterSdkPath": ".fvm/flutter_sdk",
+  "material-icon-theme.folders.associations": {
+    "common": "",
+    "core": "",
+    "dependencies": "",
+    "features": ""
+  },
+  "chat.tools.terminal.autoApprove": {
+    "javap": true
+  }
+}

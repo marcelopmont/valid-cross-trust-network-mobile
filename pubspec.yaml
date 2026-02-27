@@ -1,0 +1,30 @@
+name: did_app_poc
+publish_to: none
+version: 1.0.0
+
+environment:
+  sdk: ^3.9.2
+
+dev_dependencies:
+  melos: ^7.3.0
+
+workspace:
+  - app
+  - common/dependencies
+  - common/core
+  - common/network
+  - features/authentication
+  - features/home
+  - features/user_credentials
+
+melos:
+  scripts:
+    analyze:flutter:
+      run: flutter analyze .
+      description: Run Flutter analyzer on all packages.
+      packageFilters:
+        flutter: true
+
+    format:
+      run: dart format .
+      description: Run Dart formatter on all packages.

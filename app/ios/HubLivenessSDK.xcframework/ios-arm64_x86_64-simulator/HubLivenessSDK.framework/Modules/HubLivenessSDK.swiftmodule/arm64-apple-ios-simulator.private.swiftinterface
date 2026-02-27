@@ -1,0 +1,165 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 6.1.2 effective-5.10 (swiftlang-6.1.2.1.2 clang-1700.0.13.5)
+// swift-module-flags: -target arm64-apple-ios17.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -module-name HubLivenessSDK
+// swift-module-flags-ignorable: -no-verify-emitted-module-interface -interface-compiler-version 6.1.2
+import Combine
+import Foundation
+@_exported import HubLivenessSDK
+import Swift
+import SwiftUI
+import _Concurrency
+import _StringProcessing
+import _SwiftConcurrencyShims
+@_hasMissingDesignatedInitializers @_Concurrency.MainActor final public class HubLiveness : Foundation.ObservableObject {
+  @_Concurrency.MainActor public static let shared: HubLivenessSDK.HubLiveness
+  @_Concurrency.MainActor final public func initialize(config: HubLivenessSDK.HubConfig) async throws
+  @_Concurrency.MainActor final public func startLiveness(riskLevel: HubLivenessSDK.HubRiskLevel, onCompletion: @escaping (HubLivenessSDK.HubResult) -> Swift.Void) async throws
+  public typealias ObjectWillChangePublisher = Combine.ObservableObjectPublisher
+  @objc deinit
+}
+public struct HubConfig : Swift.Sendable {
+  public let apiBaseUrl: Swift.String
+  public let apiKey: Swift.String
+  public let appName: Swift.String
+  public let cekClientId: Swift.String
+  public let cekKeyId: Swift.String
+  public let cekEncryptionKey: Swift.String
+  public let localization: HubLivenessSDK.HubLocalization
+  public init(apiBaseUrl: Swift.String, apiKey: Swift.String, appName: Swift.String, cek: Swift.String, localization: HubLivenessSDK.HubLocalization = .default)
+}
+public enum HubRiskLevel : Swift.String, Swift.Sendable, Swift.CaseIterable, Swift.Codable {
+  case low
+  case medium
+  case high
+  public init?(rawValue: Swift.String)
+  public typealias AllCases = [HubLivenessSDK.HubRiskLevel]
+  public typealias RawValue = Swift.String
+  nonisolated public static var allCases: [HubLivenessSDK.HubRiskLevel] {
+    get
+  }
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public enum HubResult : Swift.Sendable {
+  case success(HubLivenessSDK.HubSuccessData)
+  case failure(HubLivenessSDK.HubError)
+  case cancelled
+}
+public struct HubSuccessData : Swift.Sendable {
+  public let faceImage: Foundation.Data
+  public let livenessScore: Swift.Double?
+  public let sessionId: Swift.String?
+  public let metadata: [Swift.String : Swift.String]
+  public init(faceImage: Foundation.Data, livenessScore: Swift.Double? = nil, sessionId: Swift.String? = nil, metadata: [Swift.String : Swift.String] = [:])
+}
+public enum HubError : Swift.Error, Swift.Sendable {
+  case notInitialized
+  case invalidConfiguration
+  case cameraPermissionDenied
+  case userCancelled
+  case timeout
+  case livenessCheckFailed(reason: Swift.String)
+  case networkError(Swift.String)
+  case unknownError(Swift.String)
+  public var localizedDescription: Swift.String {
+    get
+  }
+}
+public struct HubLocalization : Swift.Sendable {
+  public let language: HubLivenessSDK.HubSupportedLanguage?
+  public let customStrings: HubLivenessSDK.HubStrings?
+  public init(language: HubLivenessSDK.HubSupportedLanguage? = nil, customStrings: HubLivenessSDK.HubStrings? = nil)
+  public static let `default`: HubLivenessSDK.HubLocalization
+  public static let ptBR: HubLivenessSDK.HubLocalization
+  public static let es: HubLivenessSDK.HubLocalization
+}
+public enum HubSupportedLanguage : Swift.String, Swift.Sendable, Swift.CaseIterable {
+  case en
+  case ptBR
+  case es
+  public init?(rawValue: Swift.String)
+  public typealias AllCases = [HubLivenessSDK.HubSupportedLanguage]
+  public typealias RawValue = Swift.String
+  nonisolated public static var allCases: [HubLivenessSDK.HubSupportedLanguage] {
+    get
+  }
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public struct HubStrings : Swift.Sendable {
+  public let screens: HubLivenessSDK.HubScreenStrings?
+  public let feedback: HubLivenessSDK.HubFeedbackStrings?
+  public let buttons: HubLivenessSDK.HubButtonStrings?
+  public init(screens: HubLivenessSDK.HubScreenStrings? = nil, feedback: HubLivenessSDK.HubFeedbackStrings? = nil, buttons: HubLivenessSDK.HubButtonStrings? = nil)
+}
+public struct HubScreenStrings : Swift.Sendable {
+  public let captureTitle: Swift.String?
+  public let captureHelpText: Swift.String?
+  public let loadingText: Swift.String?
+  public let reviewPhotoTitle: Swift.String?
+  public let reviewPhotoInstruction: Swift.String?
+  public let getReadyTitle: Swift.String?
+  public let getReadySubtitle: Swift.String?
+  public let getReadyMessage: Swift.String?
+  public let getReadyMessageLine2: Swift.String?
+  public let retryTitle: Swift.String?
+  public let retrySubtitle: Swift.String?
+  public let retryTip1: Swift.String?
+  public let retryTip2: Swift.String?
+  public let yourImageLabel: Swift.String?
+  public let idealImageLabel: Swift.String?
+  public let uploadingMessage: Swift.String?
+  public let uploadingSlowConnection: Swift.String?
+  public let successMessage: Swift.String?
+  public init(captureTitle: Swift.String? = nil, captureHelpText: Swift.String? = nil, loadingText: Swift.String? = nil, reviewPhotoTitle: Swift.String? = nil, reviewPhotoInstruction: Swift.String? = nil, getReadyTitle: Swift.String? = nil, getReadySubtitle: Swift.String? = nil, getReadyMessage: Swift.String? = nil, getReadyMessageLine2: Swift.String? = nil, retryTitle: Swift.String? = nil, retrySubtitle: Swift.String? = nil, retryTip1: Swift.String? = nil, retryTip2: Swift.String? = nil, yourImageLabel: Swift.String? = nil, idealImageLabel: Swift.String? = nil, uploadingMessage: Swift.String? = nil, uploadingSlowConnection: Swift.String? = nil, successMessage: Swift.String? = nil)
+}
+public struct HubFeedbackStrings : Swift.Sendable {
+  public let noFaceDetected: Swift.String?
+  public let multipleFaces: Swift.String?
+  public let faceCentered: Swift.String?
+  public let tooClose: Swift.String?
+  public let tooFar: Swift.String?
+  public let tooLeft: Swift.String?
+  public let tooRight: Swift.String?
+  public let tooHigh: Swift.String?
+  public let tooLow: Swift.String?
+  public let moveToEyeLevel: Swift.String?
+  public let invalidIED: Swift.String?
+  public let faceAngleMisaligned: Swift.String?
+  public let lookStraightAhead: Swift.String?
+  public let holdHeadStraight: Swift.String?
+  public let closedEyes: Swift.String?
+  public let smiling: Swift.String?
+  public let neutralExpression: Swift.String?
+  public let removeDarkGlasses: Swift.String?
+  public let tooDark: Swift.String?
+  public let tooBright: Swift.String?
+  public let lightFaceEvenly: Swift.String?
+  public let brightenEnvironment: Swift.String?
+  public let holdSteady: Swift.String?
+  public let frameYourFace: Swift.String?
+  public init(noFaceDetected: Swift.String? = nil, multipleFaces: Swift.String? = nil, faceCentered: Swift.String? = nil, tooClose: Swift.String? = nil, tooFar: Swift.String? = nil, tooLeft: Swift.String? = nil, tooRight: Swift.String? = nil, tooHigh: Swift.String? = nil, tooLow: Swift.String? = nil, moveToEyeLevel: Swift.String? = nil, invalidIED: Swift.String? = nil, faceAngleMisaligned: Swift.String? = nil, lookStraightAhead: Swift.String? = nil, holdHeadStraight: Swift.String? = nil, closedEyes: Swift.String? = nil, smiling: Swift.String? = nil, neutralExpression: Swift.String? = nil, removeDarkGlasses: Swift.String? = nil, tooDark: Swift.String? = nil, tooBright: Swift.String? = nil, lightFaceEvenly: Swift.String? = nil, brightenEnvironment: Swift.String? = nil, holdSteady: Swift.String? = nil, frameYourFace: Swift.String? = nil)
+}
+public struct HubButtonStrings : Swift.Sendable {
+  public let back: Swift.String?
+  public let capture: Swift.String?
+  public let retake: Swift.String?
+  public let submit: Swift.String?
+  public let switchCamera: Swift.String?
+  public let flashOn: Swift.String?
+  public let flashOff: Swift.String?
+  public let imReady: Swift.String?
+  public let tryAgain: Swift.String?
+  public let ok: Swift.String?
+  public let continueButton: Swift.String?
+  public init(back: Swift.String? = nil, capture: Swift.String? = nil, retake: Swift.String? = nil, submit: Swift.String? = nil, switchCamera: Swift.String? = nil, flashOn: Swift.String? = nil, flashOff: Swift.String? = nil, imReady: Swift.String? = nil, tryAgain: Swift.String? = nil, ok: Swift.String? = nil, continueButton: Swift.String? = nil)
+}
+extension HubLivenessSDK.HubLiveness : Swift.Sendable {}
+extension HubLivenessSDK.HubRiskLevel : Swift.Equatable {}
+extension HubLivenessSDK.HubRiskLevel : Swift.Hashable {}
+extension HubLivenessSDK.HubRiskLevel : Swift.RawRepresentable {}
+extension HubLivenessSDK.HubSupportedLanguage : Swift.Equatable {}
+extension HubLivenessSDK.HubSupportedLanguage : Swift.Hashable {}
+extension HubLivenessSDK.HubSupportedLanguage : Swift.RawRepresentable {}

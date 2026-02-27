@@ -1,0 +1,148 @@
+# =============================================================================
+# Flutter / Dart
+# =============================================================================
+**/doc/api/
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.flutter-plugin*
+.packages
+.pub-cache/
+.pub/
+build/
+/coverage/
+
+# Locks — keep only the app lock file
+**/pubspec.lock
+!app/pubspec.lock
+
+# Generated files
+*.g.dart
+*.gr.dart
+*.freezed.dart
+*.mocks.dart
+
+# Symbolication / obfuscation
+app.*.symbols
+app.*.map.json
+
+# =============================================================================
+# Melos (monorepo)
+# =============================================================================
+pubspec_overrides.yaml
+melos_*.iml
+
+# =============================================================================
+# FVM (Flutter Version Manager)
+# =============================================================================
+.fvm/
+.fvmrc
+
+# =============================================================================
+# Android
+# =============================================================================
+**/android/**/gradle-wrapper.jar
+**/android/.gradle
+**/android/captures/
+**/android/gradlew
+**/android/gradlew.bat
+**/android/local.properties
+**/android/**/GeneratedPluginRegistrant.java
+**/android/key.properties
+**/android/**/*.keystore
+**/android/**/*.jks
+
+# =============================================================================
+# iOS / macOS / Xcode
+# =============================================================================
+**/ios/**/*.mode1v3
+**/ios/**/*.mode2v3
+**/ios/**/*.moved-aside
+**/ios/**/*.pbxuser
+**/ios/**/*.perspectivev3
+**/ios/**/*.zip
+**/ios/**/*.ipa
+**/ios/**/*sync/
+**/ios/**/.sconsign.dblite
+**/ios/**/.tags*
+**/ios/**/.vagrant/
+**/ios/**/DerivedData/
+**/ios/**/Icon?
+**/ios/**/Pods/
+**/ios/**/.symlinks/
+**/ios/**/profile
+**/ios/**/xcuserdata
+**/ios/.generated/
+**/ios/build/
+**/ios/Flutter/App.framework
+**/ios/Flutter/Flutter.framework
+**/ios/Flutter/Generated.xcconfig
+**/ios/Flutter/app.flx
+**/ios/Flutter/app.zip
+**/ios/Flutter/flutter_assets/
+**/ios/Flutter/flutter_export_environment.sh
+**/ios/Flutter/.last_build_id
+**/ios/ServiceDefinitions.json
+**/ios/Runner/GeneratedPluginRegistrant.*
+**/ios/fastlane/*.xml
+**/ios/fastlane/report.xml
+**/macos/**/Pods/
+**/macos/**/.symlinks/
+**/macos/**/xcuserdata
+**/macos/**/DerivedData/
+.swiftpm/
+
+# Exceptions
+!**/ios/**/default.mode1v3
+!**/ios/**/default.mode2v3
+!**/ios/**/default.pbxuser
+!**/ios/**/default.perspectivev3
+
+# =============================================================================
+# IDEs
+# =============================================================================
+
+# IntelliJ / Android Studio
+*.ipr
+*.iws
+.idea/
+!.idea/runConfigurations/
+
+# VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# =============================================================================
+# OS
+# =============================================================================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+
+# =============================================================================
+# Misc
+# =============================================================================
+*.class
+*.log
+*.pyc
+*.swp
+.atom/
+.buildlog/
+.history
+.svn/
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.p12
+*.mobileprovision
+google-services.json
+GoogleService-Info.plist

@@ -1,0 +1,39 @@
+name: app
+description: 'A DID PoC App'
+publish_to: none
+version: 1.0.0+1
+resolution: workspace
+
+environment:
+  sdk: ^3.9.2
+
+dependencies:
+  authentication: ^0.0.1
+  core: ^0.0.1
+  dependencies: ^0.0.1
+  flutter:
+    sdk: flutter
+  home: ^0.0.1
+  network: ^0.0.1
+  user_credentials: ^0.0.1
+  wallet: ^0.0.1
+
+dev_dependencies:
+  flutter_launcher_icons: ^0.14.4
+  flutter_lints: ^5.0.0
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/
+    - assets/images/home/
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: 'assets/images/icon/valid_square.png'
+  remove_alpha_ios: true
+  adaptive_icon_background: '#FFFFFF'
+  adaptive_icon_foreground: 'assets/images/icon/valid_square.png'

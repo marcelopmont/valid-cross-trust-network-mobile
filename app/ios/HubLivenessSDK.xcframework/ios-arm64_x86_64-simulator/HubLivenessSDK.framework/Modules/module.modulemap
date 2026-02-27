@@ -1,0 +1,11 @@
+framework module HubLivenessSDK {
+  umbrella header "HubLivenessSDK.h"
+  export *
+
+  module * { export * }
+}
+
+module HubLivenessSDK.Swift {
+  header "HubLivenessSDK-Swift.h"
+  requires objc
+}

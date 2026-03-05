@@ -1,6 +1,7 @@
 import 'package:dependencies/dependencies.dart';
 import 'package:flutter/widgets.dart';
 
+import '../../domain/errors/signin_errors.dart';
 import 'signin_bloc.dart';
 import 'signin_bloc_state.dart';
 

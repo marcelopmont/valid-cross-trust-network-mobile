@@ -1,1 +1,1 @@
-enum SigninErrors { storageError, invalidDocument }
+enum SigninErrors { invalidCredentials, networkError, timeOut, unknownError }

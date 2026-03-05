@@ -1,24 +1,20 @@
 part of '../signin_bloc_event.dart';
 
 final class PerformSignin extends SigninBlocEvent {
-  const PerformSignin(this.document);
+  const PerformSignin({required this.cpf, required this.password});
 
-  final String document;
+  final String cpf;
+  final String password;
 
   @override
   Future<void> execute(SigninBloc bloc, Emitter<SigninBlocState> emit) async {
-    emit(bloc.state.copyWith(error: () => null));
+    emit(bloc.state.copyWith(isLoading: true, error: () => null));
 
     try {
-      if (document.isEmpty) {
-        emit(bloc.state.copyWith(error: () => 'Please enter a document'));
-        return;
-      }
-
-      await bloc.signinRepository.saveDocument(document);
-      emit(bloc.state.copyWith(isAuthenticated: true));
-    } catch (e) {
-      emit(bloc.state.copyWith(error: e.toString));
+      await bloc.signinRepository.login(cpf: cpf, password: password);
+      emit(bloc.state.copyWith(isLoading: false, isAuthenticated: true));
+    } on SigninErrors catch (e) {
+      emit(bloc.state.copyWith(isLoading: false, error: () => e));
     }
   }
 }

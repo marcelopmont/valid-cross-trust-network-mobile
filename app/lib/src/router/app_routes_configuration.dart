@@ -10,6 +10,7 @@ abstract class AppRoutesConfiguration {
   static List<RouteBase> routes() => <RouteBase>[
     SplashRoute(),
     SigninRoute(),
+    SignupRoute(),
     HomeRoute(),
   ];
 }

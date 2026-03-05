@@ -6,16 +6,15 @@ final class CheckAuthentication extends SplashBlocEvent {
   @override
   Future<void> execute(SplashBloc bloc, Emitter<SplashBlocState> emit) async {
     try {
-      final document = await bloc.splashRepository.getUserDocument();
+      final token = await bloc.splashRepository.getToken();
 
       emit(
         bloc.state.copyWith(
           isChecking: false,
-          isLoggedIn: document != null && document.isNotEmpty,
+          isLoggedIn: token != null && token.isNotEmpty,
         ),
       );
     } catch (e) {
-      // If there's an error, assume not logged in
       emit(bloc.state.copyWith(isChecking: false, isLoggedIn: false));
     }
   }

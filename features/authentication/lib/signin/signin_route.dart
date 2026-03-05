@@ -16,6 +16,9 @@ class SigninRoute extends GoRoute {
                 onSigninSuccess: () {
                   context.goNamed(RouteNames.credentialsList);
                 },
+                onNavigateToSignup: () {
+                  context.pushNamed(RouteNames.signup);
+                },
               ),
             ),
           );

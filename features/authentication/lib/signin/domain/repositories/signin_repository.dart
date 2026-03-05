@@ -1,3 +1,3 @@
 abstract class SigninRepository {
-  Future<void> saveDocument(String document);
+  Future<void> login({required String cpf, required String password});
 }

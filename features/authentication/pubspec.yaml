@@ -11,6 +11,7 @@ environment:
 dependencies:
   core: ^0.0.1
   dependencies: ^0.0.1
+  network: ^0.0.1
   flutter:
     sdk: flutter
   mask_text_input_formatter: ^2.9.0

@@ -14,8 +14,8 @@ import 'src/splash/domain/repositories/splash_repository.dart';
 Future<void> initAppDependencies() async {
   await _serviceLocator();
   await core.initServiceLocator();
-  await auth.initServiceLocator();
   await network.initServiceLocator();
+  await auth.initServiceLocator();
   await user_credentials.initServiceLocator();
   await home.initServiceLocator();
   await _registerSplashDependencies();
@@ -31,6 +31,7 @@ Future<void> _registerSplashDependencies() async {
   di.registerLazySingleton<SplashRepository>(
     () => SplashRepositoryImpl(
       userDocumentStorageService: di<UserDocumentStorageService>(),
+      tokenStorageService: di<TokenStorageService>(),
     ),
   );
 }

@@ -47,9 +47,6 @@ flutter {
 }
 
 dependencies {
-    // Liveness Hub SDK
-    implementation(files("libs/liveness-hub-sdk.aar"))
-
     // Koin (REQUIRED)
     implementation("io.insert-koin:koin-android:4.0.1")
     implementation("io.insert-koin:koin-core:4.0.1")

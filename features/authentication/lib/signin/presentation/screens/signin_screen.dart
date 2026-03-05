@@ -30,7 +30,6 @@ class _SigninScreenState extends State<SigninScreen> {
 
   void _handleSignin() {
     if (_formKey.currentState?.validate() ?? false) {
-      // Get unmasked CPF (only numbers)
       final cpf = _cpfMaskFormatter.getUnmaskedText();
       widget.onSignin(cpf);
     }
@@ -68,13 +67,6 @@ class _SigninScreenState extends State<SigninScreen> {
                       ),
                     ),
                     const SizedBox(height: 48),
-                    Text(
-                      'Digite suas credenciais para continuar',
-                      style: TextStyle(fontSize: 14, color: Colors.grey[600]),
-                      textAlign: TextAlign.center,
-                    ),
-                    const SizedBox(height: 48),
-                    // Document Field
                     TextFormField(
                       controller: _documentController,
                       inputFormatters: [_cpfMaskFormatter],
@@ -100,25 +92,7 @@ class _SigninScreenState extends State<SigninScreen> {
                         return null;
                       },
                     ),
-                    const SizedBox(height: 20),
-
-                    // Password Field
-                    TextFormField(
-                      controller: _passwordController,
-                      obscureText: true,
-                      decoration: InputDecoration(
-                        labelText: 'Senha',
-                        hintText: 'Digite sua senha',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        filled: true,
-                        fillColor: Colors.white,
-                        prefixIcon: const Icon(Icons.lock_outline),
-                      ),
-                    ),
-                    const SizedBox(height: 32),
-
+                    const SizedBox(height: 48),
                     // Sign In Button
                     ElevatedButton(
                       onPressed: _handleSignin,

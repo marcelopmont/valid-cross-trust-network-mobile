@@ -11,6 +11,7 @@ abstract class AppRoutesConfiguration {
     SplashRoute(),
     SigninRoute(),
     SignupRoute(),
+    ConsentRoute(),
     HomeRoute(),
   ];
 }

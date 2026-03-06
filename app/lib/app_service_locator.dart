@@ -4,6 +4,7 @@ import 'package:core/core.dart';
 import 'package:core/core_service_locator.dart' as core;
 import 'package:dependencies/dependencies.dart';
 import 'package:home/home_service_locator.dart' as home;
+import 'package:network/network.dart';
 import 'package:network/network_service_locator.dart' as network;
 import 'package:user_credentials/user_credentials_service_locator.dart'
     as user_credentials;
@@ -19,12 +20,19 @@ Future<void> initAppDependencies() async {
   await user_credentials.initServiceLocator();
   await home.initServiceLocator();
   await _registerSplashDependencies();
+  _registerAuthInterceptor();
 }
 
 Future<void> _serviceLocator() async {
   di.registerSingleton<FlutterSecureStorage>(const FlutterSecureStorage());
 
   await di.allReady();
+}
+
+void _registerAuthInterceptor() {
+  final dio = di<Dio>();
+  final tokenService = di<TokenStorageService>();
+  dio.interceptors.add(AuthInterceptor(tokenProvider: tokenService.getToken));
 }
 
 Future<void> _registerSplashDependencies() async {

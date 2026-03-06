@@ -7,6 +7,7 @@ abstract final class RouteNames {
   // Authentication
   static const String signin = 'Sign In';
   static const String signup = 'Sign Up';
+  static const String consent = 'Consent';
 
   // Dashboard
   static const String scan = 'QR Scanner';

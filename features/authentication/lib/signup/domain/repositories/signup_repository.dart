@@ -1,7 +1,3 @@
 abstract class SignupRepository {
-  Future<void> register({
-    required String cpf,
-    required String password,
-    required String tenantId,
-  });
+  Future<void> register({required String cpf, required String password});
 }

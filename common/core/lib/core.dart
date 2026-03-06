@@ -1,5 +1,6 @@
 library core;
 
+export 'src/config/app_config.dart';
 export 'src/design_system/colors/app_colors.dart';
 export 'src/design_system/theme/app_theme.dart';
 export 'src/di/dependency_injection.dart';

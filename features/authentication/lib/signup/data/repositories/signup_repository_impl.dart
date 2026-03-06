@@ -12,13 +12,12 @@ class SignupRepositoryImpl implements SignupRepository {
   Future<void> register({
     required String cpf,
     required String password,
-    required String tenantId,
   }) async {
     try {
       await httpClient.post(
         HttpRequest(
           path: '/auth/register',
-          payload: {'cpf': cpf, 'password': password, 'tenant_id': tenantId},
+          payload: {'cpf': cpf, 'password': password},
         ),
       );
     } on HttpErrorResponse catch (e) {

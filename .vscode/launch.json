@@ -2,30 +2,56 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Android Device (SM S928B)",
+      "name": "Android Device (SM S928B) - HML",
       "cwd": "app",
       "request": "launch",
       "type": "dart",
       "program": "lib/main.dart",
       "deviceId": "RQCX703GC5J",
-      "args": []
+      "args": ["--dart-define=ENV=hml"]
     },
     {
-      "name": "Android Device (Emulator)",
+      "name": "Android Device (SM S928B) - Prod",
       "cwd": "app",
       "request": "launch",
       "type": "dart",
       "program": "lib/main.dart",
-      "args": []
+      "deviceId": "RQCX703GC5J",
+      "args": ["--dart-define=ENV=prod"]
     },
     {
-      "name": "iOS Simulator",
+      "name": "Android Device (Emulator) - HML",
+      "cwd": "app",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main.dart",
+      "args": ["--dart-define=ENV=hml"]
+    },
+    {
+      "name": "Android Device (Emulator) - Prod",
+      "cwd": "app",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main.dart",
+      "args": ["--dart-define=ENV=prod"]
+    },
+    {
+      "name": "iOS Simulator - HML",
       "cwd": "app",
       "request": "launch",
       "type": "dart",
       "program": "lib/main.dart",
       "deviceId": "3ADB205F-5710-4FFD-A11B-F6FDE8184857",
-      "args": []
+      "args": ["--dart-define=ENV=hml"]
+    },
+    {
+      "name": "iOS Simulator - Prod",
+      "cwd": "app",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main.dart",
+      "deviceId": "3ADB205F-5710-4FFD-A11B-F6FDE8184857",
+      "args": ["--dart-define=ENV=prod"]
     }
   ]
 }

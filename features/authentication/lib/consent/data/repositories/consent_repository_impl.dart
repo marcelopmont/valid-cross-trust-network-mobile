@@ -15,7 +15,7 @@ class ConsentRepositoryImpl implements ConsentRepository {
   Future<List<Consent>> getConsents() async {
     try {
       final response = await httpClient.get(
-        const HttpRequest(path: '/api/v1/consents'),
+        const HttpRequest(path: '/consents'),
       );
 
       final data = jsonDecode(response.dataJson!) as Map<String, dynamic>;
@@ -49,7 +49,7 @@ class ConsentRepositoryImpl implements ConsentRepository {
     try {
       final response = await httpClient.post(
         const HttpRequest(
-          path: '/api/v1/consents',
+          path: '/consents',
           payload: {
             'credentialType': 'CIN',
             'scope': ['full_name', 'cpf', 'birth_date'],

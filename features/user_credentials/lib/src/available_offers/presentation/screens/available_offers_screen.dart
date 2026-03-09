@@ -72,7 +72,7 @@ class AvailableOffersScreen extends StatelessWidget {
           ...offers.map(
             (offer) => OfferCard(
               offer: offer,
-              onTap: () => DownloadConfirmationDialog.show(
+              onEmit: () => DownloadConfirmationDialog.show(
                 context,
                 () => onOfferSelected(offer),
               ),

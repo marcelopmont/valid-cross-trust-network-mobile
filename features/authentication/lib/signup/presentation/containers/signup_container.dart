@@ -14,13 +14,7 @@ class SignupContainer extends BlocConsumer<SignupBloc, SignupBlocState> {
     required VoidCallback onNavigateToSignin,
   }) : super(
          listener: (context, state) {
-           if (state.isRegistered) {
-             ScaffoldMessenger.of(context).showSnackBar(
-               const SnackBar(
-                 content: Text('Cadastro realizado com sucesso!'),
-                 backgroundColor: Colors.green,
-               ),
-             );
+           if (state.isAuthenticated) {
              onSignupSuccess();
            }
 

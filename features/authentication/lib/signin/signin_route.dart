@@ -14,7 +14,7 @@ class SigninRoute extends GoRoute {
             child: SigninBlocProvider(
               child: SigninContainer(
                 onSigninSuccess: () {
-                  context.goNamed(RouteNames.consent);
+                  context.goNamed(RouteNames.credentialsList);
                 },
                 onNavigateToSignup: () {
                   context.pushNamed(RouteNames.signup);

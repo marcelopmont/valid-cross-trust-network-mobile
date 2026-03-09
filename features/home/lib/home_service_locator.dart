@@ -8,6 +8,7 @@ import 'options/domain/repositories/options_repository.dart';
 Future<void> initServiceLocator() async {
   di.registerFactory<OptionsRepository>(
     () => OptionsRepositoryImpl(
+      tokenStorageService: di<TokenStorageService>(),
       userDocumentStorageService: di<UserDocumentStorageService>(),
       credentialStorageService: di<CredentialStorageService>(),
     ),

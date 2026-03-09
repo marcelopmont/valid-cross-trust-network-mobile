@@ -1,5 +1,8 @@
 import 'package:core/core.dart';
+import 'package:network/network.dart';
 
+import 'src/consent/data/repositories/consent_repository_impl.dart';
+import 'src/consent/domain/repositories/consent_repository.dart';
 import 'src/credentials_list/data/repositories/credentials_repository_impl.dart';
 import 'src/credentials_list/data/services/credential_storage_service_impl.dart';
 import 'src/credentials_list/domain/repositories/credentials_repository.dart';
@@ -18,5 +21,9 @@ Future<void> initServiceLocator() async {
     () => CredentialsRepositoryImpl(
       credentialStorageService: di<CredentialStorageService>(),
     ),
+  );
+
+  di.registerFactory<ConsentRepository>(
+    () => ConsentRepositoryImpl(httpClient: di<HttpClient>()),
   );
 }

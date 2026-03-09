@@ -7,14 +7,12 @@ class ConsentScreen extends StatelessWidget {
     required this.isGranting,
     required this.showDeclinedMessage,
     required this.onAccept,
-    required this.onDecline,
     required this.onLogout,
   });
 
   final bool isGranting;
   final bool showDeclinedMessage;
   final VoidCallback onAccept;
-  final VoidCallback onDecline;
   final VoidCallback onLogout;
 
   @override
@@ -162,28 +160,10 @@ class ConsentScreen extends StatelessWidget {
                       ),
               ),
               const SizedBox(height: 12),
-              OutlinedButton(
-                onPressed: isGranting ? null : onDecline,
-                style: OutlinedButton.styleFrom(
-                  foregroundColor: AppColors.darkBlue,
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  side: const BorderSide(color: AppColors.darkBlue),
-                ),
-                child: const Text(
-                  'Recusar',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-                ),
+              TextButton(
+                onPressed: onLogout,
+                child: const Text('Sair da conta'),
               ),
-              if (showDeclinedMessage) ...[
-                const SizedBox(height: 12),
-                TextButton(
-                  onPressed: onLogout,
-                  child: const Text('Sair da conta'),
-                ),
-              ],
             ],
           ),
         ),

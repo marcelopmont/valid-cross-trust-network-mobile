@@ -5,26 +5,26 @@ import '../../domain/errors/signup_errors.dart';
 final class SignupBlocState extends Equatable {
   const SignupBlocState({
     this.isLoading = false,
-    this.isRegistered = false,
+    this.isAuthenticated = false,
     this.error,
   });
 
   final bool isLoading;
-  final bool isRegistered;
+  final bool isAuthenticated;
   final SignupErrors? error;
 
   SignupBlocState copyWith({
     bool? isLoading,
-    bool? isRegistered,
+    bool? isAuthenticated,
     SignupErrors? Function()? error,
   }) {
     return SignupBlocState(
       isLoading: isLoading ?? this.isLoading,
-      isRegistered: isRegistered ?? this.isRegistered,
+      isAuthenticated: isAuthenticated ?? this.isAuthenticated,
       error: error != null ? error() : this.error,
     );
   }
 
   @override
-  List<Object?> get props => [isLoading, isRegistered, error];
+  List<Object?> get props => [isLoading, isAuthenticated, error];
 }

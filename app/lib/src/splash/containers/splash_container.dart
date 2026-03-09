@@ -11,7 +11,7 @@ class SplashContainer extends BlocConsumer<SplashBloc, SplashBlocState> {
         listener: (context, state) {
           if (!state.isChecking) {
             if (state.isLoggedIn) {
-              context.goNamed(RouteNames.consent);
+              context.goNamed(RouteNames.credentialsList);
             } else {
               context.goNamed(RouteNames.signin);
             }

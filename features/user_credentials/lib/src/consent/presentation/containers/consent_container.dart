@@ -18,6 +18,10 @@ class ConsentContainer extends BlocConsumer<ConsentBloc, ConsentBlocState> {
              onConsentGranted();
            }
 
+           if (state.isLoggedOut) {
+             onLogout();
+           }
+
            if (state.error != null) {
              final message = switch (state.error!) {
                ConsentErrors.networkError => 'Erro de conexão. Tente novamente',
@@ -41,9 +45,8 @@ class ConsentContainer extends BlocConsumer<ConsentBloc, ConsentBlocState> {
              showDeclinedMessage: state.showDeclinedMessage,
              onAccept: () =>
                  ConsentBlocProvider.of(context).add(const GrantConsent()),
-             onDecline: () =>
-                 ConsentBlocProvider.of(context).add(const DeclineConsent()),
-             onLogout: onLogout,
+             onLogout: () =>
+                 ConsentBlocProvider.of(context).add(const PerformLogout()),
            );
          },
        );

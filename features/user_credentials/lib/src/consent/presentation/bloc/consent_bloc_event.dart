@@ -7,7 +7,7 @@ import 'consent_bloc_state.dart';
 
 part 'events/check_consent.dart';
 part 'events/grant_consent.dart';
-part 'events/decline_consent.dart';
+part 'events/perform_logout.dart';
 
 @immutable
 sealed class ConsentBlocEvent extends Equatable {

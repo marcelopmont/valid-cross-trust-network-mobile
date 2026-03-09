@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:dependencies/dependencies.dart' show sha256;
 import 'package:network/network.dart';
 
 import '../../../common/domain/services/token_storage_service.dart';
@@ -21,10 +22,12 @@ class SigninRepositoryImpl implements SigninRepository {
   @override
   Future<void> login({required String cpf, required String password}) async {
     try {
+      final passwordHash = sha256.convert(utf8.encode(password)).toString();
+
       final response = await httpClient.post(
         HttpRequest(
           path: '/auth/login',
-          payload: {'cpf': cpf, 'password': password},
+          payload: {'cpf': cpf, 'password': passwordHash},
         ),
       );
 

@@ -12,7 +12,7 @@ final class PerformSignup extends SignupBlocEvent {
 
     try {
       await bloc.signupRepository.register(cpf: cpf, password: password);
-      emit(bloc.state.copyWith(isLoading: false, isRegistered: true));
+      emit(bloc.state.copyWith(isLoading: false, isAuthenticated: true));
     } on SignupErrors catch (e) {
       emit(bloc.state.copyWith(isLoading: false, error: () => e));
     }

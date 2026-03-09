@@ -1,5 +1,12 @@
 export 'src/available_offers/presentation/bloc/available_offers_bloc.dart';
 export 'src/available_offers/presentation/containers/available_offers_container.dart';
+export 'src/consent/consent_route.dart';
+export 'src/consent/domain/repositories/consent_repository.dart';
+export 'src/consent/presentation/bloc/consent_bloc.dart';
+export 'src/consent/presentation/bloc/consent_bloc_event.dart';
+export 'src/consent/presentation/bloc/consent_bloc_state.dart';
+export 'src/consent/presentation/containers/consent_container.dart';
+export 'src/consent/presentation/screens/consent_screen.dart';
 export 'src/credentials_list/domain/entities/credential_share_invitation.dart';
 export 'src/credentials_list/domain/services/credential_storage_service.dart';
 export 'src/credentials_list/presentation/bloc/credentials_list_bloc.dart';

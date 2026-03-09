@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import '../../domain/entities/offer_entity.dart';
 import 'components/download_confirmation_dialog.dart';
 import 'components/header_text.dart';
-import 'components/issuer_section.dart';
+import 'components/offer_card.dart';
 
-class AvailableOffersScreen extends StatefulWidget {
+class AvailableOffersScreen extends StatelessWidget {
   const AvailableOffersScreen({
     super.key,
     required this.isLoading,
@@ -19,17 +19,6 @@ class AvailableOffersScreen extends StatefulWidget {
   final Function(OfferEntity offer) onOfferSelected;
 
   @override
-  State<AvailableOffersScreen> createState() => _AvailableOffersScreenState();
-}
-
-class _AvailableOffersScreenState extends State<AvailableOffersScreen> {
-  final Map<String, bool> _expandedSections = {
-    'gov': false,
-    'detran': false,
-    'cofen': true,
-  };
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[100],
@@ -39,13 +28,40 @@ class _AvailableOffersScreenState extends State<AvailableOffersScreen> {
         foregroundColor: Colors.white,
         elevation: 0,
       ),
-      body: widget.isLoading
+      body: isLoading
           ? const Center(child: CircularProgressIndicator())
-          : _buildContent(),
+          : _buildContent(context),
     );
   }
 
-  Widget _buildContent() {
+  Widget _buildContent(BuildContext context) {
+    if (offers.isEmpty) {
+      return Center(
+        child: Padding(
+          padding: const EdgeInsets.all(32),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.folder_open_outlined,
+                size: 80,
+                color: Colors.grey[400],
+              ),
+              const SizedBox(height: 24),
+              Text(
+                'Nenhuma oferta disponível',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.grey[700],
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+
     return SingleChildScrollView(
       padding: const EdgeInsets.all(16),
       child: Column(
@@ -53,44 +69,17 @@ class _AvailableOffersScreenState extends State<AvailableOffersScreen> {
         children: [
           const HeaderText(),
           const SizedBox(height: 20),
-          IssuerSection(
-            iconPath: 'assets/images/gov.png',
-            offers: const [],
-            isExpanded: _expandedSections['gov'] ?? false,
-            onToggle: () => _toggleSection('gov'),
-            onOfferTap: _onOfferTap,
-          ),
-          const SizedBox(height: 12),
-          IssuerSection(
-            iconPath: 'assets/images/detran.png',
-            offers: const [],
-            isExpanded: _expandedSections['detran'] ?? false,
-            onToggle: () => _toggleSection('detran'),
-            onOfferTap: _onOfferTap,
-          ),
-          const SizedBox(height: 12),
-          IssuerSection(
-            iconPath: 'assets/images/cofen.png',
-            offers: widget.offers,
-            isExpanded: _expandedSections['cofen'] ?? false,
-            onToggle: () => _toggleSection('cofen'),
-            onOfferTap: _onOfferTap,
+          ...offers.map(
+            (offer) => OfferCard(
+              offer: offer,
+              onTap: () => DownloadConfirmationDialog.show(
+                context,
+                () => onOfferSelected(offer),
+              ),
+            ),
           ),
         ],
       ),
-    );
-  }
-
-  void _toggleSection(String id) {
-    setState(() {
-      _expandedSections[id] = !(_expandedSections[id] ?? false);
-    });
-  }
-
-  void _onOfferTap(OfferEntity offer) {
-    DownloadConfirmationDialog.show(
-      context,
-      () => widget.onOfferSelected(offer),
     );
   }
 }

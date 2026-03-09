@@ -1,6 +1,8 @@
 import 'package:core/core.dart';
 import 'package:network/network.dart';
 
+import 'src/available_offers/data/repositories/offers_repository_impl.dart';
+import 'src/available_offers/domain/repositories/offers_repository.dart';
 import 'src/consent/data/repositories/consent_repository_impl.dart';
 import 'src/consent/domain/repositories/consent_repository.dart';
 import 'src/credentials_list/data/repositories/credentials_repository_impl.dart';
@@ -12,6 +14,10 @@ Future<void> initServiceLocator() async {
 
   di.registerFactory<CredentialsRepository>(
     () => CredentialsRepositoryImpl(httpClient: di<HttpClient>()),
+  );
+
+  di.registerFactory<OffersRepository>(
+    () => OffersRepositoryImpl(httpClient: di<HttpClient>()),
   );
 
   di.registerFactory<ConsentRepository>(

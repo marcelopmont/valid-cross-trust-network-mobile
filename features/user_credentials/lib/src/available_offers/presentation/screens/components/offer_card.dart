@@ -44,20 +44,18 @@ class OfferCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      offer.documentType,
+                      offer.credentialType,
                       style: const TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w600,
                         color: AppColors.textPrimary,
                       ),
                     ),
-                    if (offer.number.isNotEmpty) ...[
-                      const SizedBox(height: 2),
-                      Text(
-                        offer.number,
-                        style: TextStyle(fontSize: 12, color: Colors.grey[600]),
-                      ),
-                    ],
+                    const SizedBox(height: 2),
+                    Text(
+                      offer.issuer.name,
+                      style: TextStyle(fontSize: 12, color: Colors.grey[600]),
+                    ),
                   ],
                 ),
               ),

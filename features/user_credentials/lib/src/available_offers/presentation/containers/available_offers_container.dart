@@ -37,7 +37,7 @@ class AvailableOffersContainer
               final success =
                   await context.pushNamed<bool>(
                     RouteNames.livenessVerification,
-                    pathParameters: {'credentialId': offer.credentialId},
+                    pathParameters: {'credentialId': offer.schemaId},
                   ) ??
                   false;
               if (success) {}

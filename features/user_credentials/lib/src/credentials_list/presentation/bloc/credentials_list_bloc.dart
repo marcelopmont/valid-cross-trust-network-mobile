@@ -21,7 +21,7 @@ class CredentialsListBlocProvider extends BlocProvider<CredentialsListBloc> {
     : super(
         create: (context) => CredentialsListBloc(
           credentialsRepository: di<CredentialsRepository>(),
-        ),
+        )..add(const LoadCredentials()),
       );
 
   static CredentialsListBloc of(BuildContext context) =>

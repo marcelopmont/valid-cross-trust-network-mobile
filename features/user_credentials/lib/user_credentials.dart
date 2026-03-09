@@ -7,8 +7,6 @@ export 'src/consent/presentation/bloc/consent_bloc_event.dart';
 export 'src/consent/presentation/bloc/consent_bloc_state.dart';
 export 'src/consent/presentation/containers/consent_container.dart';
 export 'src/consent/presentation/screens/consent_screen.dart';
-export 'src/credentials_list/domain/entities/credential_share_invitation.dart';
-export 'src/credentials_list/domain/services/credential_storage_service.dart';
 export 'src/credentials_list/presentation/bloc/credentials_list_bloc.dart';
 export 'src/credentials_list/presentation/containers/credentials_list_container.dart';
 export 'src/liveness/data/services/liveness_hub_service.dart';

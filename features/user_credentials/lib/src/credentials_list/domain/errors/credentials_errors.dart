@@ -1,0 +1,1 @@
+enum CredentialsErrors { networkError, unknownError }

@@ -9,7 +9,7 @@ final class ConsentBlocState extends Equatable {
     this.isGranting = false,
     this.isConsentGranted = false,
     this.showDeclinedMessage = false,
-    this.isLoggedOut = false,
+    this.generatedConsentId,
     this.error,
   });
 
@@ -18,7 +18,7 @@ final class ConsentBlocState extends Equatable {
   final bool isGranting;
   final bool isConsentGranted;
   final bool showDeclinedMessage;
-  final bool isLoggedOut;
+  final String? generatedConsentId;
   final ConsentErrors? error;
 
   ConsentBlocState copyWith({
@@ -27,7 +27,7 @@ final class ConsentBlocState extends Equatable {
     bool? isGranting,
     bool? isConsentGranted,
     bool? showDeclinedMessage,
-    bool? isLoggedOut,
+    String? generatedConsentId,
     ConsentErrors? Function()? error,
   }) {
     return ConsentBlocState(
@@ -36,7 +36,7 @@ final class ConsentBlocState extends Equatable {
       isGranting: isGranting ?? this.isGranting,
       isConsentGranted: isConsentGranted ?? this.isConsentGranted,
       showDeclinedMessage: showDeclinedMessage ?? this.showDeclinedMessage,
-      isLoggedOut: isLoggedOut ?? this.isLoggedOut,
+      generatedConsentId: generatedConsentId ?? this.generatedConsentId,
       error: error != null ? error() : this.error,
     );
   }
@@ -48,7 +48,7 @@ final class ConsentBlocState extends Equatable {
     isGranting,
     isConsentGranted,
     showDeclinedMessage,
-    isLoggedOut,
+    generatedConsentId,
     error,
   ];
 }

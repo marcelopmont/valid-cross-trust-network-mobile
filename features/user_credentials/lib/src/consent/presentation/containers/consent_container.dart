@@ -8,46 +8,38 @@ import '../bloc/consent_bloc_state.dart';
 import '../screens/consent_screen.dart';
 
 class ConsentContainer extends BlocConsumer<ConsentBloc, ConsentBlocState> {
-  ConsentContainer({
-    super.key,
-    required VoidCallback onConsentGranted,
-    required VoidCallback onLogout,
-  }) : super(
-         listener: (context, state) {
-           if (state.hasActiveConsent || state.isConsentGranted) {
-             onConsentGranted();
-           }
+  ConsentContainer({super.key, required ValueChanged<String?> onGoBack})
+    : super(
+        listener: (context, state) {
+          if (state.generatedConsentId != null) {
+            onGoBack(state.generatedConsentId);
+          }
 
-           if (state.isLoggedOut) {
-             onLogout();
-           }
+          if (state.error != null) {
+            final message = switch (state.error!) {
+              ConsentErrors.networkError => 'Erro de conexão. Tente novamente',
+              ConsentErrors.timeOut => 'Tempo esgotado. Tente novamente',
+              ConsentErrors.unknownError => 'Erro inesperado. Tente novamente',
+            };
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text(message), backgroundColor: Colors.red),
+            );
+          }
+        },
+        builder: (context, state) {
+          if (state.isCheckingConsent) {
+            return const Scaffold(
+              body: Center(child: CircularProgressIndicator()),
+            );
+          }
 
-           if (state.error != null) {
-             final message = switch (state.error!) {
-               ConsentErrors.networkError => 'Erro de conexão. Tente novamente',
-               ConsentErrors.timeOut => 'Tempo esgotado. Tente novamente',
-               ConsentErrors.unknownError => 'Erro inesperado. Tente novamente',
-             };
-             ScaffoldMessenger.of(context).showSnackBar(
-               SnackBar(content: Text(message), backgroundColor: Colors.red),
-             );
-           }
-         },
-         builder: (context, state) {
-           if (state.isCheckingConsent) {
-             return const Scaffold(
-               body: Center(child: CircularProgressIndicator()),
-             );
-           }
-
-           return ConsentScreen(
-             isGranting: state.isGranting,
-             showDeclinedMessage: state.showDeclinedMessage,
-             onAccept: () =>
-                 ConsentBlocProvider.of(context).add(const GrantConsent()),
-             onLogout: () =>
-                 ConsentBlocProvider.of(context).add(const PerformLogout()),
-           );
-         },
-       );
+          return ConsentScreen(
+            isGranting: state.isGranting,
+            showDeclinedMessage: state.showDeclinedMessage,
+            onAccept: () =>
+                ConsentBlocProvider.of(context).add(const GrantConsent()),
+            onGoBack: () => onGoBack(null),
+          );
+        },
+      );
 }

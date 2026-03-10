@@ -30,4 +30,21 @@ class OffersRepositoryImpl implements OffersRepository {
       throw Exception('Unknown error');
     }
   }
+
+  @override
+  Future<void> issueCredential({
+    required String schemaId,
+    required String consentId,
+  }) async {
+    try {
+      await httpClient.post(
+        HttpRequest(
+          path: '/credentials/issue',
+          payload: {'schemaId': schemaId, 'consentId': consentId},
+        ),
+      );
+    } catch (e) {
+      throw Exception('Failed to issue credential');
+    }
+  }
 }

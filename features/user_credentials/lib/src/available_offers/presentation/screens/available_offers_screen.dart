@@ -2,7 +2,6 @@ import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 
 import '../../domain/entities/offer_entity.dart';
-import 'components/download_confirmation_dialog.dart';
 import 'components/header_text.dart';
 import 'components/offer_card.dart';
 
@@ -11,11 +10,13 @@ class AvailableOffersScreen extends StatelessWidget {
     super.key,
     required this.isLoading,
     required this.offers,
+    required this.issuingSchemaId,
     required this.onOfferSelected,
   });
 
   final bool isLoading;
   final List<OfferEntity> offers;
+  final String? issuingSchemaId;
   final Function(OfferEntity offer) onOfferSelected;
 
   @override
@@ -72,10 +73,8 @@ class AvailableOffersScreen extends StatelessWidget {
           ...offers.map(
             (offer) => OfferCard(
               offer: offer,
-              onEmit: () => DownloadConfirmationDialog.show(
-                context,
-                () => onOfferSelected(offer),
-              ),
+              isIssuing: issuingSchemaId == offer.schemaId,
+              onEmit: () => onOfferSelected(offer),
             ),
           ),
         ],

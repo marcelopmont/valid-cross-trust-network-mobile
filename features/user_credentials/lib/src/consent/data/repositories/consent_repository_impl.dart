@@ -12,10 +12,10 @@ class ConsentRepositoryImpl implements ConsentRepository {
   final HttpClient httpClient;
 
   @override
-  Future<List<Consent>> getConsents() async {
+  Future<List<Consent>> getConsents({required String schemaId}) async {
     try {
       final response = await httpClient.get(
-        const HttpRequest(path: '/consents'),
+        HttpRequest(path: '/consents', queryParameters: {'schemaId': schemaId}),
       );
 
       final data = jsonDecode(response.dataJson!) as Map<String, dynamic>;
@@ -45,18 +45,10 @@ class ConsentRepositoryImpl implements ConsentRepository {
   }
 
   @override
-  Future<Consent> grantConsent() async {
+  Future<Consent> grantConsent({required String schemaId}) async {
     try {
       final response = await httpClient.post(
-        const HttpRequest(
-          path: '/consents',
-          payload: {
-            'credentialType': 'CIN',
-            'scope': ['full_name', 'cpf', 'birth_date'],
-            'purpose': 'Identity verification for account opening',
-            'legalBasis': 'LGPD Art. 7, I - Consent',
-          },
-        ),
+        HttpRequest(path: '/consents', payload: {'schemaId': schemaId}),
       );
 
       final data = jsonDecode(response.dataJson!) as Map<String, dynamic>;

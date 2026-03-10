@@ -1,4 +1,3 @@
-import 'package:authentication/authentication.dart';
 import 'package:core/core.dart';
 import 'package:dependencies/dependencies.dart';
 import 'package:flutter/material.dart';
@@ -8,26 +7,21 @@ import 'consent_bloc_event.dart';
 import 'consent_bloc_state.dart';
 
 class ConsentBloc extends Bloc<ConsentBlocEvent, ConsentBlocState> {
-  ConsentBloc({
-    required this.consentRepository,
-    required this.tokenStorageService,
-    required this.userDocumentStorageService,
-  }) : super(const ConsentBlocState()) {
+  ConsentBloc({required this.schemaId, required this.consentRepository})
+    : super(const ConsentBlocState()) {
     on<ConsentBlocEvent>((event, emit) => event.execute(this, emit));
   }
 
+  final String schemaId;
   final ConsentRepository consentRepository;
-  final TokenStorageService tokenStorageService;
-  final UserDocumentStorageService userDocumentStorageService;
 }
 
 class ConsentBlocProvider extends BlocProvider<ConsentBloc> {
-  ConsentBlocProvider({super.key, super.child})
+  ConsentBlocProvider({super.key, required String schemaId, super.child})
     : super(
         create: (context) => ConsentBloc(
+          schemaId: schemaId,
           consentRepository: di<ConsentRepository>(),
-          tokenStorageService: di<TokenStorageService>(),
-          userDocumentStorageService: di<UserDocumentStorageService>(),
         )..add(const CheckConsent()),
       );
 

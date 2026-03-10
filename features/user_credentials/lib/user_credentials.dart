@@ -1,6 +1,5 @@
 export 'src/available_offers/presentation/bloc/available_offers_bloc.dart';
 export 'src/available_offers/presentation/containers/available_offers_container.dart';
-export 'src/consent/consent_route.dart';
 export 'src/consent/domain/repositories/consent_repository.dart';
 export 'src/consent/presentation/bloc/consent_bloc.dart';
 export 'src/consent/presentation/bloc/consent_bloc_event.dart';

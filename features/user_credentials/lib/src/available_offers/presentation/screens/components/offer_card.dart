@@ -4,9 +4,15 @@ import 'package:flutter/material.dart';
 import '../../../domain/entities/offer_entity.dart';
 
 class OfferCard extends StatelessWidget {
-  const OfferCard({super.key, required this.offer, required this.onEmit});
+  const OfferCard({
+    super.key,
+    required this.offer,
+    required this.isIssuing,
+    required this.onEmit,
+  });
 
   final OfferEntity offer;
+  final bool isIssuing;
   final VoidCallback onEmit;
 
   @override
@@ -56,7 +62,7 @@ class OfferCard extends StatelessWidget {
               ),
               const SizedBox(width: 8),
               ElevatedButton(
-                onPressed: onEmit,
+                onPressed: isIssuing ? null : onEmit,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.darkBlue,
                   foregroundColor: Colors.white,
@@ -72,10 +78,19 @@ class OfferCard extends StatelessWidget {
                     fontWeight: FontWeight.w600,
                   ),
                 ),
-                child: const Text(
-                  'Emitir\nCredencial',
-                  textAlign: TextAlign.center,
-                ),
+                child: isIssuing
+                    ? const SizedBox(
+                        width: 16,
+                        height: 16,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2,
+                          color: AppColors.darkBlue,
+                        ),
+                      )
+                    : const Text(
+                        'Emitir\nCredencial',
+                        textAlign: TextAlign.center,
+                      ),
               ),
             ],
           ),

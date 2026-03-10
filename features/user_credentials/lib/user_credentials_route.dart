@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 
 import 'src/available_offers/presentation/bloc/available_offers_bloc.dart';
 import 'src/available_offers/presentation/containers/available_offers_container.dart';
+import 'src/consent/presentation/bloc/consent_bloc.dart';
+import 'src/consent/presentation/containers/consent_container.dart';
 import 'src/credentials_list/presentation/bloc/credentials_list_bloc.dart';
 import 'src/credentials_list/presentation/containers/credentials_list_container.dart';
 import 'src/liveness/presentation/bloc/liveness_verification_bloc.dart';
@@ -45,6 +47,23 @@ class UserCredentialsRoute extends GoRoute {
               );
             },
             routes: [
+              GoRoute(
+                name: RouteNames.consent,
+                path: 'consent/:schemaId',
+                pageBuilder: (context, state) {
+                  final schemaId = state.pathParameters['schemaId']!;
+                  return NoTransitionPage(
+                    child: ConsentBlocProvider(
+                      schemaId: schemaId,
+                      child: ConsentContainer(
+                        onGoBack: (consentId) {
+                          context.pop(consentId);
+                        },
+                      ),
+                    ),
+                  );
+                },
+              ),
               GoRoute(
                 name: RouteNames.livenessVerification,
                 path: 'liveness/:credentialId',

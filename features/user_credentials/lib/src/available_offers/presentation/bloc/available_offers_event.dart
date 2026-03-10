@@ -5,6 +5,7 @@ import 'available_offers_bloc.dart';
 import 'available_offers_state.dart';
 
 part 'events/load_offers.dart';
+part 'events/issue_credential.dart';
 
 @immutable
 sealed class AvailableOffersEvent extends Equatable {

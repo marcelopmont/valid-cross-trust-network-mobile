@@ -7,13 +7,13 @@ class ConsentScreen extends StatelessWidget {
     required this.isGranting,
     required this.showDeclinedMessage,
     required this.onAccept,
-    required this.onLogout,
+    required this.onGoBack,
   });
 
   final bool isGranting;
   final bool showDeclinedMessage;
   final VoidCallback onAccept;
-  final VoidCallback onLogout;
+  final VoidCallback onGoBack;
 
   @override
   Widget build(BuildContext context) {
@@ -160,10 +160,7 @@ class ConsentScreen extends StatelessWidget {
                       ),
               ),
               const SizedBox(height: 12),
-              TextButton(
-                onPressed: onLogout,
-                child: const Text('Sair da conta'),
-              ),
+              TextButton(onPressed: onGoBack, child: const Text('Voltar')),
             ],
           ),
         ),

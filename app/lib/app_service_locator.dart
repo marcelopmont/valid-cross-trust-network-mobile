@@ -9,6 +9,7 @@ import 'package:network/network_service_locator.dart' as network;
 import 'package:user_credentials/user_credentials_service_locator.dart'
     as user_credentials;
 
+import 'src/session/session_manager_impl.dart';
 import 'src/splash/data/repositories/splash_repository_impl.dart';
 import 'src/splash/domain/repositories/splash_repository.dart';
 
@@ -21,6 +22,8 @@ Future<void> initAppDependencies() async {
   await home.initServiceLocator();
   await _registerSplashDependencies();
   _registerAuthInterceptor();
+  _registerSessionManager();
+  _registerUnauthorizedInterceptor();
 }
 
 Future<void> _serviceLocator() async {
@@ -40,6 +43,25 @@ Future<void> _registerSplashDependencies() async {
     () => SplashRepositoryImpl(
       userDocumentStorageService: di<UserDocumentStorageService>(),
       tokenStorageService: di<TokenStorageService>(),
+    ),
+  );
+}
+
+void _registerSessionManager() {
+  di.registerLazySingleton<SessionManager>(
+    () => SessionManagerImpl(
+      tokenStorageService: di<TokenStorageService>(),
+      userDocumentStorageService: di<UserDocumentStorageService>(),
+      router: di<GoRouter>(),
+    ),
+  );
+}
+
+void _registerUnauthorizedInterceptor() {
+  final dio = di<Dio>();
+  dio.interceptors.add(
+    UnauthorizedInterceptor(
+      sessionManager: SessionManagerLazy(() => di<SessionManager>()),
     ),
   );
 }

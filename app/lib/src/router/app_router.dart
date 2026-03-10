@@ -1,3 +1,4 @@
+import 'package:core/core.dart';
 import 'package:dependencies/dependencies.dart';
 import 'package:flutter/material.dart';
 
@@ -20,10 +21,12 @@ class _AppRouterState extends State<AppRouter> {
       initialLocation: '/',
       routes: AppRoutesConfiguration.routes(),
     );
+    di.registerSingleton<GoRouter>(_router);
   }
 
   @override
   void dispose() {
+    di.unregister<GoRouter>();
     _router.dispose();
     super.dispose();
   }

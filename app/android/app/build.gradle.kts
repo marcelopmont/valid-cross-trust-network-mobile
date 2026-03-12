@@ -79,6 +79,10 @@ dependencies {
     
     // Security (REQUIRED for crypto operations)
     implementation("androidx.security:security-crypto:1.1.0")
+
+    // Google Wallet / Jetpack Credentials (REQUIRED for Digital Credentials)
+    implementation("androidx.credentials:credentials:1.3.0-rc01")
+    implementation("androidx.credentials:credentials-play-services-auth:1.3.0-rc01")
 }
 
 

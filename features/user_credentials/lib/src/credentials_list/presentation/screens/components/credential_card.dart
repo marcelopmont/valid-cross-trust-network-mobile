@@ -5,9 +5,16 @@ import '../../../domain/entities/verifiable_credential_entity.dart';
 import 'credential_status_badge.dart';
 
 class CredentialCard extends StatelessWidget {
-  const CredentialCard({super.key, required this.credential});
+  const CredentialCard({
+    super.key,
+    required this.credential,
+    this.isAddingToWallet = false,
+    this.onAddWallet,
+  });
 
   final VerifiableCredentialEntity credential;
+  final bool isAddingToWallet;
+  final VoidCallback? onAddWallet;
 
   @override
   Widget build(BuildContext context) {
@@ -69,6 +76,28 @@ class CredentialCard extends StatelessWidget {
                   fontSize: 12,
                   color: Colors.white.withValues(alpha: 0.7),
                 ),
+              ),
+            ],
+            if (onAddWallet != null) ...[
+              const SizedBox(height: 16),
+              Align(
+                alignment: Alignment.centerRight,
+                child: isAddingToWallet
+                    ? const SizedBox(
+                        height: 24,
+                        width: 24,
+                        child: CircularProgressIndicator(
+                          color: Colors.white,
+                          strokeWidth: 2,
+                        ),
+                      )
+                    : GestureDetector(
+                        onTap: onAddWallet,
+                        child: Image.asset(
+                          'assets/images/add_to_google_wallet.svg',
+                          height: 40,
+                        ),
+                      ),
               ),
             ],
           ],

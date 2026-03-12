@@ -26,8 +26,14 @@ class CredentialsListContainer
             isLoading: state.isLoading,
             credentials: state.credentials,
             hasReachedEnd: state.hasReachedEnd,
+            issuingWalletCredentialId: state.issuingWalletCredentialId,
             onAddCredential: () async {
               await context.pushNamed(RouteNames.availableOffers);
+            },
+            onAddWallet: (credentialId) {
+              CredentialsListBlocProvider.of(
+                context,
+              ).add(AddToWallet(credentialId: credentialId));
             },
             onLoadMore: () {
               CredentialsListBlocProvider.of(

@@ -13,6 +13,8 @@ class CredentialsListScreen extends StatelessWidget {
     required this.hasReachedEnd,
     required this.onAddCredential,
     required this.onLoadMore,
+    this.issuingWalletCredentialId,
+    required this.onAddWallet,
   });
 
   final bool isLoading;
@@ -20,6 +22,8 @@ class CredentialsListScreen extends StatelessWidget {
   final bool hasReachedEnd;
   final VoidCallback onAddCredential;
   final VoidCallback onLoadMore;
+  final String? issuingWalletCredentialId;
+  final void Function(String) onAddWallet;
 
   @override
   Widget build(BuildContext context) {
@@ -52,6 +56,8 @@ class CredentialsListScreen extends StatelessWidget {
       isLoading: isLoading,
       hasReachedEnd: hasReachedEnd,
       onLoadMore: onLoadMore,
+      issuingWalletCredentialId: issuingWalletCredentialId,
+      onAddWallet: onAddWallet,
     );
   }
 }

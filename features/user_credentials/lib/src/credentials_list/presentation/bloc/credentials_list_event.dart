@@ -7,6 +7,7 @@ import 'credentials_list_state.dart';
 
 part 'events/load_credentials.dart';
 part 'events/clear_credentials_error.dart';
+part 'events/add_to_wallet.dart';
 
 @immutable
 sealed class CredentialsListEvent extends Equatable {

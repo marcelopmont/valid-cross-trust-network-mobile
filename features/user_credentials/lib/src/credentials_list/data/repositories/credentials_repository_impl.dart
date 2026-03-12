@@ -42,4 +42,25 @@ class CredentialsRepositoryImpl implements CredentialsRepository {
       throw CredentialsErrors.unknownError;
     }
   }
+
+  @override
+  Future<String> getGoogleWalletOffer(String credentialId) async {
+    try {
+      final response = await httpClient.post(
+        HttpRequest(
+          path: '/wallet/credentials/$credentialId/google-wallet-offer',
+        ),
+      );
+
+      // We expect the backend to return the raw JSON
+      // Object format openid4vci1.0
+      // e.g: { "protocol": "...", "data": { ... } }
+      return response.dataJson ?? '';
+    } on HttpErrorResponse {
+      throw CredentialsErrors.networkError;
+    } catch (e) {
+      if (e is CredentialsErrors) rethrow;
+      throw CredentialsErrors.unknownError;
+    }
+  }
 }

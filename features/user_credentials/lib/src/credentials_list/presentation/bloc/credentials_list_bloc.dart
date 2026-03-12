@@ -8,12 +8,15 @@ import 'credentials_list_state.dart';
 
 class CredentialsListBloc
     extends Bloc<CredentialsListEvent, CredentialsListState> {
-  CredentialsListBloc({required this.credentialsRepository})
-    : super(const CredentialsListState()) {
+  CredentialsListBloc({
+    required this.credentialsRepository,
+    required this.googleWalletService,
+  }) : super(const CredentialsListState()) {
     on<CredentialsListEvent>((event, emit) => event.execute(this, emit));
   }
 
   final CredentialsRepository credentialsRepository;
+  final GoogleWalletService googleWalletService;
 }
 
 class CredentialsListBlocProvider extends BlocProvider<CredentialsListBloc> {
@@ -21,6 +24,7 @@ class CredentialsListBlocProvider extends BlocProvider<CredentialsListBloc> {
     : super(
         create: (context) => CredentialsListBloc(
           credentialsRepository: di<CredentialsRepository>(),
+          googleWalletService: di<GoogleWalletService>(),
         )..add(const LoadCredentials()),
       );
 

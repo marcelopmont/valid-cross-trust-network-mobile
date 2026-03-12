@@ -10,12 +10,16 @@ class CredentialsList extends StatelessWidget {
     required this.isLoading,
     required this.hasReachedEnd,
     required this.onLoadMore,
+    this.issuingWalletCredentialId,
+    required this.onAddWallet,
   });
 
   final List<VerifiableCredentialEntity> credentials;
   final bool isLoading;
   final bool hasReachedEnd;
   final VoidCallback onLoadMore;
+  final String? issuingWalletCredentialId;
+  final void Function(String) onAddWallet;
 
   @override
   Widget build(BuildContext context) {
@@ -40,9 +44,16 @@ class CredentialsList extends StatelessWidget {
             );
           }
 
+          final credential = credentials[index];
+
           return Padding(
             padding: const EdgeInsets.only(bottom: 16),
-            child: CredentialCard(credential: credentials[index]),
+            child: CredentialCard(
+              credential: credential,
+              isAddingToWallet:
+                  issuingWalletCredentialId == credential.credentialId,
+              onAddWallet: () => onAddWallet(credential.credentialId),
+            ),
           );
         },
       ),

@@ -40,7 +40,7 @@ final class CredentialsListState extends Equatable {
     int? total,
     int? offset,
     bool? hasReachedEnd,
-    String? issuingWalletCredentialId,
+    String? Function()? issuingWalletCredentialId,
   }) {
     return CredentialsListState(
       credentials: credentials ?? this.credentials,
@@ -49,8 +49,9 @@ final class CredentialsListState extends Equatable {
       total: total ?? this.total,
       offset: offset ?? this.offset,
       hasReachedEnd: hasReachedEnd ?? this.hasReachedEnd,
-      issuingWalletCredentialId:
-          issuingWalletCredentialId ?? this.issuingWalletCredentialId,
+      issuingWalletCredentialId: issuingWalletCredentialId != null
+          ? issuingWalletCredentialId()
+          : this.issuingWalletCredentialId,
     );
   }
 }

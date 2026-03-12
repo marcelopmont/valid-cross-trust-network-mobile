@@ -11,7 +11,9 @@ final class IssueCredential extends AvailableOffersEvent {
     AvailableOffersBloc bloc,
     Emitter<AvailableOffersState> emit,
   ) async {
-    emit(bloc.state.copyWith(issuingSchemaId: schemaId, error: () => null));
+    emit(
+      bloc.state.copyWith(issuingSchemaId: () => schemaId, error: () => null),
+    );
 
     try {
       await bloc.offersRepository.issueCredential(
@@ -20,12 +22,15 @@ final class IssueCredential extends AvailableOffersEvent {
       );
 
       emit(
-        bloc.state.copyWith(issuingSchemaId: null, isCredentialIssued: true),
+        bloc.state.copyWith(
+          issuingSchemaId: () => null,
+          isCredentialIssued: true,
+        ),
       );
     } catch (e) {
       emit(
         bloc.state.copyWith(
-          issuingSchemaId: null,
+          issuingSchemaId: () => null,
           error: () => 'Erro ao emitir credencial. Tente novamente.',
         ),
       );

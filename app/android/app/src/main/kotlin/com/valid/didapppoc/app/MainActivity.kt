@@ -6,6 +6,7 @@ import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodChannel
 import androidx.credentials.CredentialManager
 import androidx.credentials.CreateDigitalCredentialRequest
+import androidx.credentials.ExperimentalDigitalCredentialApi
 import androidx.credentials.exceptions.CreateCredentialException
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
@@ -15,7 +16,7 @@ class MainActivity : FlutterActivity() {
 
     override fun configureFlutterEngine(@NonNull flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
-        
+
         MethodChannel(flutterEngine.dartExecutor.binaryMessenger, CHANNEL).setMethodCallHandler { call, result ->
             if (call.method == "addCredential") {
                 val offerJson = call.argument<String>("offerJson")
@@ -30,23 +31,21 @@ class MainActivity : FlutterActivity() {
         }
     }
 
+    @OptIn(ExperimentalDigitalCredentialApi::class)
     private fun provisionCredential(offerJson: String, result: MethodChannel.Result) {
         val credentialManager = CredentialManager.create(this)
-        
-        // Use a coroutine scope since createCredential is a suspend function
+
         lifecycleScope.launch {
             try {
-                val request = CreateDigitalCredentialRequest(offerJson)
-                // Note: The second parameter is context/activity depending on overloaded method.
-                // In Activity context, 'this@MainActivity' works.
+                val request = CreateDigitalCredentialRequest(
+                    requestJson = offerJson,
+                    origin = null,
+                )
                 credentialManager.createCredential(this@MainActivity, request)
-                // If it completes without throwing an exception, it's considered successful.
                 result.success(true)
             } catch (e: CreateCredentialException) {
-                // Return specific credential errors
-                result.error("CREDENTIAL_ERROR", e.message, e.javaClass.simpleName)
+                result.error("CREDENTIAL_ERROR", e.message, e.type)
             } catch (e: Exception) {
-                // Return generic errors
                 result.error("UNKNOWN_ERROR", e.message, null)
             }
         }

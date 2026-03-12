@@ -10,7 +10,7 @@ final class AddToWallet extends CredentialsListEvent {
     CredentialsListBloc bloc,
     Emitter<CredentialsListState> emit,
   ) async {
-    emit(bloc.state.copyWith(issuingWalletCredentialId: credentialId));
+    emit(bloc.state.copyWith(issuingWalletCredentialId: () => credentialId));
 
     try {
       final offerJson = await bloc.credentialsRepository.getGoogleWalletOffer(
@@ -26,7 +26,7 @@ final class AddToWallet extends CredentialsListEvent {
           // Em caso de sucesso, talvez mostrar um snackbar?
           // Dependendo da interface nativa, podemos apenas remover o
           // status de loading.
-          emit(bloc.state.copyWith(issuingWalletCredentialId: null));
+          emit(bloc.state.copyWith(issuingWalletCredentialId: () => null));
         } else {
           throw Exception('Google Wallet addition failed or was cancelled');
         }
@@ -36,7 +36,7 @@ final class AddToWallet extends CredentialsListEvent {
     } catch (e) {
       emit(
         bloc.state.copyWith(
-          issuingWalletCredentialId: null,
+          issuingWalletCredentialId: () => null,
           error: () => CredentialsErrors.unknownError,
         ),
       );

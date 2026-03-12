@@ -11,6 +11,7 @@ import 'src/liveness/data/services/liveness_hub_service.dart';
 
 Future<void> initServiceLocator() async {
   di.registerLazySingleton<LivenessHubService>(LivenessHubService.new);
+  di.registerLazySingleton<GoogleWalletService>(GoogleWalletService.new);
 
   di.registerFactory<CredentialsRepository>(
     () => CredentialsRepositoryImpl(httpClient: di<HttpClient>()),

@@ -22,14 +22,16 @@ final class AvailableOffersState extends Equatable {
     List<OfferEntity>? offers,
     String? Function()? error,
     bool? isCredentialIssued,
-    String? issuingSchemaId,
+    String? Function()? issuingSchemaId,
   }) {
     return AvailableOffersState(
       isLoading: isLoading ?? this.isLoading,
       offers: offers ?? this.offers,
       error: error != null ? error() : this.error,
       isCredentialIssued: isCredentialIssued ?? this.isCredentialIssued,
-      issuingSchemaId: issuingSchemaId ?? this.issuingSchemaId,
+      issuingSchemaId: issuingSchemaId != null
+          ? issuingSchemaId()
+          : this.issuingSchemaId,
     );
   }
 

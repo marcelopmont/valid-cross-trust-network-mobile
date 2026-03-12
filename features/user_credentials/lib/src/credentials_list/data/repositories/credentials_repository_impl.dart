@@ -45,16 +45,14 @@ class CredentialsRepositoryImpl implements CredentialsRepository {
 
   @override
   Future<String> getGoogleWalletOffer(String credentialId) async {
+    final uuid = credentialId.replaceFirst('urn:uuid:', '');
     try {
       final response = await httpClient.post(
         HttpRequest(
-          path: '/wallet/credentials/$credentialId/google-wallet-offer',
+          path: '/google-wallet/offer',
+          payload: jsonEncode({'credentialId': uuid}),
         ),
       );
-
-      // We expect the backend to return the raw JSON
-      // Object format openid4vci1.0
-      // e.g: { "protocol": "...", "data": { ... } }
       return response.dataJson ?? '';
     } on HttpErrorResponse {
       throw CredentialsErrors.networkError;

@@ -45,6 +45,8 @@ class CredentialsList extends StatelessWidget {
           }
 
           final credential = credentials[index];
+          final isWalletEligible = credential.credentialType ==
+              'AgeVerificationCredential';
 
           return Padding(
             padding: const EdgeInsets.only(bottom: 16),
@@ -52,7 +54,9 @@ class CredentialsList extends StatelessWidget {
               credential: credential,
               isAddingToWallet:
                   issuingWalletCredentialId == credential.credentialId,
-              onAddWallet: () => onAddWallet(credential.credentialId),
+              onAddWallet: isWalletEligible
+                  ? () => onAddWallet(credential.credentialId)
+                  : null,
             ),
           );
         },

@@ -81,7 +81,7 @@ class CredentialCard extends StatelessWidget {
             if (onAddWallet != null) ...[
               const SizedBox(height: 16),
               Align(
-                alignment: Alignment.centerRight,
+                alignment: Alignment.centerLeft,
                 child: isAddingToWallet
                     ? const SizedBox(
                         height: 24,
@@ -94,8 +94,8 @@ class CredentialCard extends StatelessWidget {
                     : GestureDetector(
                         onTap: onAddWallet,
                         child: Image.asset(
-                          'assets/images/add_to_google_wallet.svg',
-                          height: 40,
+                          'assets/images/add_to_google_wallet.png',
+                          height: 24,
                         ),
                       ),
               ),

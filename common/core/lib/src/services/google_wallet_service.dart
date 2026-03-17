@@ -17,8 +17,7 @@ class GoogleWalletService {
   Future<bool> addCredentialToWallet(String offerJson) async {
     try {
       final offer = jsonDecode(offerJson) as Map<String, dynamic>;
-      final credentialOffer =
-          offer['credentialOffer'] as Map<String, dynamic>;
+      final credentialOffer = offer['credentialOffer'] as Map<String, dynamic>;
 
       // Restructure to W3C Digital Credentials create() format
       final requestJson = jsonEncode({

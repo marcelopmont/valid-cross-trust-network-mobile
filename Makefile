@@ -1,27 +1,26 @@
 .PHONY: default setup analyze format clean clean-ios create-package clean-branches
 
 default:
-	melos bs
+	fvm dart pub get
 
 setup:
 	fvm install
-	fvm dart pub global activate melos
 
 analyze:
-	melos run analyze:flutter --no-select
+	fvm dart analyze .
 
 format:
-	melos run format --no-select
+	fvm dart format .
 
 clean:
-	melos clean
-	melos bs
+	@find . -name "pubspec.yaml" -not -path "*/\.*" -exec dirname {} \; | while read dir; do \
+		echo "Cleaning $$dir..."; \
+		(cd "$$dir" && fvm flutter clean); \
+	done
 
-clean-ios:
-	melos clean
-	melos bs
-	(cd root_app && fvm flutter clean && fvm flutter pub get)
-	(cd root_app/ios && rm -f Podfile.lock && (pod deintegrate || true) && pod install --repo-update)
+clean-ios: clean
+	(cd app && fvm flutter pub get)
+	(cd app/ios && rm -f Podfile.lock && (pod deintegrate || true) && pod install --repo-update)
 
 create-package:
 	chmod +x scripts/create-flutter-package.sh

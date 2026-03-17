@@ -6,7 +6,7 @@ environment:
   sdk: ^3.9.2
 
 dev_dependencies:
-  melos: ^7.3.0
+  flutter_lints: ^5.0.0
 
 workspace:
   - app
@@ -16,15 +16,3 @@ workspace:
   - features/authentication
   - features/home
   - features/user_credentials
-
-melos:
-  scripts:
-    analyze:flutter:
-      run: flutter analyze .
-      description: Run Flutter analyzer on all packages.
-      packageFilters:
-        flutter: true
-
-    format:
-      run: dart format .
-      description: Run Dart formatter on all packages.

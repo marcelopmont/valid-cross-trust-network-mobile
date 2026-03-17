@@ -20,7 +20,7 @@
       "args": ["--dart-define=ENV=prod"]
     },
     {
-      "name": "Android Device (Emulator) - HML",
+      "name": "Emulator - HML",
       "cwd": "app",
       "request": "launch",
       "type": "dart",
@@ -28,30 +28,12 @@
       "args": ["--dart-define=ENV=hml"]
     },
     {
-      "name": "Android Device (Emulator) - Prod",
+      "name": "Emulator - Prod",
       "cwd": "app",
       "request": "launch",
       "type": "dart",
       "program": "lib/main.dart",
       "args": ["--dart-define=ENV=prod"]
     },
-    {
-      "name": "iOS Simulator - HML",
-      "cwd": "app",
-      "request": "launch",
-      "type": "dart",
-      "program": "lib/main.dart",
-      "deviceId": "3ADB205F-5710-4FFD-A11B-F6FDE8184857",
-      "args": ["--dart-define=ENV=hml"]
-    },
-    {
-      "name": "iOS Simulator - Prod",
-      "cwd": "app",
-      "request": "launch",
-      "type": "dart",
-      "program": "lib/main.dart",
-      "deviceId": "3ADB205F-5710-4FFD-A11B-F6FDE8184857",
-      "args": ["--dart-define=ENV=prod"]
-    }
   ]
 }

@@ -10,7 +10,7 @@ abstract final class AppConfig {
 
   static String get baseUrl => switch (environment) {
     Environment.hml =>
-      'https://subthoracal-irresoluble-magdalen.ngrok-free.dev/api/v1', //'https://vtn-hml.valid-cross-service.app/api/v1',
+      'https://vtn-hml.valid-cross-service.app/api/v1', //'https://subthoracal-irresoluble-magdalen.ngrok-free.dev/api/v1',
     Environment.prod => 'https://vtn.valid-cross-service.app/api/v1',
   };
 }

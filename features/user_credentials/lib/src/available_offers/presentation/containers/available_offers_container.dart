@@ -29,7 +29,7 @@ class AvailableOffersContainer
           return AvailableOffersScreen(
             isLoading: state.isLoading,
             offers: state.offers,
-            issuingSchemaId: state.issuingSchemaId,
+            issuingOfferId: state.issuingOfferId,
             onOfferSelected: (offer) async {
               final consentId = await context.pushNamed<String?>(
                 RouteNames.consent,
@@ -39,7 +39,7 @@ class AvailableOffersContainer
               if (consentId != null && context.mounted) {
                 AvailableOffersBlocProvider.of(context).add(
                   IssueCredential(
-                    schemaId: offer.schemaId,
+                    offerId: offer.id,
                     consentId: consentId,
                   ),
                 );

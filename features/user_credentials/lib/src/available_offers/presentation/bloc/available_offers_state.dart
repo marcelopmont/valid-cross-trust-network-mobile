@@ -8,30 +8,30 @@ final class AvailableOffersState extends Equatable {
     this.offers = const [],
     this.error,
     this.isCredentialIssued = false,
-    this.issuingSchemaId,
+    this.issuingOfferId,
   });
 
   final bool isLoading;
   final List<OfferEntity> offers;
   final String? error;
   final bool isCredentialIssued;
-  final String? issuingSchemaId;
+  final String? issuingOfferId;
 
   AvailableOffersState copyWith({
     bool? isLoading,
     List<OfferEntity>? offers,
     String? Function()? error,
     bool? isCredentialIssued,
-    String? Function()? issuingSchemaId,
+    String? Function()? issuingOfferId,
   }) {
     return AvailableOffersState(
       isLoading: isLoading ?? this.isLoading,
       offers: offers ?? this.offers,
       error: error != null ? error() : this.error,
       isCredentialIssued: isCredentialIssued ?? this.isCredentialIssued,
-      issuingSchemaId: issuingSchemaId != null
-          ? issuingSchemaId()
-          : this.issuingSchemaId,
+      issuingOfferId: issuingOfferId != null
+          ? issuingOfferId()
+          : this.issuingOfferId,
     );
   }
 
@@ -41,6 +41,6 @@ final class AvailableOffersState extends Equatable {
     offers,
     error,
     isCredentialIssued,
-    issuingSchemaId,
+    issuingOfferId,
   ];
 }

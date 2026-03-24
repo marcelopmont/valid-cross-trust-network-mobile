@@ -10,13 +10,13 @@ class AvailableOffersScreen extends StatelessWidget {
     super.key,
     required this.isLoading,
     required this.offers,
-    required this.issuingSchemaId,
+    required this.issuingOfferId,
     required this.onOfferSelected,
   });
 
   final bool isLoading;
   final List<OfferEntity> offers;
-  final String? issuingSchemaId;
+  final String? issuingOfferId;
   final Function(OfferEntity offer) onOfferSelected;
 
   @override
@@ -73,7 +73,7 @@ class AvailableOffersScreen extends StatelessWidget {
           ...offers.map(
             (offer) => OfferCard(
               offer: offer,
-              isIssuing: issuingSchemaId == offer.schemaId,
+              isIssuing: issuingOfferId == offer.id,
               onEmit: () => onOfferSelected(offer),
             ),
           ),

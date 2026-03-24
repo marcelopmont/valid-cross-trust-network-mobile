@@ -33,14 +33,14 @@ class OffersRepositoryImpl implements OffersRepository {
 
   @override
   Future<void> issueCredential({
-    required String schemaId,
+    required String offerId,
     required String consentId,
   }) async {
     try {
       await httpClient.post(
         HttpRequest(
           path: '/credentials/issue',
-          payload: {'schemaId': schemaId, 'consentId': consentId},
+          payload: {'offerId': offerId, 'consentId': consentId},
         ),
       );
     } catch (e) {

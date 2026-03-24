@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:core/core.dart';
+import 'package:flutter/material.dart';
 
 import '../../domain/entities/verifiable_credential_entity.dart';
 import 'components/credentials_empty_state.dart';
@@ -59,11 +59,6 @@ class CredentialsListScreen extends StatelessWidget {
       );
     }
 
-    return Stack(
-      children: [
-        const AnimatedGlassBackground(),
-        content,
-      ],
-    );
+    return content;
   }
 }

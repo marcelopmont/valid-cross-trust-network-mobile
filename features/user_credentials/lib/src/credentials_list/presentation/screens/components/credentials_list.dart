@@ -133,7 +133,7 @@ class _CredentialsListState extends State<CredentialsList> with SingleTickerProv
               scale = 0.9 - ((t - 1.0) * 0.02);
               rotateX = -0.15;
             }
-            opacity = (1.0 - (t * 0.2)).clamp(0.0, 1.0);
+            opacity = 1.0;
           } else {
             // BOTTOM STACK CONVERGENCE
             double progress = t.abs().clamp(0.0, 1.0);

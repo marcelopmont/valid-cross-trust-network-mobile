@@ -1,3 +1,4 @@
+import 'package:glassmorphism/glassmorphism.dart';
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 
@@ -18,20 +19,31 @@ class CredentialCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: EdgeInsets.zero,
-      elevation: 2,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      child: Container(
-        padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12),
-          gradient: const LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [AppColors.primary, AppColors.accent],
-          ),
-        ),
+    return GlassmorphicContainer(
+      width: double.infinity,
+      height: onAddWallet != null ? 260 : 200,
+      borderRadius: 16,
+      blur: 40, // Muito mais fosco
+      alignment: Alignment.center,
+      border: 1.5,
+      linearGradient: LinearGradient(
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+        colors: [
+          AppColors.primary.withValues(alpha: 0.75),
+          AppColors.accent.withValues(alpha: 0.55),
+        ],
+      ),
+      borderGradient: LinearGradient(
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+        colors: [
+          Colors.white.withValues(alpha: 0.5),
+          Colors.white.withValues(alpha: 0.1),
+        ],
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

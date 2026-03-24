@@ -18,3 +18,4 @@ workspace:
   - features/user_credentials
 dependencies:
   glassmorphism: ^3.0.0
+  stacked_card_carousel: ^0.0.4

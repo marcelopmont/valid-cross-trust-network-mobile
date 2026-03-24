@@ -42,21 +42,28 @@ class CredentialsListScreen extends StatelessWidget {
   }
 
   Widget _buildBody() {
+    Widget content;
+
     if (isLoading && credentials.isEmpty) {
-      return const Center(child: CircularProgressIndicator());
+      content = const Center(child: CircularProgressIndicator());
+    } else if (credentials.isEmpty) {
+      content = const CredentialsEmptyState();
+    } else {
+      content = CredentialsList(
+        credentials: credentials,
+        isLoading: isLoading,
+        hasReachedEnd: hasReachedEnd,
+        onLoadMore: onLoadMore,
+        issuingWalletCredentialId: issuingWalletCredentialId,
+        onAddWallet: onAddWallet,
+      );
     }
 
-    if (credentials.isEmpty) {
-      return const CredentialsEmptyState();
-    }
-
-    return CredentialsList(
-      credentials: credentials,
-      isLoading: isLoading,
-      hasReachedEnd: hasReachedEnd,
-      onLoadMore: onLoadMore,
-      issuingWalletCredentialId: issuingWalletCredentialId,
-      onAddWallet: onAddWallet,
+    return Stack(
+      children: [
+        const AnimatedGlassBackground(),
+        content,
+      ],
     );
   }
 }

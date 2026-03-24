@@ -1,5 +1,6 @@
 import 'package:dependencies/dependencies.dart';
 
+import '../../../credentials_list/domain/entities/verifiable_credential_entity.dart';
 import '../../domain/entities/offer_entity.dart';
 
 final class AvailableOffersState extends Equatable {
@@ -7,28 +8,28 @@ final class AvailableOffersState extends Equatable {
     this.isLoading = true,
     this.offers = const [],
     this.error,
-    this.isCredentialIssued = false,
+    this.issuedCredential,
     this.issuingOfferId,
   });
 
   final bool isLoading;
   final List<OfferEntity> offers;
   final String? error;
-  final bool isCredentialIssued;
+  final VerifiableCredentialEntity? issuedCredential;
   final String? issuingOfferId;
 
   AvailableOffersState copyWith({
     bool? isLoading,
     List<OfferEntity>? offers,
     String? Function()? error,
-    bool? isCredentialIssued,
+    VerifiableCredentialEntity? issuedCredential,
     String? Function()? issuingOfferId,
   }) {
     return AvailableOffersState(
       isLoading: isLoading ?? this.isLoading,
       offers: offers ?? this.offers,
       error: error != null ? error() : this.error,
-      isCredentialIssued: isCredentialIssued ?? this.isCredentialIssued,
+      issuedCredential: issuedCredential ?? this.issuedCredential,
       issuingOfferId: issuingOfferId != null
           ? issuingOfferId()
           : this.issuingOfferId,
@@ -40,7 +41,7 @@ final class AvailableOffersState extends Equatable {
     isLoading,
     offers,
     error,
-    isCredentialIssued,
+    issuedCredential,
     issuingOfferId,
   ];
 }

@@ -11,12 +11,10 @@ final class IssueCredential extends AvailableOffersEvent {
     AvailableOffersBloc bloc,
     Emitter<AvailableOffersState> emit,
   ) async {
-    emit(
-      bloc.state.copyWith(issuingOfferId: () => offerId, error: () => null),
-    );
+    emit(bloc.state.copyWith(issuingOfferId: () => offerId, error: () => null));
 
     try {
-      await bloc.offersRepository.issueCredential(
+      final credential = await bloc.offersRepository.issueCredential(
         offerId: offerId,
         consentId: consentId,
       );
@@ -24,7 +22,7 @@ final class IssueCredential extends AvailableOffersEvent {
       emit(
         bloc.state.copyWith(
           issuingOfferId: () => null,
-          isCredentialIssued: true,
+          issuedCredential: credential,
         ),
       );
     } catch (e) {

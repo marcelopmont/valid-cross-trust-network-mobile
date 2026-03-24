@@ -11,7 +11,7 @@ class CredentialsList extends StatelessWidget {
     required this.hasReachedEnd,
     required this.onLoadMore,
     this.issuingWalletCredentialId,
-    required this.onAddWallet,
+    this.onAddWallet,
   });
 
   final List<VerifiableCredentialEntity> credentials;
@@ -19,7 +19,7 @@ class CredentialsList extends StatelessWidget {
   final bool hasReachedEnd;
   final VoidCallback onLoadMore;
   final String? issuingWalletCredentialId;
-  final void Function(String) onAddWallet;
+  final void Function(String)? onAddWallet;
 
   @override
   Widget build(BuildContext context) {
@@ -54,8 +54,8 @@ class CredentialsList extends StatelessWidget {
               credential: credential,
               isAddingToWallet:
                   issuingWalletCredentialId == credential.credentialId,
-              onAddWallet: isWalletEligible
-                  ? () => onAddWallet(credential.credentialId)
+              onAddWallet: isWalletEligible && onAddWallet != null
+                  ? () => onAddWallet!(credential.credentialId)
                   : null,
             ),
           );

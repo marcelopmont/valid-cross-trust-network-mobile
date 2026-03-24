@@ -12,8 +12,8 @@ class AvailableOffersContainer
   AvailableOffersContainer({super.key})
     : super(
         listener: (context, state) {
-          if (state.isCredentialIssued) {
-            context.goNamed(RouteNames.credentialsList);
+          if (state.issuedCredential != null) {
+            context.pop(state.issuedCredential);
           }
 
           if (state.error != null) {

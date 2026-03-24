@@ -2,8 +2,10 @@ import 'dart:convert';
 
 import 'package:network/network.dart';
 
+import '../../../credentials_list/domain/entities/verifiable_credential_entity.dart';
 import '../../domain/entities/offer_entity.dart';
 import '../../domain/repositories/offers_repository.dart';
+import '../models/issued_credential_model.dart';
 import '../models/offer_model.dart';
 
 class OffersRepositoryImpl implements OffersRepository {
@@ -32,17 +34,20 @@ class OffersRepositoryImpl implements OffersRepository {
   }
 
   @override
-  Future<void> issueCredential({
+  Future<VerifiableCredentialEntity> issueCredential({
     required String offerId,
     required String consentId,
   }) async {
     try {
-      await httpClient.post(
+      final response = await httpClient.post(
         HttpRequest(
           path: '/credentials/issue',
           payload: {'offerId': offerId, 'consentId': consentId},
         ),
       );
+
+      final data = jsonDecode(response.dataJson!) as Map<String, dynamic>;
+      return IssuedCredentialModel.fromJson(data).toEntity();
     } catch (e) {
       throw Exception('Failed to issue credential');
     }

@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:core/core.dart';
+import 'package:flutter/material.dart';
 
 import '../../domain/entities/offer_entity.dart';
 import 'components/header_text.dart';
@@ -23,9 +23,7 @@ class AvailableOffersScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
-      appBar: const ValidAppBar(
-        titleText: 'Credenciais Disponíveis',
-      ),
+      appBar: const ValidAppBar(titleText: 'Credenciais Disponíveis'),
       body: isLoading
           ? const Center(child: CircularProgressIndicator())
           : _buildContent(context),

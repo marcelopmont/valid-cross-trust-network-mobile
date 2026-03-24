@@ -1,4 +1,3 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
 
 import 'package:glassmorphism/glassmorphism.dart';
@@ -50,7 +49,7 @@ class ValidButton extends StatelessWidget {
   }
 }
 
-// ─── Primary (glass effect) ───────────────────────────────────────────────────
+// ─── Primary (glass effect) ──────────────────────────────────────────────────
 
 class _PrimaryButton extends StatelessWidget {
   const _PrimaryButton({
@@ -115,7 +114,7 @@ class _PrimaryButton extends StatelessWidget {
   }
 }
 
-// ─── Secondary (outlined) ─────────────────────────────────────────────────────
+// ─── Secondary (outlined) ────────────────────────────────────────────────────
 
 class _SecondaryButton extends StatelessWidget {
   const _SecondaryButton({
@@ -154,7 +153,7 @@ class _SecondaryButton extends StatelessWidget {
   }
 }
 
-// ─── Shared content ───────────────────────────────────────────────────────────
+// ─── Shared content ──────────────────────────────────────────────────────────
 
 class _ButtonContent extends StatelessWidget {
   const _ButtonContent({

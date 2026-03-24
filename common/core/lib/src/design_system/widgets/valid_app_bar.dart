@@ -11,7 +11,10 @@ class ValidAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.actions,
     this.leading,
     this.automaticallyImplyLeading = true,
-  }) : assert(titleText == null || titleWidget == null, 'Cannot provide both titleText and titleWidget');
+  }) : assert(
+         titleText == null || titleWidget == null,
+         'Cannot provide both titleText and titleWidget',
+       );
 
   final String? titleText;
   final Widget? titleWidget;

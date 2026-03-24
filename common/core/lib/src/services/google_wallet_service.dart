@@ -36,8 +36,7 @@ class GoogleWalletService {
         'offerJson': requestJson,
       });
       return result ?? false;
-    } on PlatformException catch (error) {
-      print(error);
+    } on PlatformException catch (_) {
       return false;
     } catch (_) {
       return false;

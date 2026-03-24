@@ -24,7 +24,6 @@ abstract final class AppTheme {
         foregroundColor: AppColors.primary,
         elevation: 0,
         scrolledUnderElevation: 0,
-        // Uncomment to use system blur if supported, or apply flexibleSpace blur manually if needed
       ),
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
         backgroundColor: Colors.transparent,

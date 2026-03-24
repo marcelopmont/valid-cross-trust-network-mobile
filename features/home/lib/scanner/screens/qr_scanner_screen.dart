@@ -1,5 +1,5 @@
-import 'package:dependencies/dependencies.dart';
 import 'package:core/core.dart';
+import 'package:dependencies/dependencies.dart';
 import 'package:flutter/material.dart';
 
 class QrScannerScreen extends StatefulWidget {

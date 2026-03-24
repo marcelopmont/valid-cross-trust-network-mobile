@@ -1,6 +1,6 @@
-import 'package:glassmorphism/glassmorphism.dart';
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
+import 'package:glassmorphism/glassmorphism.dart';
 
 import '../../../domain/entities/verifiable_credential_entity.dart';
 import 'credential_status_badge.dart';

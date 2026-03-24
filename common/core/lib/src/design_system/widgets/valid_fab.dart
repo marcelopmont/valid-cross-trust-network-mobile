@@ -1,4 +1,3 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:glassmorphism/glassmorphism.dart';
 import '../colors/app_colors.dart';
@@ -40,11 +39,7 @@ class ValidFloatingActionButton extends StatelessWidget {
             Colors.white.withValues(alpha: 0.2),
           ],
         ),
-        child: Icon(
-          icon,
-          color: Colors.white,
-          size: 28,
-        ),
+        child: Icon(icon, color: Colors.white, size: 28),
       ),
     );
   }

@@ -7,7 +7,8 @@ class AnimatedGlassBackground extends StatefulWidget {
   const AnimatedGlassBackground({super.key});
 
   @override
-  State<AnimatedGlassBackground> createState() => _AnimatedGlassBackgroundState();
+  State<AnimatedGlassBackground> createState() =>
+      _AnimatedGlassBackgroundState();
 }
 
 class _AnimatedGlassBackgroundState extends State<AnimatedGlassBackground>
@@ -47,7 +48,7 @@ class _AnimatedGlassBackgroundState extends State<AnimatedGlassBackground>
               ),
             ),
           ),
-          
+
           // Blob 1 Primary Color
           AnimatedBuilder(
             animation: _controller,

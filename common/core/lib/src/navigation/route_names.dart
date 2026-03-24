@@ -17,4 +17,5 @@ abstract final class RouteNames {
   static const String credentialsList = 'Credentials List';
   static const String availableOffers = 'Available Offers';
   static const String livenessVerification = 'Liveness Verification';
+  static const String credentialDetail = 'Credential Detail';
 }

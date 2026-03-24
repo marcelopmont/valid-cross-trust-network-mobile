@@ -43,6 +43,17 @@ class CredentialsListContainer
             //     context,
             //   ).add(AddToWallet(credentialId: credentialId));
             // },
+            onCredentialTap: (credential) async {
+              final result = await context.pushNamed(
+                RouteNames.credentialDetail,
+                extra: credential,
+              );
+              if (result is VerifiableCredentialEntity && context.mounted) {
+                CredentialsListBlocProvider.of(
+                  context,
+                ).add(UpdateCredential(credential: result));
+              }
+            },
             onLoadMore: () {
               CredentialsListBlocProvider.of(
                 context,

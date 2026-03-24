@@ -15,6 +15,7 @@ class CredentialsListScreen extends StatelessWidget {
     required this.onLoadMore,
     this.issuingWalletCredentialId,
     this.onAddWallet,
+    this.onCredentialTap,
   });
 
   final bool isLoading;
@@ -24,6 +25,7 @@ class CredentialsListScreen extends StatelessWidget {
   final VoidCallback onLoadMore;
   final String? issuingWalletCredentialId;
   final void Function(String)? onAddWallet;
+  final void Function(VerifiableCredentialEntity)? onCredentialTap;
 
   @override
   Widget build(BuildContext context) {
@@ -56,6 +58,7 @@ class CredentialsListScreen extends StatelessWidget {
         onLoadMore: onLoadMore,
         issuingWalletCredentialId: issuingWalletCredentialId,
         onAddWallet: onAddWallet,
+        onCredentialTap: onCredentialTap,
       );
     }
 

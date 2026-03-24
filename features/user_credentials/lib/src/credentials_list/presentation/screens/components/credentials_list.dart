@@ -12,6 +12,7 @@ class CredentialsList extends StatefulWidget {
     required this.onLoadMore,
     this.issuingWalletCredentialId,
     this.onAddWallet,
+    this.onCredentialTap,
   });
 
   final List<VerifiableCredentialEntity> credentials;
@@ -20,6 +21,7 @@ class CredentialsList extends StatefulWidget {
   final VoidCallback onLoadMore;
   final String? issuingWalletCredentialId;
   final void Function(String)? onAddWallet;
+  final void Function(VerifiableCredentialEntity)? onCredentialTap;
 
   @override
   State<CredentialsList> createState() => _CredentialsListState();
@@ -183,14 +185,24 @@ class _CredentialsListState extends State<CredentialsList>
                   horizontal: 24.0,
                   vertical: 8.0,
                 ),
-                child: CredentialCard(
-                  credential: credential,
-                  isAddingToWallet:
-                      widget.issuingWalletCredentialId ==
-                      credential.credentialId,
-                  onAddWallet: isWalletEligible && widget.onAddWallet != null
-                      ? () => widget.onAddWallet!(credential.credentialId)
+                child: GestureDetector(
+                  onTap: widget.onCredentialTap != null
+                      ? () => widget.onCredentialTap!(credential)
                       : null,
+                  child: Hero(
+                    tag: 'credential_card_${credential.credentialId}',
+                    child: CredentialCard(
+                      credential: credential,
+                      isAddingToWallet:
+                          widget.issuingWalletCredentialId ==
+                          credential.credentialId,
+                      onAddWallet:
+                          isWalletEligible && widget.onAddWallet != null
+                              ? () =>
+                                  widget.onAddWallet!(credential.credentialId)
+                              : null,
+                    ),
+                  ),
                 ),
               ),
             ),

@@ -22,7 +22,6 @@ class AvailableOffersScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBodyBehindAppBar: true,
       appBar: const ValidAppBar(titleText: 'Credenciais Disponíveis'),
       body: isLoading
           ? const Center(child: CircularProgressIndicator())

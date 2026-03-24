@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:core/core.dart';
 
 import '../../domain/entities/verifiable_credential_entity.dart';
 import 'components/credentials_empty_state.dart';
@@ -27,11 +28,15 @@ class CredentialsListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Carteira')),
+      extendBodyBehindAppBar: true,
+      appBar: const ValidAppBar(titleText: 'Carteira'),
       body: _buildBody(),
-      floatingActionButton: FloatingActionButton(
-        onPressed: onAddCredential,
-        child: const Icon(Icons.add, color: Colors.white),
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(bottom: 80.0), // height of bottom navbar
+        child: ValidFloatingActionButton(
+          onPressed: onAddCredential,
+          icon: Icons.add,
+        ),
       ),
     );
   }

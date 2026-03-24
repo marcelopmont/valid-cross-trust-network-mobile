@@ -52,10 +52,9 @@ class _SignupScreenState extends State<SignupScreen> {
     final isWeb = size.width > 600;
 
     return Scaffold(
+      extendBodyBehindAppBar: true,
       backgroundColor: const Color(0xFFFAFAFA),
-      appBar: AppBar(
-        backgroundColor: const Color(0xFFFAFAFA),
-        elevation: 0,
+      appBar: ValidAppBar(
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: widget.onNavigateToSignin,

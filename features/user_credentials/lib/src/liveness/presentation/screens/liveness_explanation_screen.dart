@@ -20,9 +20,9 @@ class LivenessExplanationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Verificação de Identidade'),
-        elevation: 0,
+      extendBodyBehindAppBar: true,
+      appBar: ValidAppBar(
+        titleText: 'Verificação de Identidade',
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: onCancel,

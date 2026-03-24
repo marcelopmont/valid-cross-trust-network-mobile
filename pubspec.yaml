@@ -16,3 +16,5 @@ workspace:
   - features/authentication
   - features/home
   - features/user_credentials
+dependencies:
+  glassmorphism: ^3.0.0

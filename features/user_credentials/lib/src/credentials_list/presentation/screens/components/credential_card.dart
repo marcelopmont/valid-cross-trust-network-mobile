@@ -29,7 +29,7 @@ class CredentialCard extends StatelessWidget {
           gradient: const LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
-            colors: [AppColors.darkBlue, AppColors.lightBlue],
+            colors: [AppColors.primary, AppColors.accent],
           ),
         ),
         child: Column(

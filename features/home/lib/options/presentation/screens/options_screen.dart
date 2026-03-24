@@ -34,7 +34,7 @@ class OptionsScreen extends StatelessWidget {
                       children: [
                         const CircleAvatar(
                           radius: 24,
-                          backgroundColor: AppColors.lightBlue,
+                          backgroundColor: AppColors.primary,
                           child: Icon(
                             Icons.person,
                             size: 24,

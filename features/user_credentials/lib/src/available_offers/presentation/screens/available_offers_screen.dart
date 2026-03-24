@@ -1,4 +1,3 @@
-import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 
 import '../../domain/entities/offer_entity.dart';
@@ -22,11 +21,8 @@ class AvailableOffersScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[100],
       appBar: AppBar(
         title: const Text('Credenciais Disponíveis'),
-        backgroundColor: AppColors.darkBlue,
-        foregroundColor: Colors.white,
         elevation: 0,
       ),
       body: isLoading

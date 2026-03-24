@@ -20,7 +20,6 @@ class App extends StatelessWidget {
     return MaterialApp(
       title: 'DID App Poc',
       theme: AppTheme.lightTheme,
-      darkTheme: AppTheme.darkTheme,
       themeMode: ThemeMode.light,
       builder: (context, child) => const AppRouter(),
     );

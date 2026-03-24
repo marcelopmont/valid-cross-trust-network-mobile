@@ -60,37 +60,13 @@ class OfferCard extends StatelessWidget {
                   ],
                 ),
               ),
-              const SizedBox(width: 8),
-              ElevatedButton(
-                onPressed: isIssuing ? null : onEmit,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.darkBlue,
-                  foregroundColor: Colors.white,
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 14,
-                    vertical: 8,
-                  ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  textStyle: const TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w600,
-                  ),
+              SizedBox(
+                width: 110,
+                child: ValidButton(
+                  label: 'Emitir',
+                  onPressed: isIssuing ? null : onEmit,
+                  isLoading: isIssuing,
                 ),
-                child: isIssuing
-                    ? const SizedBox(
-                        width: 16,
-                        height: 16,
-                        child: CircularProgressIndicator(
-                          strokeWidth: 2,
-                          color: AppColors.darkBlue,
-                        ),
-                      )
-                    : const Text(
-                        'Emitir\nCredencial',
-                        textAlign: TextAlign.center,
-                      ),
               ),
             ],
           ),

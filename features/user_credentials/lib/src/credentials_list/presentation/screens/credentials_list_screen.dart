@@ -1,4 +1,3 @@
-import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 
 import '../../domain/entities/verifiable_credential_entity.dart';
@@ -28,15 +27,10 @@ class CredentialsListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Carteira'),
-        backgroundColor: AppColors.darkBlue,
-        foregroundColor: Colors.white,
-      ),
+      appBar: AppBar(title: const Text('Carteira')),
       body: _buildBody(),
       floatingActionButton: FloatingActionButton(
         onPressed: onAddCredential,
-        backgroundColor: AppColors.darkBlue,
         child: const Icon(Icons.add, color: Colors.white),
       ),
     );

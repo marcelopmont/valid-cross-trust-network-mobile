@@ -20,11 +20,8 @@ class LivenessExplanationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[100],
       appBar: AppBar(
         title: const Text('Verificação de Identidade'),
-        backgroundColor: AppColors.darkBlue,
-        foregroundColor: Colors.white,
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
@@ -53,11 +50,7 @@ class LivenessExplanationScreen extends StatelessWidget {
               const Text(
                 'Para garantir sua segurança e confirmar sua identidade, '
                 'precisamos realizar uma verificação facial rápida.',
-                style: TextStyle(
-                  fontSize: 16,
-                  color: AppColors.grey,
-                  height: 1.5,
-                ),
+                style: TextStyle(fontSize: 16),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 32),

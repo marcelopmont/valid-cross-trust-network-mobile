@@ -29,7 +29,7 @@ class ConsentScreen extends StatelessWidget {
               const Icon(
                 Icons.privacy_tip_outlined,
                 size: 64,
-                color: AppColors.darkBlue,
+                color: AppColors.primary,
               ),
               const SizedBox(height: 24),
               const Text(
@@ -66,7 +66,6 @@ class ConsentScreen extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: AppColors.lightGrey),
                 ),
                 child: const Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -76,7 +75,6 @@ class ConsentScreen extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.w600,
-                        color: AppColors.grey,
                       ),
                     ),
                     SizedBox(height: 4),
@@ -94,7 +92,6 @@ class ConsentScreen extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.w600,
-                        color: AppColors.grey,
                       ),
                     ),
                     SizedBox(height: 4),
@@ -131,33 +128,10 @@ class ConsentScreen extends StatelessWidget {
                     textAlign: TextAlign.center,
                   ),
                 ),
-              ElevatedButton(
+              ValidButton(
+                label: 'Aceitar e continuar',
                 onPressed: isGranting ? null : onAccept,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.darkBlue,
-                  foregroundColor: Colors.white,
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  elevation: 0,
-                ),
-                child: isGranting
-                    ? const SizedBox(
-                        height: 20,
-                        width: 20,
-                        child: CircularProgressIndicator(
-                          strokeWidth: 2,
-                          color: Colors.white,
-                        ),
-                      )
-                    : const Text(
-                        'Aceitar e continuar',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
+                isLoading: isGranting,
               ),
               const SizedBox(height: 12),
               TextButton(onPressed: onGoBack, child: const Text('Voltar')),
@@ -173,7 +147,7 @@ class ConsentScreen extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 6),
       child: Row(
         children: [
-          Icon(icon, size: 20, color: AppColors.darkBlue),
+          Icon(icon, size: 20),
           const SizedBox(width: 12),
           Text(
             label,

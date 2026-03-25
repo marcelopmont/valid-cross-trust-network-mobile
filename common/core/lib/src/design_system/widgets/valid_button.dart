@@ -21,7 +21,7 @@ class ValidButton extends StatelessWidget {
   final ValidButtonVariant variant;
   final bool isLoading;
   final double width;
-  final IconData? icon;
+  final dynamic icon;
 
   bool get _isPrimary => variant == ValidButtonVariant.primary;
 
@@ -62,7 +62,7 @@ class _PrimaryButton extends StatelessWidget {
   final String label;
   final VoidCallback? onPressed;
   final bool isLoading;
-  final IconData? icon;
+  final dynamic icon;
 
   @override
   Widget build(BuildContext context) {
@@ -127,7 +127,7 @@ class _SecondaryButton extends StatelessWidget {
   final String label;
   final VoidCallback? onPressed;
   final bool isLoading;
-  final IconData? icon;
+  final dynamic icon;
 
   @override
   Widget build(BuildContext context) {
@@ -139,7 +139,7 @@ class _SecondaryButton extends StatelessWidget {
       style: OutlinedButton.styleFrom(
         foregroundColor: color,
         backgroundColor: Colors.transparent,
-        side: BorderSide(color: color, width: 1.5),
+        side: const BorderSide(color: Colors.transparent),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
         padding: EdgeInsets.zero,
       ),
@@ -166,7 +166,7 @@ class _ButtonContent extends StatelessWidget {
   final String label;
   final bool isLoading;
   final Color color;
-  final IconData? icon;
+  final dynamic icon;
 
   @override
   Widget build(BuildContext context) {
@@ -187,7 +187,9 @@ class _ButtonContent extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         if (icon != null) ...[
-          Icon(icon, size: 18, color: color),
+          (icon is IconData)
+              ? Icon(icon, size: 18, color: color)
+              : SizedBox(width: 18, height: 18, child: icon as Widget),
           const SizedBox(width: 8),
         ],
         Text(

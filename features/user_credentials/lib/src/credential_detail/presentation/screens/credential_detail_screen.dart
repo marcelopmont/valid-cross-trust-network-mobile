@@ -9,15 +9,21 @@ class CredentialDetailScreen extends StatelessWidget {
     super.key,
     required this.credential,
     required this.isRevoking,
+    required this.isAddingToWallet,
+    this.onAddToWallet,
     this.onRevoke,
   });
 
   final VerifiableCredentialEntity credential;
   final bool isRevoking;
+  final bool isAddingToWallet;
+  final VoidCallback? onAddToWallet;
   final VoidCallback? onRevoke;
 
   @override
   Widget build(BuildContext context) {
+    final canShowActions = credential.status != 'revoked';
+
     return Scaffold(
       appBar: const ValidAppBar(titleText: 'Detalhes'),
       body: SingleChildScrollView(
@@ -31,13 +37,21 @@ class CredentialDetailScreen extends StatelessWidget {
             ),
             const SizedBox(height: 24),
             _buildPreviewSection(),
-            if (credential.status != 'revoked' && onRevoke != null) ...[
+            if (canShowActions && onAddToWallet != null) ...[
               const SizedBox(height: 32),
+              ValidButton(
+                onPressed: onAddToWallet,
+                label: 'Adicionar à Carteira do Google',
+                isLoading: isAddingToWallet,
+                icon: Image.asset('assets/images/icon/google-wallet-icon.png'),
+              ),
+            ],
+            if (canShowActions && onRevoke != null) ...[
+              const SizedBox(height: 16),
               ValidButton(
                 label: 'Revogar Credencial',
                 onPressed: onRevoke,
                 isLoading: isRevoking,
-                icon: Icons.block,
                 variant: ValidButtonVariant.secondary,
               ),
             ],

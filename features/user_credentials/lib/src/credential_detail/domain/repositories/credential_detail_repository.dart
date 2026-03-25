@@ -3,4 +3,6 @@ abstract class CredentialDetailRepository {
     required String credentialId,
     required String reason,
   });
+
+  Future<String> getGoogleWalletOffer(String credentialId);
 }

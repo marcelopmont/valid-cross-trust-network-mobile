@@ -11,26 +11,28 @@ class CredentialDetailBloc
     extends Bloc<CredentialDetailEvent, CredentialDetailState> {
   CredentialDetailBloc({
     required this.credentialDetailRepository,
+    required this.googleWalletService,
     required VerifiableCredentialEntity credential,
   }) : super(CredentialDetailState(credential: credential)) {
     on<CredentialDetailEvent>((event, emit) => event.execute(this, emit));
   }
 
   final CredentialDetailRepository credentialDetailRepository;
+  final GoogleWalletService googleWalletService;
 }
 
-class CredentialDetailBlocProvider
-    extends BlocProvider<CredentialDetailBloc> {
+class CredentialDetailBlocProvider extends BlocProvider<CredentialDetailBloc> {
   CredentialDetailBlocProvider({
     super.key,
     super.child,
     required VerifiableCredentialEntity credential,
   }) : super(
-          create: (context) => CredentialDetailBloc(
-            credentialDetailRepository: di<CredentialDetailRepository>(),
-            credential: credential,
-          ),
-        );
+         create: (context) => CredentialDetailBloc(
+           credentialDetailRepository: di<CredentialDetailRepository>(),
+           googleWalletService: di<GoogleWalletService>(),
+           credential: credential,
+         ),
+       );
 
   static CredentialDetailBloc of(BuildContext context) =>
       BlocProvider.of<CredentialDetailBloc>(context);

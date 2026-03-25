@@ -42,23 +42,4 @@ class CredentialsRepositoryImpl implements CredentialsRepository {
       throw CredentialsErrors.unknownError;
     }
   }
-
-  @override
-  Future<String> getGoogleWalletOffer(String credentialId) async {
-    final uuid = credentialId.replaceFirst('urn:uuid:', '');
-    try {
-      final response = await httpClient.post(
-        HttpRequest(
-          path: '/google-wallet/offer',
-          payload: jsonEncode({'credentialId': uuid}),
-        ),
-      );
-      return response.dataJson ?? '';
-    } on HttpErrorResponse {
-      throw CredentialsErrors.networkError;
-    } catch (e) {
-      if (e is CredentialsErrors) rethrow;
-      throw CredentialsErrors.unknownError;
-    }
-  }
 }

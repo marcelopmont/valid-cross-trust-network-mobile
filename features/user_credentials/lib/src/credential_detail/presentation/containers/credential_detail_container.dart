@@ -14,15 +14,13 @@ class CredentialDetailContainer
           if (state.error != null) {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
-                content: Text('Erro ao revogar credencial'),
+                content: Text('Ops, ocorreu um erro, tente novamente.'),
               ),
             );
           }
           if (state.isRevoked) {
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('Credencial revogada com sucesso'),
-              ),
+              const SnackBar(content: Text('Credencial revogada com sucesso')),
             );
             onRevoked(state.credential);
           }
@@ -31,6 +29,14 @@ class CredentialDetailContainer
           return CredentialDetailScreen(
             credential: state.credential,
             isRevoking: state.isRevoking,
+            isAddingToWallet: state.isAddingToWallet,
+            onAddToWallet: state.credential.status != 'revoked'
+                ? () {
+                    CredentialDetailBlocProvider.of(
+                      context,
+                    ).add(const AddCredentialToWallet());
+                  }
+                : null,
             onRevoke: state.credential.status != 'revoked'
                 ? () {
                     CredentialDetailBlocProvider.of(

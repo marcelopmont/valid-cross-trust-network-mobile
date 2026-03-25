@@ -6,6 +6,7 @@ import '../../../credentials_list/domain/errors/credentials_errors.dart';
 import 'credential_detail_bloc.dart';
 import 'credential_detail_state.dart';
 
+part 'events/add_to_wallet.dart';
 part 'events/revoke_credential.dart';
 
 @immutable

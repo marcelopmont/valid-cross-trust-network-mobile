@@ -8,7 +8,6 @@ import 'credentials_list_state.dart';
 
 part 'events/load_credentials.dart';
 part 'events/clear_credentials_error.dart';
-part 'events/add_to_wallet.dart';
 part 'events/prepend_credential.dart';
 part 'events/update_credential.dart';
 

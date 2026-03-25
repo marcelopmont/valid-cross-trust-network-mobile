@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 
 import '../../../domain/entities/verifiable_credential_entity.dart';
@@ -198,9 +200,8 @@ class _CredentialsListState extends State<CredentialsList>
                           credential.credentialId,
                       onAddWallet:
                           isWalletEligible && widget.onAddWallet != null
-                              ? () =>
-                                  widget.onAddWallet!(credential.credentialId)
-                              : null,
+                          ? () => widget.onAddWallet!(credential.credentialId)
+                          : null,
                     ),
                   ),
                 ),
@@ -248,7 +249,8 @@ class _CredentialsListState extends State<CredentialsList>
 }
 
 class _CardItem {
+  _CardItem(this.child, this.zIndex);
+
   final Widget child;
   final double zIndex;
-  _CardItem(this.child, this.zIndex);
 }

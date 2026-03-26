@@ -132,33 +132,10 @@ class _SigninScreenState extends State<SigninScreen> {
                       },
                     ),
                     const SizedBox(height: 32),
-                    ElevatedButton(
+                    ValidButton(
+                      label: 'Entrar',
                       onPressed: widget.isLoading ? null : _handleSignin,
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.darkBlue,
-                        foregroundColor: Colors.white,
-                        padding: const EdgeInsets.symmetric(vertical: 16),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        elevation: 0,
-                      ),
-                      child: widget.isLoading
-                          ? const SizedBox(
-                              height: 20,
-                              width: 20,
-                              child: CircularProgressIndicator(
-                                strokeWidth: 2,
-                                color: Colors.white,
-                              ),
-                            )
-                          : const Text(
-                              'Entrar',
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
+                      isLoading: widget.isLoading,
                     ),
                     const SizedBox(height: 16),
                     TextButton(

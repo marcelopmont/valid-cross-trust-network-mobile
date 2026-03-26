@@ -13,6 +13,9 @@ class CredentialsListScreen extends StatelessWidget {
     required this.hasReachedEnd,
     required this.onAddCredential,
     required this.onLoadMore,
+    this.issuingWalletCredentialId,
+    this.onAddWallet,
+    this.onCredentialTap,
   });
 
   final bool isLoading;
@@ -20,38 +23,45 @@ class CredentialsListScreen extends StatelessWidget {
   final bool hasReachedEnd;
   final VoidCallback onAddCredential;
   final VoidCallback onLoadMore;
+  final String? issuingWalletCredentialId;
+  final void Function(String)? onAddWallet;
+  final void Function(VerifiableCredentialEntity)? onCredentialTap;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Carteira'),
-        backgroundColor: AppColors.darkBlue,
-        foregroundColor: Colors.white,
-      ),
+      extendBodyBehindAppBar: true,
+      appBar: const ValidAppBar(titleText: 'Carteira'),
       body: _buildBody(),
-      floatingActionButton: FloatingActionButton(
-        onPressed: onAddCredential,
-        backgroundColor: AppColors.darkBlue,
-        child: const Icon(Icons.add, color: Colors.white),
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(bottom: 80.0), // height of bottom navbar
+        child: ValidFloatingActionButton(
+          onPressed: onAddCredential,
+          icon: Icons.add,
+        ),
       ),
     );
   }
 
   Widget _buildBody() {
+    Widget content;
+
     if (isLoading && credentials.isEmpty) {
-      return const Center(child: CircularProgressIndicator());
+      content = const Center(child: CircularProgressIndicator());
+    } else if (credentials.isEmpty) {
+      content = const CredentialsEmptyState();
+    } else {
+      content = CredentialsList(
+        credentials: credentials,
+        isLoading: isLoading,
+        hasReachedEnd: hasReachedEnd,
+        onLoadMore: onLoadMore,
+        issuingWalletCredentialId: issuingWalletCredentialId,
+        onAddWallet: onAddWallet,
+        onCredentialTap: onCredentialTap,
+      );
     }
 
-    if (credentials.isEmpty) {
-      return const CredentialsEmptyState();
-    }
-
-    return CredentialsList(
-      credentials: credentials,
-      isLoading: isLoading,
-      hasReachedEnd: hasReachedEnd,
-      onLoadMore: onLoadMore,
-    );
+    return content;
   }
 }

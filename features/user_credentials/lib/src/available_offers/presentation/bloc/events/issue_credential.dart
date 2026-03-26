@@ -1,9 +1,9 @@
 part of '../available_offers_event.dart';
 
 final class IssueCredential extends AvailableOffersEvent {
-  const IssueCredential({required this.schemaId, required this.consentId});
+  const IssueCredential({required this.offerId, required this.consentId});
 
-  final String schemaId;
+  final String offerId;
   final String consentId;
 
   @override
@@ -11,21 +11,24 @@ final class IssueCredential extends AvailableOffersEvent {
     AvailableOffersBloc bloc,
     Emitter<AvailableOffersState> emit,
   ) async {
-    emit(bloc.state.copyWith(issuingSchemaId: schemaId, error: () => null));
+    emit(bloc.state.copyWith(issuingOfferId: () => offerId, error: () => null));
 
     try {
-      await bloc.offersRepository.issueCredential(
-        schemaId: schemaId,
+      final credential = await bloc.offersRepository.issueCredential(
+        offerId: offerId,
         consentId: consentId,
       );
 
       emit(
-        bloc.state.copyWith(issuingSchemaId: null, isCredentialIssued: true),
+        bloc.state.copyWith(
+          issuingOfferId: () => null,
+          issuedCredential: credential,
+        ),
       );
     } catch (e) {
       emit(
         bloc.state.copyWith(
-          issuingSchemaId: null,
+          issuingOfferId: () => null,
           error: () => 'Erro ao emitir credencial. Tente novamente.',
         ),
       );

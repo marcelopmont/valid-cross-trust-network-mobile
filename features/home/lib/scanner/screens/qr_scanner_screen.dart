@@ -1,3 +1,4 @@
+import 'package:core/core.dart';
 import 'package:dependencies/dependencies.dart';
 import 'package:flutter/material.dart';
 
@@ -49,11 +50,10 @@ class _QrScannerScreenState extends State<QrScannerScreen> {
     final scanArea = (size.width < 400 || size.height < 400) ? 280.0 : 400.0;
 
     return Scaffold(
+      extendBodyBehindAppBar: true,
       backgroundColor: Colors.black,
-      appBar: AppBar(
-        title: const Text('Scan QR Code'),
-        backgroundColor: Colors.black,
-        foregroundColor: Colors.white,
+      appBar: ValidAppBar(
+        titleText: 'Scan QR Code',
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {

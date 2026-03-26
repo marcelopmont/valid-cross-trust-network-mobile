@@ -6,6 +6,9 @@ import 'src/available_offers/presentation/bloc/available_offers_bloc.dart';
 import 'src/available_offers/presentation/containers/available_offers_container.dart';
 import 'src/consent/presentation/bloc/consent_bloc.dart';
 import 'src/consent/presentation/containers/consent_container.dart';
+import 'src/credential_detail/presentation/bloc/credential_detail_bloc.dart';
+import 'src/credential_detail/presentation/containers/credential_detail_container.dart';
+import 'src/credentials_list/domain/entities/verifiable_credential_entity.dart';
 import 'src/credentials_list/presentation/bloc/credentials_list_bloc.dart';
 import 'src/credentials_list/presentation/containers/credentials_list_container.dart';
 import 'src/liveness/presentation/bloc/liveness_verification_bloc.dart';
@@ -36,6 +39,31 @@ class UserCredentialsRoute extends GoRoute {
           );
         },
         routes: [
+          GoRoute(
+            name: RouteNames.credentialDetail,
+            path: 'detail',
+            pageBuilder: (context, state) {
+              final credential =
+                  state.extra as VerifiableCredentialEntity;
+              return CustomTransitionPage(
+                child: CredentialDetailBlocProvider(
+                  credential: credential,
+                  child: CredentialDetailContainer(
+                    onRevoked: (updatedCredential) {
+                      context.pop(updatedCredential);
+                    },
+                  ),
+                ),
+                transitionsBuilder:
+                    (context, animation, secondaryAnimation, child) {
+                  return FadeTransition(
+                    opacity: animation,
+                    child: child,
+                  );
+                },
+              );
+            },
+          ),
           GoRoute(
             name: RouteNames.availableOffers,
             path: 'available-offers',

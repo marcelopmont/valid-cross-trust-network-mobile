@@ -4,6 +4,7 @@ import '../../../credentials_list/domain/entities/verifiable_credential_entity.d
 
 class OfferEntity extends Equatable {
   const OfferEntity({
+    required this.id,
     required this.credentialType,
     required this.schemaId,
     required this.schemaVersion,
@@ -11,6 +12,7 @@ class OfferEntity extends Equatable {
     this.preview = const {},
   });
 
+  final String id;
   final String credentialType;
   final String schemaId;
   final String schemaVersion;
@@ -19,6 +21,7 @@ class OfferEntity extends Equatable {
 
   @override
   List<Object?> get props => [
+    id,
     credentialType,
     schemaId,
     schemaVersion,

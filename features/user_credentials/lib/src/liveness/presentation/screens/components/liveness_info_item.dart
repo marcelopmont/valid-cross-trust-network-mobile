@@ -19,11 +19,8 @@ class LivenessInfoItem extends StatelessWidget {
       children: [
         Container(
           padding: const EdgeInsets.all(10),
-          decoration: BoxDecoration(
-            color: AppColors.darkBlue.withValues(alpha: 0.1),
-            borderRadius: BorderRadius.circular(8),
-          ),
-          child: Icon(icon, color: AppColors.darkBlue, size: 24),
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
+          child: Icon(icon, size: 24),
         ),
         const SizedBox(width: 16),
         Expanded(

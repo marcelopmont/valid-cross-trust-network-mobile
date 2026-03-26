@@ -3,6 +3,7 @@ import '../../domain/entities/offer_entity.dart';
 
 class OfferModel {
   OfferModel({
+    required this.id,
     required this.credentialType,
     required this.schemaId,
     required this.schemaVersion,
@@ -13,6 +14,7 @@ class OfferModel {
   factory OfferModel.fromJson(Map<String, dynamic> json) {
     final issuerJson = json['issuer'] as Map<String, dynamic>;
     return OfferModel(
+      id: json['offerId'] as String,
       credentialType: json['credentialType'] as String,
       schemaId: json['schemaId'] as String,
       schemaVersion: json['schemaVersion'] as String,
@@ -21,6 +23,7 @@ class OfferModel {
     );
   }
 
+  final String id;
   final String credentialType;
   final String schemaId;
   final String schemaVersion;
@@ -28,6 +31,7 @@ class OfferModel {
   final Map<String, dynamic> preview;
 
   OfferEntity toEntity() => OfferEntity(
+    id: id,
     credentialType: credentialType,
     schemaId: schemaId,
     schemaVersion: schemaVersion,

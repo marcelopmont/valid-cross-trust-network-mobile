@@ -10,25 +10,19 @@ class AvailableOffersScreen extends StatelessWidget {
     super.key,
     required this.isLoading,
     required this.offers,
-    required this.issuingSchemaId,
+    required this.issuingOfferId,
     required this.onOfferSelected,
   });
 
   final bool isLoading;
   final List<OfferEntity> offers;
-  final String? issuingSchemaId;
+  final String? issuingOfferId;
   final Function(OfferEntity offer) onOfferSelected;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[100],
-      appBar: AppBar(
-        title: const Text('Credenciais Disponíveis'),
-        backgroundColor: AppColors.darkBlue,
-        foregroundColor: Colors.white,
-        elevation: 0,
-      ),
+      appBar: const ValidAppBar(titleText: 'Credenciais Disponíveis'),
       body: isLoading
           ? const Center(child: CircularProgressIndicator())
           : _buildContent(context),
@@ -73,7 +67,7 @@ class AvailableOffersScreen extends StatelessWidget {
           ...offers.map(
             (offer) => OfferCard(
               offer: offer,
-              isIssuing: issuingSchemaId == offer.schemaId,
+              isIssuing: issuingOfferId == offer.id,
               onEmit: () => onOfferSelected(offer),
             ),
           ),

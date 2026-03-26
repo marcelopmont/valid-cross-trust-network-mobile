@@ -11,6 +11,7 @@ final class CredentialsListState extends Equatable {
     this.total = 0,
     this.offset = 0,
     this.hasReachedEnd = false,
+    this.issuingWalletCredentialId,
   });
 
   final List<VerifiableCredentialEntity> credentials;
@@ -19,6 +20,7 @@ final class CredentialsListState extends Equatable {
   final int total;
   final int offset;
   final bool hasReachedEnd;
+  final String? issuingWalletCredentialId;
 
   @override
   List<Object?> get props => [
@@ -28,6 +30,7 @@ final class CredentialsListState extends Equatable {
     total,
     offset,
     hasReachedEnd,
+    issuingWalletCredentialId,
   ];
 
   CredentialsListState copyWith({
@@ -37,6 +40,7 @@ final class CredentialsListState extends Equatable {
     int? total,
     int? offset,
     bool? hasReachedEnd,
+    String? Function()? issuingWalletCredentialId,
   }) {
     return CredentialsListState(
       credentials: credentials ?? this.credentials,
@@ -45,6 +49,9 @@ final class CredentialsListState extends Equatable {
       total: total ?? this.total,
       offset: offset ?? this.offset,
       hasReachedEnd: hasReachedEnd ?? this.hasReachedEnd,
+      issuingWalletCredentialId: issuingWalletCredentialId != null
+          ? issuingWalletCredentialId()
+          : this.issuingWalletCredentialId,
     );
   }
 }

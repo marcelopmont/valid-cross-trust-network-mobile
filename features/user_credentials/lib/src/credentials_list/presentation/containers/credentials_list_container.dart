@@ -2,6 +2,7 @@ import 'package:core/core.dart';
 import 'package:dependencies/dependencies.dart';
 import 'package:flutter/material.dart';
 
+import '../../domain/entities/verifiable_credential_entity.dart';
 import '../bloc/credentials_list_bloc.dart';
 import '../bloc/credentials_list_event.dart';
 import '../bloc/credentials_list_state.dart';
@@ -26,8 +27,32 @@ class CredentialsListContainer
             isLoading: state.isLoading,
             credentials: state.credentials,
             hasReachedEnd: state.hasReachedEnd,
+            issuingWalletCredentialId: state.issuingWalletCredentialId,
             onAddCredential: () async {
-              await context.pushNamed(RouteNames.availableOffers);
+              final result = await context.pushNamed(
+                RouteNames.availableOffers,
+              );
+              if (result is VerifiableCredentialEntity && context.mounted) {
+                CredentialsListBlocProvider.of(
+                  context,
+                ).add(PrependCredential(credential: result));
+              }
+            },
+            // onAddWallet: (credentialId) {
+            //   CredentialsListBlocProvider.of(
+            //     context,
+            //   ).add(AddToWallet(credentialId: credentialId));
+            // },
+            onCredentialTap: (credential) async {
+              final result = await context.pushNamed(
+                RouteNames.credentialDetail,
+                extra: credential,
+              );
+              if (result is VerifiableCredentialEntity && context.mounted) {
+                CredentialsListBlocProvider.of(
+                  context,
+                ).add(UpdateCredential(credential: result));
+              }
             },
             onLoadMore: () {
               CredentialsListBlocProvider.of(

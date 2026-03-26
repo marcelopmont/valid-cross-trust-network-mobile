@@ -5,12 +5,15 @@ import 'src/available_offers/data/repositories/offers_repository_impl.dart';
 import 'src/available_offers/domain/repositories/offers_repository.dart';
 import 'src/consent/data/repositories/consent_repository_impl.dart';
 import 'src/consent/domain/repositories/consent_repository.dart';
+import 'src/credential_detail/data/repositories/credential_detail_repository_impl.dart';
+import 'src/credential_detail/domain/repositories/credential_detail_repository.dart';
 import 'src/credentials_list/data/repositories/credentials_repository_impl.dart';
 import 'src/credentials_list/domain/repositories/credentials_repository.dart';
 import 'src/liveness/data/services/liveness_hub_service.dart';
 
 Future<void> initServiceLocator() async {
   di.registerLazySingleton<LivenessHubService>(LivenessHubService.new);
+  di.registerLazySingleton<GoogleWalletService>(GoogleWalletService.new);
 
   di.registerFactory<CredentialsRepository>(
     () => CredentialsRepositoryImpl(httpClient: di<HttpClient>()),
@@ -22,5 +25,9 @@ Future<void> initServiceLocator() async {
 
   di.registerFactory<ConsentRepository>(
     () => ConsentRepositoryImpl(httpClient: di<HttpClient>()),
+  );
+
+  di.registerFactory<CredentialDetailRepository>(
+    () => CredentialDetailRepositoryImpl(httpClient: di<HttpClient>()),
   );
 }

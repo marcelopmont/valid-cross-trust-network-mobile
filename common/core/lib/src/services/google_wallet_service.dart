@@ -20,23 +20,23 @@ class GoogleWalletService {
       final credentialOffer = offer['credentialOffer'] as Map<String, dynamic>;
 
       // Restructure to W3C Digital Credentials create() format
-      final requestJson = jsonEncode({
-        'requests': [
-          {
-            'protocol': credentialOffer['protocol'],
-            'data': {
-              'credential_issuer': credentialOffer['credential_issuer'],
-              'grants': credentialOffer['grants'],
-            },
-          },
-        ],
-      });
+      // final requestJson = jsonEncode({
+      //   'requests': [
+      //     {
+      //       'protocol': credentialOffer['protocol'],
+      //       'data': {
+      //         'credential_issuer': credentialOffer['credential_issuer'],
+      //         'grants': credentialOffer['grants'],
+      //       },
+      //     },
+      //   ],
+      // });
 
       final result = await _channel.invokeMethod<bool>('addCredential', {
-        'offerJson': requestJson,
+        'offerJson': jsonEncode(credentialOffer),
       });
       return result ?? false;
-    } on PlatformException catch (_) {
+    } on PlatformException catch (error) {
       return false;
     } catch (_) {
       return false;

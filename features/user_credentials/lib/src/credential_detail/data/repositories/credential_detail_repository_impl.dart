@@ -19,7 +19,7 @@ class CredentialDetailRepositoryImpl implements CredentialDetailRepository {
     try {
       await httpClient.post(
         HttpRequest(
-          path: '/credentials/$uuid/revoke',
+          path: '/wallet/credentials/$uuid/revoke',
           payload: jsonEncode({'reason': reason}),
         ),
       );

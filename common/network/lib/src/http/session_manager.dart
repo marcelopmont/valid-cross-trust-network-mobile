@@ -1,5 +1,6 @@
 abstract class SessionManager {
   Future<void> onSessionExpired();
+  Future<bool> hasSession();
 }
 
 class SessionManagerLazy implements SessionManager {
@@ -9,4 +10,7 @@ class SessionManagerLazy implements SessionManager {
 
   @override
   Future<void> onSessionExpired() => _factory().onSessionExpired();
+
+  @override
+  Future<bool> hasSession() => _factory().hasSession();
 }

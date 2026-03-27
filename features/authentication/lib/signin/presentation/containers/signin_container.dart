@@ -20,7 +20,7 @@ class SigninContainer extends BlocConsumer<SigninBloc, SigninBlocState> {
 
            if (state.error != null) {
              final message = switch (state.error!) {
-               SigninErrors.invalidCredentials => 'CPF ou senha inválidos',
+               SigninErrors.invalidCredentials => 'Usuário não encontrado',
                SigninErrors.networkError => 'Erro de conexão. Tente novamente',
                SigninErrors.timeOut => 'Tempo esgotado. Tente novamente',
                SigninErrors.unknownError => 'Erro inesperado. Tente novamente',

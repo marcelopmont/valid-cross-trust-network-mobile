@@ -23,4 +23,10 @@ class SessionManagerImpl implements SessionManager {
     await userDocumentStorageService.deleteDocument();
     router.goNamed(RouteNames.signin);
   }
+
+  @override
+  Future<bool> hasSession() async {
+    final token = await tokenStorageService.getToken();
+    return token != null && token.isNotEmpty;
+  }
 }

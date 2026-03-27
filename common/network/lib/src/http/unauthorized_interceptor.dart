@@ -10,11 +10,16 @@ class UnauthorizedInterceptor extends Interceptor {
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) {
     if (err.response?.statusCode == 401) {
-      sessionManager.onSessionExpired();
-
-      handler.resolve(
-        Response(requestOptions: err.requestOptions, statusCode: 401),
-      );
+      sessionManager.hasSession().then((hasSession) {
+        if (hasSession) {
+          sessionManager.onSessionExpired();
+          handler.resolve(
+            Response(requestOptions: err.requestOptions, statusCode: 401),
+          );
+        } else {
+          handler.next(err);
+        }
+      });
       return;
     }
 

@@ -17,8 +17,11 @@ class CredentialsListContainer
             context.goNamed(RouteNames.signin);
           }
           if (state.error != null) {
+            final l10n = AppLocalizations.of(context);
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Erro ao carregar credenciais')),
+              SnackBar(
+                content: Text(l10n.credentialsLoadError),
+              ),
             );
             CredentialsListBlocProvider.of(
               context,
@@ -30,7 +33,8 @@ class CredentialsListContainer
             isLoading: state.isLoading,
             credentials: state.credentials,
             hasReachedEnd: state.hasReachedEnd,
-            issuingWalletCredentialId: state.issuingWalletCredentialId,
+            issuingWalletCredentialId:
+                state.issuingWalletCredentialId,
             userDocument: state.userDocument,
             onLogout: () => CredentialsListBlocProvider.of(
               context,
@@ -39,10 +43,13 @@ class CredentialsListContainer
               final result = await context.pushNamed(
                 RouteNames.availableOffers,
               );
-              if (result is VerifiableCredentialEntity && context.mounted) {
+              if (result is VerifiableCredentialEntity &&
+                  context.mounted) {
                 CredentialsListBlocProvider.of(
                   context,
-                ).add(PrependCredential(credential: result));
+                ).add(
+                  PrependCredential(credential: result),
+                );
               }
             },
             onCredentialTap: (credential) async {
@@ -50,10 +57,13 @@ class CredentialsListContainer
                 RouteNames.credentialDetail,
                 extra: credential,
               );
-              if (result is VerifiableCredentialEntity && context.mounted) {
+              if (result is VerifiableCredentialEntity &&
+                  context.mounted) {
                 CredentialsListBlocProvider.of(
                   context,
-                ).add(UpdateCredential(credential: result));
+                ).add(
+                  UpdateCredential(credential: result),
+                );
               }
             },
             onLoadMore: () {

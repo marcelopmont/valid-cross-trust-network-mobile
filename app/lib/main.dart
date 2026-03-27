@@ -18,9 +18,12 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'DID App Poc',
+      title: 'Valid ID',
       theme: AppTheme.lightTheme,
       themeMode: ThemeMode.light,
+      localizationsDelegates:
+          AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
       builder: (context, child) => const AppRouter(),
     );
   }

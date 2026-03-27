@@ -1,0 +1,90 @@
+{
+  "@@locale": "en",
+
+  "appTitle": "Valid ID",
+
+  "walletTab": "Wallet",
+  "scanTab": "Scan",
+
+  "cpfLabel": "CPF",
+  "cpfHint": "000.000.000-00",
+  "cpfRequired": "CPF is required",
+  "cpfMustHave11Digits": "CPF must have 11 digits",
+
+  "password": "Password",
+  "passwordRequired": "Password is required",
+  "passwordMinLength": "Password must have at least 6 characters",
+  "confirmPassword": "Confirm Password",
+  "confirmPasswordRequired": "Password confirmation is required",
+  "passwordsDoNotMatch": "Passwords do not match",
+
+  "signIn": "Sign in",
+  "noAccountSignUp": "Don't have an account? Sign up",
+  "createAccount": "Create Account",
+  "signUp": "Sign up",
+
+  "userNotFound": "User not found",
+  "userAlreadyRegistered": "User already registered",
+  "connectionError": "Connection error. Please try again",
+  "timeoutError": "Timed out. Please try again",
+  "unexpectedError": "Unexpected error. Please try again",
+
+  "addCredential": "Add credential",
+  "noCredentials": "No credentials",
+  "credentialsLoadError": "Error loading credentials",
+  "issuedOn": "Issued on: {date}",
+  "@issuedOn": {
+    "placeholders": {
+      "date": { "type": "String" }
+    }
+  },
+  "expiresOn": "Expires on: {date}",
+  "@expiresOn": {
+    "placeholders": {
+      "date": { "type": "String" }
+    }
+  },
+  "statusIssued": "Issued",
+
+  "details": "Details",
+  "addToGoogleWallet": "Add to Google Wallet",
+  "revokeCredential": "Revoke Credential",
+  "information": "Information",
+  "credentialDetailError": "Oops, an error occurred. Please try again.",
+  "credentialRevokedSuccess": "Credential revoked successfully",
+
+  "availableCredentials": "Available Credentials",
+  "noOffersAvailable": "No offers available",
+  "offersHeaderText": "Here are your documents available for issuance.",
+  "issue": "Issue",
+
+  "consent": "Consent",
+  "consentDescription": "To use the application, we need your consent to collect and process some of your personal data:",
+  "consentName": "Name",
+  "consentDateOfBirth": "Date of birth",
+  "consentPurpose": "Purpose",
+  "consentPurposeDescription": "Age verification for credential issuance",
+  "consentLegalBasis": "Legal Basis",
+  "consentLegalBasisDescription": "LGPD Art. 7, I - Consent",
+  "consentWarning": "Consent is required to continue using the application. You can exit and sign in with another account if you prefer.",
+  "acceptAndContinue": "Accept and continue",
+  "back": "Back",
+
+  "identityVerification": "Identity Verification",
+  "livenessVerification": "Liveness Verification",
+  "livenessDescription": "To ensure your security and confirm your identity, we need to perform a quick facial verification.",
+  "startVerification": "Start Verification",
+  "cancel": "Cancel",
+
+  "scanQrCode": "Scan QR Code",
+  "positionQrCode": "Position the QR code within the frame",
+
+  "documentNotFound": "Document not found",
+  "signOut": "Sign out",
+
+  "offersLoadError": "Error loading offers",
+  "credentialIssueError": "Error issuing credential. Please try again.",
+
+  "credentialTypeAgeVerification": "Age Verification",
+  "credentialTypeCofenNursingLicense": "COFEN Nursing License"
+}

@@ -17,7 +17,7 @@ final class LoadOffers extends AvailableOffersEvent {
       emit(
         bloc.state.copyWith(
           isLoading: false,
-          error: () => 'Erro ao carregar ofertas',
+          error: () => 'offersLoadError',
         ),
       );
     }

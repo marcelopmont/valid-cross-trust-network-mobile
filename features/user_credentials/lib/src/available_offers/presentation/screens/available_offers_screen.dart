@@ -21,8 +21,12 @@ class AvailableOffersScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+
     return Scaffold(
-      appBar: const ValidAppBar(titleText: 'Credenciais Disponíveis'),
+      appBar: ValidAppBar(
+        titleText: l10n.availableCredentials,
+      ),
       body: isLoading
           ? const Center(child: CircularProgressIndicator())
           : _buildContent(context),
@@ -30,6 +34,8 @@ class AvailableOffersScreen extends StatelessWidget {
   }
 
   Widget _buildContent(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+
     if (offers.isEmpty) {
       return Center(
         child: Padding(
@@ -44,7 +50,7 @@ class AvailableOffersScreen extends StatelessWidget {
               ),
               const SizedBox(height: 24),
               Text(
-                'Nenhuma oferta disponível',
+                l10n.noOffersAvailable,
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.w600,

@@ -19,11 +19,13 @@ class CredentialCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+
     return GlassmorphicContainer(
       width: double.infinity,
       height: onAddWallet != null ? 260 : 200,
       borderRadius: 16,
-      blur: 40, // Muito mais fosco
+      blur: 40,
       alignment: Alignment.center,
       border: 1.5,
       linearGradient: LinearGradient(
@@ -48,11 +50,15 @@ class CredentialCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment:
+                  MainAxisAlignment.spaceBetween,
               children: [
                 Expanded(
                   child: Text(
-                    credential.credentialType,
+                    localizedCredentialType(
+                      l10n,
+                      credential.credentialType,
+                    ),
                     style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -60,7 +66,9 @@ class CredentialCard extends StatelessWidget {
                     ),
                   ),
                 ),
-                CredentialStatusBadge(status: credential.status),
+                CredentialStatusBadge(
+                  status: credential.status,
+                ),
               ],
             ),
             const SizedBox(height: 16),
@@ -74,7 +82,9 @@ class CredentialCard extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             Text(
-              'Emitido em: ${_formatDate(credential.issuedAt)}',
+              l10n.issuedOn(
+                _formatDate(credential.issuedAt),
+              ),
               style: TextStyle(
                 fontSize: 14,
                 color: Colors.white.withValues(alpha: 0.8),
@@ -83,10 +93,13 @@ class CredentialCard extends StatelessWidget {
             if (credential.expiresAt != null) ...[
               const SizedBox(height: 4),
               Text(
-                'Expira em: ${_formatDate(credential.expiresAt!)}',
+                l10n.expiresOn(
+                  _formatDate(credential.expiresAt!),
+                ),
                 style: TextStyle(
                   fontSize: 12,
-                  color: Colors.white.withValues(alpha: 0.7),
+                  color:
+                      Colors.white.withValues(alpha: 0.7),
                 ),
               ),
             ],
@@ -121,7 +134,9 @@ class CredentialCard extends StatelessWidget {
   String _formatDate(String isoDate) {
     try {
       final date = DateTime.parse(isoDate);
-      return '${date.day.toString().padLeft(2, '0')}/${date.month.toString().padLeft(2, '0')}/${date.year}';
+      return '${date.day.toString().padLeft(2, '0')}'
+          '/${date.month.toString().padLeft(2, '0')}'
+          '/${date.year}';
     } catch (_) {
       return isoDate;
     }

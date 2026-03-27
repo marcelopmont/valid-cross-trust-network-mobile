@@ -5,12 +5,15 @@ import '../colors/app_colors.dart';
 
 enum ValidButtonVariant { primary, secondary }
 
+enum ValidButtonSize { regular, small }
+
 class ValidButton extends StatelessWidget {
   const ValidButton({
     super.key,
     required this.label,
     required this.onPressed,
     this.variant = ValidButtonVariant.primary,
+    this.size = ValidButtonSize.regular,
     this.isLoading = false,
     this.width = double.infinity,
     this.icon,
@@ -20,12 +23,20 @@ class ValidButton extends StatelessWidget {
   final String label;
   final VoidCallback? onPressed;
   final ValidButtonVariant variant;
+  final ValidButtonSize size;
   final bool isLoading;
   final double width;
   final dynamic icon;
   final Color? color;
 
   bool get _isPrimary => variant == ValidButtonVariant.primary;
+  bool get _isSmall => size == ValidButtonSize.small;
+
+  double get _height => _isSmall ? 36 : 52;
+  double get _borderRadius => _isSmall ? 10 : 16;
+  double get _fontSize => _isSmall ? 13 : 15;
+  double get _iconSize => _isSmall ? 15 : 18;
+  double get _loaderSize => _isSmall ? 16 : 22;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +44,7 @@ class ValidButton extends StatelessWidget {
 
     return SizedBox(
       width: width,
-      height: 52,
+      height: _height,
       child: _isPrimary
           ? _PrimaryButton(
               label: label,
@@ -41,6 +52,11 @@ class ValidButton extends StatelessWidget {
               isLoading: isLoading,
               icon: icon,
               color: color,
+              height: _height,
+              borderRadius: _borderRadius,
+              fontSize: _fontSize,
+              iconSize: _iconSize,
+              loaderSize: _loaderSize,
             )
           : _SecondaryButton(
               label: label,
@@ -48,6 +64,10 @@ class ValidButton extends StatelessWidget {
               isLoading: isLoading,
               icon: icon,
               color: color,
+              borderRadius: _borderRadius,
+              fontSize: _fontSize,
+              iconSize: _iconSize,
+              loaderSize: _loaderSize,
             ),
     );
   }
@@ -60,6 +80,11 @@ class _PrimaryButton extends StatelessWidget {
     required this.label,
     required this.onPressed,
     required this.isLoading,
+    required this.height,
+    required this.borderRadius,
+    required this.fontSize,
+    required this.iconSize,
+    required this.loaderSize,
     this.icon,
     this.color,
   });
@@ -69,6 +94,11 @@ class _PrimaryButton extends StatelessWidget {
   final bool isLoading;
   final dynamic icon;
   final Color? color;
+  final double height;
+  final double borderRadius;
+  final double fontSize;
+  final double iconSize;
+  final double loaderSize;
 
   @override
   Widget build(BuildContext context) {
@@ -87,7 +117,7 @@ class _PrimaryButton extends StatelessWidget {
 
     return InkWell(
       onTap: onPressed,
-      borderRadius: BorderRadius.circular(16),
+      borderRadius: BorderRadius.circular(borderRadius),
       splashColor: (hasCustomColor ? color! : Colors.black).withValues(
         alpha: 0.1,
       ),
@@ -96,8 +126,8 @@ class _PrimaryButton extends StatelessWidget {
       ),
       child: GlassmorphicContainer(
         width: double.infinity,
-        height: 52,
-        borderRadius: 16,
+        height: height,
+        borderRadius: borderRadius,
         blur: 20,
         alignment: Alignment.center,
         border: 1.5,
@@ -127,6 +157,9 @@ class _PrimaryButton extends StatelessWidget {
             isLoading: isLoading,
             icon: icon,
             color: contentColor,
+            fontSize: fontSize,
+            iconSize: iconSize,
+            loaderSize: loaderSize,
           ),
         ),
       ),
@@ -141,6 +174,10 @@ class _SecondaryButton extends StatelessWidget {
     required this.label,
     required this.onPressed,
     required this.isLoading,
+    required this.borderRadius,
+    required this.fontSize,
+    required this.iconSize,
+    required this.loaderSize,
     this.icon,
     this.color,
   });
@@ -150,6 +187,10 @@ class _SecondaryButton extends StatelessWidget {
   final bool isLoading;
   final dynamic icon;
   final Color? color;
+  final double borderRadius;
+  final double fontSize;
+  final double iconSize;
+  final double loaderSize;
 
   @override
   Widget build(BuildContext context) {
@@ -163,7 +204,9 @@ class _SecondaryButton extends StatelessWidget {
         foregroundColor: effectiveColor,
         backgroundColor: Colors.transparent,
         side: const BorderSide(color: Colors.transparent),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(borderRadius),
+        ),
         padding: EdgeInsets.zero,
       ),
       child: _ButtonContent(
@@ -171,6 +214,9 @@ class _SecondaryButton extends StatelessWidget {
         isLoading: isLoading,
         icon: icon,
         color: effectiveColor,
+        fontSize: fontSize,
+        iconSize: iconSize,
+        loaderSize: loaderSize,
       ),
     );
   }
@@ -183,6 +229,9 @@ class _ButtonContent extends StatelessWidget {
     required this.label,
     required this.isLoading,
     required this.color,
+    required this.fontSize,
+    required this.iconSize,
+    required this.loaderSize,
     this.icon,
   });
 
@@ -190,14 +239,17 @@ class _ButtonContent extends StatelessWidget {
   final bool isLoading;
   final Color color;
   final dynamic icon;
+  final double fontSize;
+  final double iconSize;
+  final double loaderSize;
 
   @override
   Widget build(BuildContext context) {
     if (isLoading) {
       return Center(
         child: SizedBox(
-          width: 22,
-          height: 22,
+          width: loaderSize,
+          height: loaderSize,
           child: CircularProgressIndicator(
             strokeWidth: 2.5,
             valueColor: AlwaysStoppedAnimation<Color>(color),
@@ -211,14 +263,18 @@ class _ButtonContent extends StatelessWidget {
       children: [
         if (icon != null) ...[
           (icon is IconData)
-              ? Icon(icon, size: 18, color: color)
-              : SizedBox(width: 18, height: 18, child: icon as Widget),
+              ? Icon(icon, size: iconSize, color: color)
+              : SizedBox(
+                  width: iconSize,
+                  height: iconSize,
+                  child: icon as Widget,
+                ),
           const SizedBox(width: 8),
         ],
         Text(
           label,
           style: TextStyle(
-            fontSize: 15,
+            fontSize: fontSize,
             fontWeight: FontWeight.w600,
             color: color,
             letterSpacing: 0.3,

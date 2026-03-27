@@ -1,3 +1,4 @@
+import 'package:core/core.dart';
 import 'package:dependencies/dependencies.dart';
 import 'package:flutter/material.dart';
 
@@ -19,23 +20,31 @@ class SigninContainer extends BlocConsumer<SigninBloc, SigninBlocState> {
            }
 
            if (state.error != null) {
+             final l10n = AppLocalizations.of(context);
              final message = switch (state.error!) {
-               SigninErrors.invalidCredentials => 'Usuário não encontrado',
-               SigninErrors.networkError => 'Erro de conexão. Tente novamente',
-               SigninErrors.timeOut => 'Tempo esgotado. Tente novamente',
-               SigninErrors.unknownError => 'Erro inesperado. Tente novamente',
+               SigninErrors.invalidCredentials =>
+                 l10n.userNotFound,
+               SigninErrors.networkError =>
+                 l10n.connectionError,
+               SigninErrors.timeOut => l10n.timeoutError,
+               SigninErrors.unknownError =>
+                 l10n.unexpectedError,
              };
              ScaffoldMessenger.of(context).showSnackBar(
-               SnackBar(content: Text(message), backgroundColor: Colors.red),
+               SnackBar(
+                 content: Text(message),
+                 backgroundColor: Colors.red,
+               ),
              );
            }
          },
          builder: (context, state) {
            return SigninScreen(
              isLoading: state.isLoading,
-             onSignin: (cpf, password) => SigninBlocProvider.of(
-               context,
-             ).add(PerformSignin(cpf: cpf, password: password)),
+             onSignin: (cpf, password) =>
+                 SigninBlocProvider.of(context).add(
+               PerformSignin(cpf: cpf, password: password),
+             ),
              onNavigateToSignup: onNavigateToSignup,
            );
          },

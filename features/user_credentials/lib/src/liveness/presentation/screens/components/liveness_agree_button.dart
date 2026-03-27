@@ -13,8 +13,10 @@ class LivenessAgreeButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+
     return ValidButton(
-      label: 'Iniciar Verificação',
+      label: l10n.startVerification,
       onPressed: isLoading ? null : onPressed,
       isLoading: isLoading,
     );

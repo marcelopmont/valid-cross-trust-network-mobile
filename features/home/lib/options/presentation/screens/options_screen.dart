@@ -15,13 +15,18 @@ class OptionsScreen extends StatelessWidget {
 
   String _formatDocument(String document) {
     if (document.length == 11) {
-      return '''${document.substring(0, 3)}.${document.substring(3, 6)}.${document.substring(6, 9)}-${document.substring(9)}''';
+      return '${document.substring(0, 3)}'
+          '.${document.substring(3, 6)}'
+          '.${document.substring(6, 9)}'
+          '-${document.substring(9)}';
     }
     return document;
   }
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+
     return Scaffold(
       body: SafeArea(
         child: isLoading
@@ -42,12 +47,11 @@ class OptionsScreen extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(width: 20),
-                        // CPF Label
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'CPF',
+                              l10n.cpfLabel,
                               style: TextStyle(
                                 fontSize: 12,
                                 fontWeight: FontWeight.w500,
@@ -56,11 +60,10 @@ class OptionsScreen extends StatelessWidget {
                               ),
                             ),
                             const SizedBox(height: 4),
-                            // User Document
                             Text(
                               userDocument != null
                                   ? _formatDocument(userDocument!)
-                                  : 'Documento não encontrado',
+                                  : l10n.documentNotFound,
                               style: const TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.w600,
@@ -72,7 +75,6 @@ class OptionsScreen extends StatelessWidget {
                       ],
                     ),
                     const Spacer(),
-                    // Logout Button
                     TextButton.icon(
                       onPressed: onLogout,
                       icon: Icon(
@@ -81,7 +83,7 @@ class OptionsScreen extends StatelessWidget {
                         color: Colors.grey[700],
                       ),
                       label: Text(
-                        'Sair da conta',
+                        l10n.signOut,
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w500,

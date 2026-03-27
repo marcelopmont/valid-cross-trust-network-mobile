@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:core/core.dart';
 import 'package:dependencies/dependencies.dart';
 import 'package:flutter/material.dart';
 
@@ -57,7 +58,7 @@ class RootScreen extends StatelessWidget {
                       height: 24,
                     ),
                   ),
-                  label: 'Carteira',
+                  label: AppLocalizations.of(context).walletTab,
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(
@@ -65,7 +66,7 @@ class RootScreen extends StatelessWidget {
                     color: currentIndex == 1 ? selectedColor : unselectedColor,
                     size: 24,
                   ),
-                  label: 'Scan',
+                  label: AppLocalizations.of(context).scanTab,
                 ),
               ],
             ),

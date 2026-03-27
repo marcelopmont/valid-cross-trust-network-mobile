@@ -17,9 +17,16 @@ class AvailableOffersContainer
           }
 
           if (state.error != null) {
+            final l10n = AppLocalizations.of(context);
+            final message = switch (state.error!) {
+              'offersLoadError' => l10n.offersLoadError,
+              'credentialIssueError' =>
+                l10n.credentialIssueError,
+              _ => l10n.unexpectedError,
+            };
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                content: Text(state.error!),
+                content: Text(message),
                 backgroundColor: Colors.red,
               ),
             );

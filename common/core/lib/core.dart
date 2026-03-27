@@ -7,6 +7,8 @@ export 'src/design_system/widgets/valid_app_bar.dart';
 export 'src/design_system/widgets/valid_button.dart';
 export 'src/design_system/widgets/valid_fab.dart';
 export 'src/di/dependency_injection.dart';
+export 'src/l10n/credential_type_l10n.dart';
+export 'src/l10n/generated/app_localizations.dart';
 export 'src/navigation/route_names.dart';
 export 'src/services/google_wallet_service.dart';
 export 'src/storage/local_repository.dart';

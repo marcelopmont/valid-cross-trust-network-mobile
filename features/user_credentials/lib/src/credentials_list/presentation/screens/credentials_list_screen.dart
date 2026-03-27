@@ -27,7 +27,8 @@ class CredentialsListScreen extends StatelessWidget {
   final VoidCallback onLoadMore;
   final String? issuingWalletCredentialId;
   final void Function(String)? onAddWallet;
-  final void Function(VerifiableCredentialEntity)? onCredentialTap;
+  final void Function(VerifiableCredentialEntity)?
+      onCredentialTap;
   final String? userDocument;
   final VoidCallback? onLogout;
 
@@ -43,6 +44,8 @@ class CredentialsListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+
     return Scaffold(
       body: SafeArea(
         bottom: false,
@@ -56,10 +59,11 @@ class CredentialsListScreen extends StatelessWidget {
               child: Row(
                 children: [
                   Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment:
+                        CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'CPF',
+                        l10n.cpfLabel,
                         style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.w500,
@@ -70,7 +74,8 @@ class CredentialsListScreen extends StatelessWidget {
                       const SizedBox(height: 4),
                       Text(
                         userDocument != null
-                            ? _formatDocument(userDocument!)
+                            ? _formatDocument(
+                                userDocument!)
                             : '',
                         style: const TextStyle(
                           fontSize: 18,
@@ -101,7 +106,7 @@ class CredentialsListScreen extends StatelessWidget {
                 top: 8,
               ),
               child: ValidButton(
-                label: 'Adicionar credencial',
+                label: l10n.addCredential,
                 icon: Icons.add,
                 color: AppColors.accent,
                 onPressed: onAddCredential,
@@ -117,7 +122,9 @@ class CredentialsListScreen extends StatelessWidget {
     Widget content;
 
     if (isLoading && credentials.isEmpty) {
-      content = const Center(child: CircularProgressIndicator());
+      content = const Center(
+        child: CircularProgressIndicator(),
+      );
     } else if (credentials.isEmpty) {
       content = const CredentialsEmptyState();
     } else {
@@ -126,7 +133,8 @@ class CredentialsListScreen extends StatelessWidget {
         isLoading: isLoading,
         hasReachedEnd: hasReachedEnd,
         onLoadMore: onLoadMore,
-        issuingWalletCredentialId: issuingWalletCredentialId,
+        issuingWalletCredentialId:
+            issuingWalletCredentialId,
         onAddWallet: onAddWallet,
         onCredentialTap: onCredentialTap,
       );

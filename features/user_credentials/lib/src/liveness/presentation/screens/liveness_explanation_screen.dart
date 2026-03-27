@@ -19,10 +19,12 @@ class LivenessExplanationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: ValidAppBar(
-        titleText: 'Verificação de Identidade',
+        titleText: l10n.identityVerification,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: onCancel,
@@ -30,16 +32,17 @@ class LivenessExplanationScreen extends StatelessWidget {
       ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24),
+          padding:
+              const EdgeInsets.symmetric(horizontal: 24),
           child: ListView(
             shrinkWrap: true,
             children: [
               const SizedBox(height: 24),
               const LivenessIllustration(),
               const SizedBox(height: 32),
-              const Text(
-                'Verificação de Liveness',
-                style: TextStyle(
+              Text(
+                l10n.livenessVerification,
+                style: const TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
                   color: AppColors.textPrimary,
@@ -47,16 +50,21 @@ class LivenessExplanationScreen extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 16),
-              const Text(
-                'Para garantir sua segurança e confirmar sua identidade, '
-                'precisamos realizar uma verificação facial rápida.',
-                style: TextStyle(fontSize: 16),
+              Text(
+                l10n.livenessDescription,
+                style: const TextStyle(fontSize: 16),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 32),
-              LivenessAgreeButton(onPressed: onAgree, isLoading: isLoading),
+              LivenessAgreeButton(
+                onPressed: onAgree,
+                isLoading: isLoading,
+              ),
               const SizedBox(height: 12),
-              LivenessCancelButton(onPressed: onCancel, isLoading: isLoading),
+              LivenessCancelButton(
+                onPressed: onCancel,
+                isLoading: isLoading,
+              ),
               const SizedBox(height: 24),
             ],
           ),

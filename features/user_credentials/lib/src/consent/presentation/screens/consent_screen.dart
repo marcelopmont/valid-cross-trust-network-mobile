@@ -17,11 +17,16 @@ class ConsentScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+
     return Scaffold(
       backgroundColor: const Color(0xFFFAFAFA),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
+          padding: const EdgeInsets.symmetric(
+            horizontal: 24,
+            vertical: 32,
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -32,9 +37,9 @@ class ConsentScreen extends StatelessWidget {
                 color: AppColors.primary,
               ),
               const SizedBox(height: 24),
-              const Text(
-                'Consentimento',
-                style: TextStyle(
+              Text(
+                l10n.consent,
+                style: const TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
                   color: AppColors.textPrimary,
@@ -42,11 +47,9 @@ class ConsentScreen extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 16),
-              const Text(
-                'Para utilizar o aplicativo, precisamos do '
-                'seu consentimento para coletar e processar '
-                'alguns de seus dados pessoais:',
-                style: TextStyle(
+              Text(
+                l10n.consentDescription,
+                style: const TextStyle(
                   fontSize: 14,
                   color: AppColors.textPrimary,
                   height: 1.5,
@@ -54,10 +57,13 @@ class ConsentScreen extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 24),
-              _buildDataItem(Icons.person_outline, 'Nome'),
+              _buildDataItem(
+                Icons.person_outline,
+                l10n.consentName,
+              ),
               _buildDataItem(
                 Icons.calendar_today_outlined,
-                'Data de nascimento',
+                l10n.consentDateOfBirth,
               ),
               const SizedBox(height: 24),
               Container(
@@ -66,36 +72,37 @@ class ConsentScreen extends StatelessWidget {
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(12),
                 ),
-                child: const Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                child: Column(
+                  crossAxisAlignment:
+                      CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Finalidade',
-                      style: TextStyle(
+                      l10n.consentPurpose,
+                      style: const TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
-                    SizedBox(height: 4),
+                    const SizedBox(height: 4),
                     Text(
-                      'Verificação de idade para emissão de credencial',
-                      style: TextStyle(
+                      l10n.consentPurposeDescription,
+                      style: const TextStyle(
                         fontSize: 14,
                         color: AppColors.textPrimary,
                       ),
                     ),
-                    SizedBox(height: 12),
+                    const SizedBox(height: 12),
                     Text(
-                      'Base Legal',
-                      style: TextStyle(
+                      l10n.consentLegalBasis,
+                      style: const TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
-                    SizedBox(height: 4),
+                    const SizedBox(height: 4),
                     Text(
-                      'LGPD Art. 7, I - Consentimento',
-                      style: TextStyle(
+                      l10n.consentLegalBasisDescription,
+                      style: const TextStyle(
                         fontSize: 14,
                         color: AppColors.textPrimary,
                       ),
@@ -111,14 +118,13 @@ class ConsentScreen extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: Colors.orange.shade50,
                     borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: Colors.orange.shade200),
+                    border: Border.all(
+                      color: Colors.orange.shade200,
+                    ),
                   ),
-                  child: const Text(
-                    'O consentimento é obrigatório para '
-                    'continuar utilizando o aplicativo. '
-                    'Você pode sair e entrar com outra conta '
-                    'se preferir.',
-                    style: TextStyle(
+                  child: Text(
+                    l10n.consentWarning,
+                    style: const TextStyle(
                       fontSize: 13,
                       color: AppColors.textPrimary,
                       height: 1.4,
@@ -127,12 +133,15 @@ class ConsentScreen extends StatelessWidget {
                   ),
                 ),
               ValidButton(
-                label: 'Aceitar e continuar',
+                label: l10n.acceptAndContinue,
                 onPressed: isGranting ? null : onAccept,
                 isLoading: isGranting,
               ),
               const SizedBox(height: 12),
-              TextButton(onPressed: onGoBack, child: const Text('Voltar')),
+              TextButton(
+                onPressed: onGoBack,
+                child: Text(l10n.back),
+              ),
             ],
           ),
         ),
@@ -149,7 +158,10 @@ class ConsentScreen extends StatelessWidget {
           const SizedBox(width: 12),
           Text(
             label,
-            style: const TextStyle(fontSize: 16, color: AppColors.textPrimary),
+            style: const TextStyle(
+              fontSize: 16,
+              color: AppColors.textPrimary,
+            ),
           ),
         ],
       ),

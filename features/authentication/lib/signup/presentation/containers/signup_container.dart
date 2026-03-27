@@ -1,3 +1,4 @@
+import 'package:core/core.dart';
 import 'package:dependencies/dependencies.dart';
 import 'package:flutter/material.dart';
 
@@ -19,23 +20,31 @@ class SignupContainer extends BlocConsumer<SignupBloc, SignupBlocState> {
            }
 
            if (state.error != null) {
+             final l10n = AppLocalizations.of(context);
              final message = switch (state.error!) {
-               SignupErrors.userAlreadyExists => 'Usuário já cadastrado',
-               SignupErrors.networkError => 'Erro de conexão. Tente novamente',
-               SignupErrors.timeOut => 'Tempo esgotado. Tente novamente',
-               SignupErrors.unknownError => 'Erro inesperado. Tente novamente',
+               SignupErrors.userAlreadyExists =>
+                 l10n.userAlreadyRegistered,
+               SignupErrors.networkError =>
+                 l10n.connectionError,
+               SignupErrors.timeOut => l10n.timeoutError,
+               SignupErrors.unknownError =>
+                 l10n.unexpectedError,
              };
              ScaffoldMessenger.of(context).showSnackBar(
-               SnackBar(content: Text(message), backgroundColor: Colors.red),
+               SnackBar(
+                 content: Text(message),
+                 backgroundColor: Colors.red,
+               ),
              );
            }
          },
          builder: (context, state) {
            return SignupScreen(
              isLoading: state.isLoading,
-             onSignup: (cpf, password) => SignupBlocProvider.of(
-               context,
-             ).add(PerformSignup(cpf: cpf, password: password)),
+             onSignup: (cpf, password) =>
+                 SignupBlocProvider.of(context).add(
+               PerformSignup(cpf: cpf, password: password),
+             ),
              onNavigateToSignin: onNavigateToSignin,
            );
          },

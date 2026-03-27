@@ -12,7 +12,10 @@ dependencies:
   dependencies: ^0.0.1
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
   glassmorphism: ^3.0.0
+  intl: any
 
 dev_dependencies:
   flutter_lints: ^5.0.0
@@ -20,4 +23,5 @@ dev_dependencies:
     sdk: flutter
 
 flutter:
+  generate: true
   uses-material-design: true

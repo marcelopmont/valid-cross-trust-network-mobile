@@ -29,7 +29,7 @@ final class IssueCredential extends AvailableOffersEvent {
       emit(
         bloc.state.copyWith(
           issuingOfferId: () => null,
-          error: () => 'Erro ao emitir credencial. Tente novamente.',
+          error: () => 'credentialIssueError',
         ),
       );
     }

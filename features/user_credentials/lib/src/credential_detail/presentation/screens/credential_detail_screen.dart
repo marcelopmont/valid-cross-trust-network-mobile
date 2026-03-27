@@ -22,34 +22,45 @@ class CredentialDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final canShowActions = credential.status != 'revoked';
+    final l10n = AppLocalizations.of(context);
+    final canShowActions =
+        credential.status != 'revoked';
 
     return Scaffold(
-      appBar: const ValidAppBar(titleText: 'Detalhes'),
+      appBar: ValidAppBar(titleText: l10n.details),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+        padding: const EdgeInsets.symmetric(
+          horizontal: 24,
+          vertical: 16,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Hero(
-              tag: 'credential_card_${credential.credentialId}',
-              child: CredentialCard(credential: credential),
+              tag:
+                  'credential_card_${credential.credentialId}',
+              child: CredentialCard(
+                credential: credential,
+              ),
             ),
             const SizedBox(height: 24),
-            _buildPreviewSection(),
-            if (canShowActions && onAddToWallet != null) ...[
+            _buildPreviewSection(l10n),
+            if (canShowActions &&
+                onAddToWallet != null) ...[
               const SizedBox(height: 32),
               ValidButton(
                 onPressed: onAddToWallet,
-                label: 'Adicionar à Carteira do Google',
+                label: l10n.addToGoogleWallet,
                 isLoading: isAddingToWallet,
-                icon: Image.asset('assets/images/icon/google-wallet-icon.png'),
+                icon: Image.asset(
+                  'assets/images/icon/google-wallet-icon.png',
+                ),
               ),
             ],
             if (canShowActions && onRevoke != null) ...[
               const SizedBox(height: 16),
               ValidButton(
-                label: 'Revogar Credencial',
+                label: l10n.revokeCredential,
                 onPressed: onRevoke,
                 isLoading: isRevoking,
                 variant: ValidButtonVariant.secondary,
@@ -62,7 +73,7 @@ class CredentialDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildPreviewSection() {
+  Widget _buildPreviewSection(AppLocalizations l10n) {
     if (credential.preview.isEmpty) {
       return const SizedBox.shrink();
     }
@@ -70,9 +81,9 @@ class CredentialDetailScreen extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          'Informações',
-          style: TextStyle(
+        Text(
+          l10n.information,
+          style: const TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.bold,
             color: AppColors.textPrimary,
@@ -80,8 +91,10 @@ class CredentialDetailScreen extends StatelessWidget {
         ),
         const SizedBox(height: 12),
         ...credential.preview.entries.map(
-          (entry) =>
-              _PreviewRow(label: entry.key, value: entry.value.toString()),
+          (entry) => _PreviewRow(
+            label: entry.key,
+            value: entry.value.toString(),
+          ),
         ),
       ],
     );
@@ -89,7 +102,10 @@ class CredentialDetailScreen extends StatelessWidget {
 }
 
 class _PreviewRow extends StatelessWidget {
-  const _PreviewRow({required this.label, required this.value});
+  const _PreviewRow({
+    required this.label,
+    required this.value,
+  });
 
   final String label;
   final String value;

@@ -1,0 +1,80 @@
+{
+  "@@locale": "pt",
+
+  "appTitle": "Valid ID",
+
+  "walletTab": "Carteira",
+  "scanTab": "Scan",
+
+  "cpfLabel": "CPF",
+  "cpfHint": "000.000.000-00",
+  "cpfRequired": "CPF é obrigatório",
+  "cpfMustHave11Digits": "CPF deve conter 11 dígitos",
+
+  "password": "Senha",
+  "passwordRequired": "Senha é obrigatória",
+  "passwordMinLength": "Senha deve ter no mínimo 6 caracteres",
+  "confirmPassword": "Confirmar Senha",
+  "confirmPasswordRequired": "Confirmação de senha é obrigatória",
+  "passwordsDoNotMatch": "As senhas não conferem",
+
+  "signIn": "Entrar",
+  "noAccountSignUp": "Não tem conta? Cadastre-se",
+  "createAccount": "Criar Conta",
+  "signUp": "Cadastrar",
+
+  "userNotFound": "Usuário não encontrado",
+  "userAlreadyRegistered": "Usuário já cadastrado",
+  "connectionError": "Erro de conexão. Tente novamente",
+  "timeoutError": "Tempo esgotado. Tente novamente",
+  "unexpectedError": "Erro inesperado. Tente novamente",
+
+  "addCredential": "Adicionar credencial",
+  "noCredentials": "Nenhuma credencial",
+  "credentialsLoadError": "Erro ao carregar credenciais",
+  "issuedOn": "Emitido em: {date}",
+  "expiresOn": "Expira em: {date}",
+  "statusIssued": "Emitida",
+
+  "details": "Detalhes",
+  "addToGoogleWallet": "Adicionar à Carteira do Google",
+  "revokeCredential": "Revogar Credencial",
+  "information": "Informações",
+  "credentialDetailError": "Ops, ocorreu um erro, tente novamente.",
+  "credentialRevokedSuccess": "Credencial revogada com sucesso",
+
+  "availableCredentials": "Credenciais Disponíveis",
+  "noOffersAvailable": "Nenhuma oferta disponível",
+  "offersHeaderText": "Aqui estão seus documentos disponíveis para emissão.",
+  "issue": "Emitir",
+
+  "consent": "Consentimento",
+  "consentDescription": "Para utilizar o aplicativo, precisamos do seu consentimento para coletar e processar alguns de seus dados pessoais:",
+  "consentName": "Nome",
+  "consentDateOfBirth": "Data de nascimento",
+  "consentPurpose": "Finalidade",
+  "consentPurposeDescription": "Verificação de idade para emissão de credencial",
+  "consentLegalBasis": "Base Legal",
+  "consentLegalBasisDescription": "LGPD Art. 7, I - Consentimento",
+  "consentWarning": "O consentimento é obrigatório para continuar utilizando o aplicativo. Você pode sair e entrar com outra conta se preferir.",
+  "acceptAndContinue": "Aceitar e continuar",
+  "back": "Voltar",
+
+  "identityVerification": "Verificação de Identidade",
+  "livenessVerification": "Verificação de Liveness",
+  "livenessDescription": "Para garantir sua segurança e confirmar sua identidade, precisamos realizar uma verificação facial rápida.",
+  "startVerification": "Iniciar Verificação",
+  "cancel": "Cancelar",
+
+  "scanQrCode": "Scan QR Code",
+  "positionQrCode": "Posicione o QR code dentro do quadro",
+
+  "documentNotFound": "Documento não encontrado",
+  "signOut": "Sair da conta",
+
+  "offersLoadError": "Erro ao carregar ofertas",
+  "credentialIssueError": "Erro ao emitir credencial. Tente novamente.",
+
+  "credentialTypeAgeVerification": "Comprovante de Idade",
+  "credentialTypeCofenNursingLicense": "Licença de Enfermagem COFEN"
+}

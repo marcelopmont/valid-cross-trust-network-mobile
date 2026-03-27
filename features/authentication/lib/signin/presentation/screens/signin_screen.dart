@@ -45,6 +45,7 @@ class _SigninScreenState extends State<SigninScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     final size = MediaQuery.of(context).size;
     final isWeb = size.width > 600;
 
@@ -78,23 +79,27 @@ class _SigninScreenState extends State<SigninScreen> {
                       controller: _documentController,
                       inputFormatters: [_cpfMaskFormatter],
                       decoration: InputDecoration(
-                        labelText: 'CPF',
-                        hintText: '000.000.000-00',
+                        labelText: l10n.cpfLabel,
+                        hintText: l10n.cpfHint,
                         border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
+                          borderRadius:
+                              BorderRadius.circular(12),
                         ),
                         filled: true,
                         fillColor: Colors.white,
-                        prefixIcon: const Icon(Icons.badge_outlined),
+                        prefixIcon:
+                            const Icon(Icons.badge_outlined),
                       ),
                       keyboardType: TextInputType.number,
                       validator: (value) {
-                        if (value == null || value.trim().isEmpty) {
-                          return 'CPF é obrigatório';
+                        if (value == null ||
+                            value.trim().isEmpty) {
+                          return l10n.cpfRequired;
                         }
-                        final unmasked = _cpfMaskFormatter.getUnmaskedText();
+                        final unmasked =
+                            _cpfMaskFormatter.getUnmaskedText();
                         if (unmasked.length != 11) {
-                          return 'CPF deve conter 11 dígitos';
+                          return l10n.cpfMustHave11Digits;
                         }
                         return null;
                       },
@@ -104,13 +109,15 @@ class _SigninScreenState extends State<SigninScreen> {
                       controller: _passwordController,
                       obscureText: _obscurePassword,
                       decoration: InputDecoration(
-                        labelText: 'Senha',
+                        labelText: l10n.password,
                         border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
+                          borderRadius:
+                              BorderRadius.circular(12),
                         ),
                         filled: true,
                         fillColor: Colors.white,
-                        prefixIcon: const Icon(Icons.lock_outlined),
+                        prefixIcon:
+                            const Icon(Icons.lock_outlined),
                         suffixIcon: IconButton(
                           icon: Icon(
                             _obscurePassword
@@ -119,28 +126,32 @@ class _SigninScreenState extends State<SigninScreen> {
                           ),
                           onPressed: () {
                             setState(() {
-                              _obscurePassword = !_obscurePassword;
+                              _obscurePassword =
+                                  !_obscurePassword;
                             });
                           },
                         ),
                       ),
                       validator: (value) {
-                        if (value == null || value.trim().isEmpty) {
-                          return 'Senha é obrigatória';
+                        if (value == null ||
+                            value.trim().isEmpty) {
+                          return l10n.passwordRequired;
                         }
                         return null;
                       },
                     ),
                     const SizedBox(height: 32),
                     ValidButton(
-                      label: 'Entrar',
-                      onPressed: widget.isLoading ? null : _handleSignin,
+                      label: l10n.signIn,
+                      onPressed: widget.isLoading
+                          ? null
+                          : _handleSignin,
                       isLoading: widget.isLoading,
                     ),
                     const SizedBox(height: 16),
                     TextButton(
                       onPressed: widget.onNavigateToSignup,
-                      child: const Text('Não tem conta? Cadastre-se'),
+                      child: Text(l10n.noAccountSignUp),
                     ),
                   ],
                 ),

@@ -48,6 +48,7 @@ class _SignupScreenState extends State<SignupScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     final size = MediaQuery.of(context).size;
     final isWeb = size.width > 600;
 
@@ -84,9 +85,9 @@ class _SignupScreenState extends State<SignupScreen> {
                       ),
                     ),
                     const SizedBox(height: 32),
-                    const Text(
-                      'Criar Conta',
-                      style: TextStyle(
+                    Text(
+                      l10n.createAccount,
+                      style: const TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
                       ),
@@ -97,23 +98,27 @@ class _SignupScreenState extends State<SignupScreen> {
                       controller: _cpfController,
                       inputFormatters: [_cpfMaskFormatter],
                       decoration: InputDecoration(
-                        labelText: 'CPF',
-                        hintText: '000.000.000-00',
+                        labelText: l10n.cpfLabel,
+                        hintText: l10n.cpfHint,
                         border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
+                          borderRadius:
+                              BorderRadius.circular(12),
                         ),
                         filled: true,
                         fillColor: Colors.white,
-                        prefixIcon: const Icon(Icons.badge_outlined),
+                        prefixIcon:
+                            const Icon(Icons.badge_outlined),
                       ),
                       keyboardType: TextInputType.number,
                       validator: (value) {
-                        if (value == null || value.trim().isEmpty) {
-                          return 'CPF é obrigatório';
+                        if (value == null ||
+                            value.trim().isEmpty) {
+                          return l10n.cpfRequired;
                         }
-                        final unmasked = _cpfMaskFormatter.getUnmaskedText();
+                        final unmasked =
+                            _cpfMaskFormatter.getUnmaskedText();
                         if (unmasked.length != 11) {
-                          return 'CPF deve conter 11 dígitos';
+                          return l10n.cpfMustHave11Digits;
                         }
                         return null;
                       },
@@ -123,13 +128,15 @@ class _SignupScreenState extends State<SignupScreen> {
                       controller: _passwordController,
                       obscureText: _obscurePassword,
                       decoration: InputDecoration(
-                        labelText: 'Senha',
+                        labelText: l10n.password,
                         border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
+                          borderRadius:
+                              BorderRadius.circular(12),
                         ),
                         filled: true,
                         fillColor: Colors.white,
-                        prefixIcon: const Icon(Icons.lock_outlined),
+                        prefixIcon:
+                            const Icon(Icons.lock_outlined),
                         suffixIcon: IconButton(
                           icon: Icon(
                             _obscurePassword
@@ -138,17 +145,19 @@ class _SignupScreenState extends State<SignupScreen> {
                           ),
                           onPressed: () {
                             setState(() {
-                              _obscurePassword = !_obscurePassword;
+                              _obscurePassword =
+                                  !_obscurePassword;
                             });
                           },
                         ),
                       ),
                       validator: (value) {
-                        if (value == null || value.trim().isEmpty) {
-                          return 'Senha é obrigatória';
+                        if (value == null ||
+                            value.trim().isEmpty) {
+                          return l10n.passwordRequired;
                         }
                         if (value.length < 6) {
-                          return 'Senha deve ter no mínimo 6 caracteres';
+                          return l10n.passwordMinLength;
                         }
                         return null;
                       },
@@ -158,13 +167,15 @@ class _SignupScreenState extends State<SignupScreen> {
                       controller: _confirmPasswordController,
                       obscureText: _obscureConfirmPassword,
                       decoration: InputDecoration(
-                        labelText: 'Confirmar Senha',
+                        labelText: l10n.confirmPassword,
                         border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
+                          borderRadius:
+                              BorderRadius.circular(12),
                         ),
                         filled: true,
                         fillColor: Colors.white,
-                        prefixIcon: const Icon(Icons.lock_outlined),
+                        prefixIcon:
+                            const Icon(Icons.lock_outlined),
                         suffixIcon: IconButton(
                           icon: Icon(
                             _obscureConfirmPassword
@@ -180,19 +191,23 @@ class _SignupScreenState extends State<SignupScreen> {
                         ),
                       ),
                       validator: (value) {
-                        if (value == null || value.trim().isEmpty) {
-                          return 'Confirmação de senha é obrigatória';
+                        if (value == null ||
+                            value.trim().isEmpty) {
+                          return l10n.confirmPasswordRequired;
                         }
-                        if (value != _passwordController.text) {
-                          return 'As senhas não conferem';
+                        if (value !=
+                            _passwordController.text) {
+                          return l10n.passwordsDoNotMatch;
                         }
                         return null;
                       },
                     ),
                     const SizedBox(height: 32),
                     ValidButton(
-                      label: 'Cadastrar',
-                      onPressed: widget.isLoading ? null : _handleSignup,
+                      label: l10n.signUp,
+                      onPressed: widget.isLoading
+                          ? null
+                          : _handleSignup,
                       isLoading: widget.isLoading,
                     ),
                   ],

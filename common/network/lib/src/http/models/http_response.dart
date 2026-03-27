@@ -32,6 +32,7 @@ class HttpErrorResponse extends Equatable {
     this.error,
     this.headers,
     this.statusCode,
+    this.isTimeout = false,
   });
 
   final HttpRequest request;
@@ -39,7 +40,8 @@ class HttpErrorResponse extends Equatable {
   final dynamic error;
   final Map<String, List<String>>? headers;
   final int? statusCode;
+  final bool isTimeout;
 
   @override
-  List get props => [request, message, error, headers, statusCode];
+  List get props => [request, message, error, headers, statusCode, isTimeout];
 }

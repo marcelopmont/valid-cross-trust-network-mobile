@@ -13,23 +13,36 @@ class OffersRepositoryImpl implements OffersRepository {
 
   final HttpClient httpClient;
 
+  static const _maxRetries = 5;
+  static const _retryDelay = Duration(seconds: 2);
+
   @override
   Future<List<OfferEntity>> getAvailableOffers() async {
-    try {
-      final response = await httpClient.get(
-        const HttpRequest(path: '/credentials/offers'),
-      );
+    int attempt = 0;
+    while (true) {
+      try {
+        final response = await httpClient.get(
+          const HttpRequest(path: '/credentials/offers'),
+        );
 
-      final data = jsonDecode(response.dataJson!) as Map<String, dynamic>;
-      final offers = (data['offers'] as List)
-          .map((e) => OfferModel.fromJson(e as Map<String, dynamic>).toEntity())
-          .toList();
+        final data = jsonDecode(response.dataJson!) as Map<String, dynamic>;
+        final offers = (data['offers'] as List)
+            .map(
+              (e) => OfferModel.fromJson(e as Map<String, dynamic>).toEntity(),
+            )
+            .toList();
 
-      return offers;
-    } on HttpErrorResponse {
-      throw Exception('Network error');
-    } catch (e) {
-      throw Exception('Unknown error');
+        return offers;
+      } on HttpErrorResponse catch (e) {
+        if (e.isTimeout && attempt < _maxRetries) {
+          attempt++;
+          await Future.delayed(_retryDelay);
+          continue;
+        }
+        throw Exception('Network error');
+      } catch (e) {
+        throw Exception('Unknown error');
+      }
     }
   }
 

@@ -33,11 +33,15 @@ class CredentialsListScreen extends StatelessWidget {
       extendBodyBehindAppBar: true,
       appBar: const ValidAppBar(titleText: 'Carteira'),
       body: _buildBody(),
-      floatingActionButton: Padding(
-        padding: const EdgeInsets.only(bottom: 80.0), // height of bottom navbar
-        child: ValidFloatingActionButton(
-          onPressed: onAddCredential,
-          icon: Icons.add,
+      floatingActionButton: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.only(
+            bottom: 80.0,
+          ), // height of bottom navbar
+          child: ValidFloatingActionButton(
+            onPressed: onAddCredential,
+            icon: Icons.add,
+          ),
         ),
       ),
     );

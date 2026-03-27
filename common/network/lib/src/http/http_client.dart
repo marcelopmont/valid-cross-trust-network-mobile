@@ -55,12 +55,16 @@ class HttpClientImpl extends HttpClient {
           ),
           onError: (error, stackTrace) {
             if (error is DioException) {
+              final isTimeout = error.type == DioExceptionType.connectionTimeout ||
+                  error.type == DioExceptionType.receiveTimeout ||
+                  error.type == DioExceptionType.sendTimeout;
               throw HttpErrorResponse(
                 request: request,
                 error: error.error,
                 message: error.message,
                 statusCode: error.response?.statusCode,
                 headers: error.response?.headers.map,
+                isTimeout: isTimeout,
               );
             }
             throw error;

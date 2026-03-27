@@ -25,15 +25,16 @@ class RootScreen extends StatelessWidget {
     return Scaffold(
       extendBody: true,
       body: navigationShell,
+
       bottomNavigationBar: ClipRect(
         child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
+          filter: ImageFilter.blur(sigmaX: 2, sigmaY: 5),
           child: Container(
             decoration: BoxDecoration(
-              color: Colors.white.withValues(alpha: 0.75),
+              color: Colors.white.withValues(alpha: 0.25),
               border: Border(
                 top: BorderSide(
-                  color: Colors.white.withValues(alpha: 0.5),
+                  color: Colors.white.withValues(alpha: 0.3),
                   width: 1,
                 ),
               ),

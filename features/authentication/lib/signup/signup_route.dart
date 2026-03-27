@@ -14,7 +14,7 @@ class SignupRoute extends GoRoute {
             child: SignupBlocProvider(
               child: SignupContainer(
                 onSignupSuccess: () {
-                  context.goNamed(RouteNames.consent);
+                  context.goNamed(RouteNames.credentialsList);
                 },
                 onNavigateToSignin: () {
                   context.pop();

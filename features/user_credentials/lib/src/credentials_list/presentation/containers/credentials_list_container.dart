@@ -13,6 +13,9 @@ class CredentialsListContainer
   CredentialsListContainer({super.key})
     : super(
         listener: (context, state) {
+          if (state.isLoggedOut) {
+            context.goNamed(RouteNames.signin);
+          }
           if (state.error != null) {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(content: Text('Erro ao carregar credenciais')),
@@ -28,6 +31,10 @@ class CredentialsListContainer
             credentials: state.credentials,
             hasReachedEnd: state.hasReachedEnd,
             issuingWalletCredentialId: state.issuingWalletCredentialId,
+            userDocument: state.userDocument,
+            onLogout: () => CredentialsListBlocProvider.of(
+              context,
+            ).add(const PerformLogout()),
             onAddCredential: () async {
               final result = await context.pushNamed(
                 RouteNames.availableOffers,
@@ -38,11 +45,6 @@ class CredentialsListContainer
                 ).add(PrependCredential(credential: result));
               }
             },
-            // onAddWallet: (credentialId) {
-            //   CredentialsListBlocProvider.of(
-            //     context,
-            //   ).add(AddToWallet(credentialId: credentialId));
-            // },
             onCredentialTap: (credential) async {
               final result = await context.pushNamed(
                 RouteNames.credentialDetail,

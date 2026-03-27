@@ -67,20 +67,6 @@ class RootScreen extends StatelessWidget {
                   ),
                   label: 'Scan',
                 ),
-                BottomNavigationBarItem(
-                  icon: ColorFiltered(
-                    colorFilter: ColorFilter.mode(
-                      currentIndex == 2 ? selectedColor : unselectedColor,
-                      BlendMode.srcIn,
-                    ),
-                    child: Image.asset(
-                      'assets/images/home/menu.png',
-                      width: 24,
-                      height: 24,
-                    ),
-                  ),
-                  label: 'Opções',
-                ),
               ],
             ),
           ),

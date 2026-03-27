@@ -33,7 +33,7 @@ class ConsentScreen extends StatelessWidget {
               ),
               const SizedBox(height: 24),
               const Text(
-                'Consentimento LGPD',
+                'Consentimento',
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
@@ -45,7 +45,7 @@ class ConsentScreen extends StatelessWidget {
               const Text(
                 'Para utilizar o aplicativo, precisamos do '
                 'seu consentimento para coletar e processar '
-                'os seguintes dados pessoais:',
+                'alguns de seus dados pessoais:',
                 style: TextStyle(
                   fontSize: 14,
                   color: AppColors.textPrimary,
@@ -54,8 +54,7 @@ class ConsentScreen extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 24),
-              _buildDataItem(Icons.person_outline, 'Nome completo'),
-              _buildDataItem(Icons.badge_outlined, 'CPF'),
+              _buildDataItem(Icons.person_outline, 'Nome'),
               _buildDataItem(
                 Icons.calendar_today_outlined,
                 'Data de nascimento',
@@ -79,8 +78,7 @@ class ConsentScreen extends StatelessWidget {
                     ),
                     SizedBox(height: 4),
                     Text(
-                      'Verificação de identidade para '
-                      'abertura de conta',
+                      'Verificação de idade para emissão de credencial',
                       style: TextStyle(
                         fontSize: 14,
                         color: AppColors.textPrimary,

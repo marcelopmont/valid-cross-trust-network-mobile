@@ -97,10 +97,8 @@ class _CredentialsListState extends State<CredentialsList>
       return const SizedBox();
     }
 
-    final padding = MediaQuery.paddingOf(context);
-    final topInset = padding.top + 70.0; // Estimate for AppBar clear space
-    final bottomInset =
-        padding.bottom + 90.0; // Estimate for BottomNavBar clear space
+    const topInset = 16.0;
+    const bottomInset = 16.0;
 
     return LayoutBuilder(
       builder: (context, constraints) {

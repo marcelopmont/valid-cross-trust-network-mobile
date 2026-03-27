@@ -16,6 +16,8 @@ class CredentialsListScreen extends StatelessWidget {
     this.issuingWalletCredentialId,
     this.onAddWallet,
     this.onCredentialTap,
+    this.userDocument,
+    this.onLogout,
   });
 
   final bool isLoading;
@@ -26,22 +28,86 @@ class CredentialsListScreen extends StatelessWidget {
   final String? issuingWalletCredentialId;
   final void Function(String)? onAddWallet;
   final void Function(VerifiableCredentialEntity)? onCredentialTap;
+  final String? userDocument;
+  final VoidCallback? onLogout;
+
+  String _formatDocument(String document) {
+    if (document.length == 11) {
+      return '${document.substring(0, 3)}'
+          '.${document.substring(3, 6)}'
+          '.${document.substring(6, 9)}'
+          '-${document.substring(9)}';
+    }
+    return document;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: const ValidAppBar(titleText: 'Carteira'),
-      body: _buildBody(),
-      floatingActionButton: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.only(
-            bottom: 80.0,
-          ), // height of bottom navbar
-          child: ValidFloatingActionButton(
-            onPressed: onAddCredential,
-            icon: Icons.add,
-          ),
+      body: SafeArea(
+        bottom: false,
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 24,
+                vertical: 16,
+              ),
+              child: Row(
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'CPF',
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.grey[500],
+                          letterSpacing: 1.2,
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        userDocument != null
+                            ? _formatDocument(userDocument!)
+                            : '',
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
+                          color: AppColors.textPrimary,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const Spacer(),
+                  IconButton(
+                    onPressed: onLogout,
+                    icon: Icon(
+                      Icons.logout_outlined,
+                      size: 22,
+                      color: Colors.grey[700],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Expanded(child: _buildBody()),
+            Padding(
+              padding: const EdgeInsets.only(
+                left: 24,
+                right: 24,
+                bottom: 96,
+                top: 8,
+              ),
+              child: ValidButton(
+                label: 'Adicionar credencial',
+                icon: Icons.add,
+                color: AppColors.accent,
+                onPressed: onAddCredential,
+              ),
+            ),
+          ],
         ),
       ),
     );

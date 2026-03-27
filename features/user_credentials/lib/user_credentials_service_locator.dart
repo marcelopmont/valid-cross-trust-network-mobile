@@ -1,3 +1,4 @@
+import 'package:authentication/authentication.dart';
 import 'package:core/core.dart';
 import 'package:network/network.dart';
 
@@ -8,7 +9,9 @@ import 'src/consent/domain/repositories/consent_repository.dart';
 import 'src/credential_detail/data/repositories/credential_detail_repository_impl.dart';
 import 'src/credential_detail/domain/repositories/credential_detail_repository.dart';
 import 'src/credentials_list/data/repositories/credentials_repository_impl.dart';
+import 'src/credentials_list/data/repositories/user_session_repository_impl.dart';
 import 'src/credentials_list/domain/repositories/credentials_repository.dart';
+import 'src/credentials_list/domain/repositories/user_session_repository.dart';
 import 'src/liveness/data/services/liveness_hub_service.dart';
 
 Future<void> initServiceLocator() async {
@@ -17,6 +20,13 @@ Future<void> initServiceLocator() async {
 
   di.registerFactory<CredentialsRepository>(
     () => CredentialsRepositoryImpl(httpClient: di<HttpClient>()),
+  );
+
+  di.registerFactory<UserSessionRepository>(
+    () => UserSessionRepositoryImpl(
+      tokenStorageService: di<TokenStorageService>(),
+      userDocumentStorageService: di<UserDocumentStorageService>(),
+    ),
   );
 
   di.registerFactory<OffersRepository>(

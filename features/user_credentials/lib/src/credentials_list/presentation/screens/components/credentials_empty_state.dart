@@ -21,12 +21,6 @@ class CredentialsEmptyState extends StatelessWidget {
                 color: Colors.grey[700],
               ),
             ),
-            const SizedBox(height: 8),
-            Text(
-              'Toque no botão + para adicionar uma nova credencial',
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 14, color: Colors.grey[500]),
-            ),
           ],
         ),
       ),

@@ -14,6 +14,7 @@ class ValidButton extends StatelessWidget {
     this.isLoading = false,
     this.width = double.infinity,
     this.icon,
+    this.color,
   });
 
   final String label;
@@ -22,6 +23,7 @@ class ValidButton extends StatelessWidget {
   final bool isLoading;
   final double width;
   final dynamic icon;
+  final Color? color;
 
   bool get _isPrimary => variant == ValidButtonVariant.primary;
 
@@ -38,12 +40,14 @@ class ValidButton extends StatelessWidget {
               onPressed: isDisabled ? null : onPressed,
               isLoading: isLoading,
               icon: icon,
+              color: color,
             )
           : _SecondaryButton(
               label: label,
               onPressed: isDisabled ? null : onPressed,
               isLoading: isLoading,
               icon: icon,
+              color: color,
             ),
     );
   }
@@ -57,25 +61,39 @@ class _PrimaryButton extends StatelessWidget {
     required this.onPressed,
     required this.isLoading,
     this.icon,
+    this.color,
   });
 
   final String label;
   final VoidCallback? onPressed;
   final bool isLoading;
   final dynamic icon;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
     final isDisabled = onPressed == null;
+    final hasCustomColor = color != null;
 
-    final baseAlpha1 = isDisabled ? 0.1 : 0.2;
-    final baseAlpha2 = isDisabled ? 0.05 : 0.1;
+    final baseAlpha1 = isDisabled ? 0.1 : (hasCustomColor ? 0.65 : 0.2);
+    final baseAlpha2 = isDisabled ? 0.05 : (hasCustomColor ? 0.35 : 0.1);
+
+    final gradientColor1 =
+        hasCustomColor ? color! : Colors.black;
+    final gradientColor2 =
+        hasCustomColor ? color! : Colors.white;
+
+    final contentColor = hasCustomColor ? Colors.white : AppColors.primary;
 
     return InkWell(
       onTap: onPressed,
       borderRadius: BorderRadius.circular(16),
-      splashColor: Colors.black.withValues(alpha: 0.1),
-      highlightColor: Colors.black.withValues(alpha: 0.05),
+      splashColor: (hasCustomColor ? color! : Colors.black).withValues(
+        alpha: 0.1,
+      ),
+      highlightColor: (hasCustomColor ? color! : Colors.black).withValues(
+        alpha: 0.05,
+      ),
       child: GlassmorphicContainer(
         width: double.infinity,
         height: 52,
@@ -87,8 +105,8 @@ class _PrimaryButton extends StatelessWidget {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
-            Colors.black.withValues(alpha: baseAlpha1),
-            Colors.white.withValues(alpha: baseAlpha2),
+            gradientColor1.withValues(alpha: baseAlpha1),
+            gradientColor2.withValues(alpha: baseAlpha2),
           ],
           stops: const [0.1, 1],
         ),
@@ -97,7 +115,9 @@ class _PrimaryButton extends StatelessWidget {
           end: Alignment.bottomRight,
           colors: [
             Colors.white.withValues(alpha: isDisabled ? 0.2 : 0.5),
-            Colors.black.withValues(alpha: isDisabled ? 0.1 : 0.2),
+            (hasCustomColor ? color! : Colors.black).withValues(
+              alpha: isDisabled ? 0.1 : 0.2,
+            ),
           ],
         ),
         child: Material(
@@ -106,7 +126,7 @@ class _PrimaryButton extends StatelessWidget {
             label: label,
             isLoading: isLoading,
             icon: icon,
-            color: AppColors.primary,
+            color: contentColor,
           ),
         ),
       ),
@@ -122,22 +142,25 @@ class _SecondaryButton extends StatelessWidget {
     required this.onPressed,
     required this.isLoading,
     this.icon,
+    this.color,
   });
 
   final String label;
   final VoidCallback? onPressed;
   final bool isLoading;
   final dynamic icon;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
     final isDisabled = onPressed == null;
-    final color = isDisabled ? AppColors.textSecondary : AppColors.primary;
+    final effectiveColor =
+        isDisabled ? AppColors.textSecondary : (color ?? AppColors.primary);
 
     return OutlinedButton(
       onPressed: onPressed,
       style: OutlinedButton.styleFrom(
-        foregroundColor: color,
+        foregroundColor: effectiveColor,
         backgroundColor: Colors.transparent,
         side: const BorderSide(color: Colors.transparent),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
@@ -147,7 +170,7 @@ class _SecondaryButton extends StatelessWidget {
         label: label,
         isLoading: isLoading,
         icon: icon,
-        color: color,
+        color: effectiveColor,
       ),
     );
   }

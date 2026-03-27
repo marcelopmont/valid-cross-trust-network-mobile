@@ -12,6 +12,8 @@ final class CredentialsListState extends Equatable {
     this.offset = 0,
     this.hasReachedEnd = false,
     this.issuingWalletCredentialId,
+    this.userDocument,
+    this.isLoggedOut = false,
   });
 
   final List<VerifiableCredentialEntity> credentials;
@@ -21,6 +23,8 @@ final class CredentialsListState extends Equatable {
   final int offset;
   final bool hasReachedEnd;
   final String? issuingWalletCredentialId;
+  final String? userDocument;
+  final bool isLoggedOut;
 
   @override
   List<Object?> get props => [
@@ -31,6 +35,8 @@ final class CredentialsListState extends Equatable {
     offset,
     hasReachedEnd,
     issuingWalletCredentialId,
+    userDocument,
+    isLoggedOut,
   ];
 
   CredentialsListState copyWith({
@@ -41,6 +47,8 @@ final class CredentialsListState extends Equatable {
     int? offset,
     bool? hasReachedEnd,
     String? Function()? issuingWalletCredentialId,
+    String? Function()? userDocument,
+    bool? isLoggedOut,
   }) {
     return CredentialsListState(
       credentials: credentials ?? this.credentials,
@@ -52,6 +60,9 @@ final class CredentialsListState extends Equatable {
       issuingWalletCredentialId: issuingWalletCredentialId != null
           ? issuingWalletCredentialId()
           : this.issuingWalletCredentialId,
+      userDocument:
+          userDocument != null ? userDocument() : this.userDocument,
+      isLoggedOut: isLoggedOut ?? this.isLoggedOut,
     );
   }
 }

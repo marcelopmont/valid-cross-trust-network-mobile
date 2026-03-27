@@ -7,6 +7,8 @@ import 'credentials_list_bloc.dart';
 import 'credentials_list_state.dart';
 
 part 'events/load_credentials.dart';
+part 'events/load_user_document.dart';
+part 'events/perform_logout.dart';
 part 'events/clear_credentials_error.dart';
 part 'events/prepend_credential.dart';
 part 'events/update_credential.dart';

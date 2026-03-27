@@ -71,37 +71,37 @@ class _PrimaryButton extends StatelessWidget {
     final baseAlpha1 = isDisabled ? 0.1 : 0.2;
     final baseAlpha2 = isDisabled ? 0.05 : 0.1;
 
-    return GlassmorphicContainer(
-      width: double.infinity,
-      height: 52,
-      borderRadius: 16,
-      blur: 20,
-      alignment: Alignment.center,
-      border: 1.5,
-      linearGradient: LinearGradient(
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-        colors: [
-          Colors.black.withValues(alpha: baseAlpha1),
-          Colors.white.withValues(alpha: baseAlpha2),
-        ],
-        stops: const [0.1, 1],
-      ),
-      borderGradient: LinearGradient(
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-        colors: [
-          Colors.white.withValues(alpha: isDisabled ? 0.2 : 0.5),
-          Colors.black.withValues(alpha: isDisabled ? 0.1 : 0.2),
-        ],
-      ),
-      child: Material(
-        color: Colors.transparent,
-        child: InkWell(
-          onTap: onPressed,
-          borderRadius: BorderRadius.circular(16),
-          splashColor: Colors.black.withValues(alpha: 0.1),
-          highlightColor: Colors.black.withValues(alpha: 0.05),
+    return InkWell(
+      onTap: onPressed,
+      borderRadius: BorderRadius.circular(16),
+      splashColor: Colors.black.withValues(alpha: 0.1),
+      highlightColor: Colors.black.withValues(alpha: 0.05),
+      child: GlassmorphicContainer(
+        width: double.infinity,
+        height: 52,
+        borderRadius: 16,
+        blur: 20,
+        alignment: Alignment.center,
+        border: 1.5,
+        linearGradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            Colors.black.withValues(alpha: baseAlpha1),
+            Colors.white.withValues(alpha: baseAlpha2),
+          ],
+          stops: const [0.1, 1],
+        ),
+        borderGradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            Colors.white.withValues(alpha: isDisabled ? 0.2 : 0.5),
+            Colors.black.withValues(alpha: isDisabled ? 0.1 : 0.2),
+          ],
+        ),
+        child: Material(
+          color: Colors.transparent,
           child: _ButtonContent(
             label: label,
             isLoading: isLoading,

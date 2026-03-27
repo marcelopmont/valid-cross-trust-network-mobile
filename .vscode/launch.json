@@ -35,5 +35,23 @@
       "program": "lib/main.dart",
       "args": ["--dart-define=ENV=prod"]
     },
+    {
+      "name": "Chrome - HML",
+      "cwd": "app",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main.dart",
+      "deviceId": "chrome",
+      "args": ["--dart-define=ENV=hml"]
+    },
+    {
+      "name": "Chrome - Prod",
+      "cwd": "app",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main.dart",
+      "deviceId": "chrome",
+      "args": ["--dart-define=ENV=prod"]
+    }
   ]
 }

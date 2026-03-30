@@ -18,7 +18,7 @@ class OffersRepositoryImpl implements OffersRepository {
 
   @override
   Future<List<OfferEntity>> getAvailableOffers() async {
-    int attempt = 0;
+    var attempt = 0;
     while (true) {
       try {
         final response = await httpClient.get(

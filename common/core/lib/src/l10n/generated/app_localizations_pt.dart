@@ -186,6 +186,34 @@ class AppLocalizationsPt extends AppLocalizations {
   String get positionQrCode => 'Posicione o QR code dentro do quadro';
 
   @override
+  String get shareCredential => 'Compartilhar Credencial';
+
+  @override
+  String get requestedFields => 'Campos solicitados';
+
+  @override
+  String get selectCredential => 'Selecionar credencial';
+
+  @override
+  String get verificationPurpose => 'Finalidade';
+
+  @override
+  String get confirmSharing => 'Confirmar Compartilhamento';
+
+  @override
+  String get sharingSuccess => 'Credencial compartilhada com sucesso';
+
+  @override
+  String get sharingError =>
+      'Erro ao compartilhar credencial. Tente novamente.';
+
+  @override
+  String get noActiveCredentials => 'Nenhuma credencial ativa disponível';
+
+  @override
+  String get credentialShared => 'Compartilhada';
+
+  @override
   String get documentNotFound => 'Documento não encontrado';
 
   @override

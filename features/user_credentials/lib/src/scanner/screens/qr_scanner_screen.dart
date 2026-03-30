@@ -1,6 +1,10 @@
+import 'dart:convert';
+
 import 'package:core/core.dart';
 import 'package:dependencies/dependencies.dart';
 import 'package:flutter/material.dart';
+
+import '../../credential_sharing/domain/entities/verifier_request_entity.dart';
 
 class QrScannerScreen extends StatefulWidget {
   const QrScannerScreen({super.key});
@@ -33,13 +37,28 @@ class _QrScannerScreenState extends State<QrScannerScreen> {
         _isProcessing = true;
       });
 
-      context.go('/credentials', extra: {'qrCode': code});
+      _handleQrCode(code);
       Future.delayed(const Duration(seconds: 1), () {
-        setState(() {
-          _isProcessing = false;
-        });
+        if (mounted) {
+          setState(() {
+            _isProcessing = false;
+          });
+        }
       });
     }
+  }
+
+  void _handleQrCode(String code) {
+    try {
+      final json = jsonDecode(code) as Map<String, dynamic>;
+      final request = VerifierRequestEntity(
+        verifierDid: json['verifierDid'] as String,
+        requestedFields: (json['requestedFields'] as List).cast<String>(),
+        purpose: json['purpose'] as String,
+        challenge: json['challenge'] as String,
+      );
+      context.pushNamed(RouteNames.credentialSharing, extra: request);
+    } catch (_) {}
   }
 
   @override

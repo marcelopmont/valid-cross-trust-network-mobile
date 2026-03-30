@@ -69,6 +69,16 @@
   "scanQrCode": "Scan QR Code",
   "positionQrCode": "Posicione o QR code dentro do quadro",
 
+  "shareCredential": "Compartilhar Credencial",
+  "requestedFields": "Campos solicitados",
+  "selectCredential": "Selecionar credencial",
+  "verificationPurpose": "Finalidade",
+  "confirmSharing": "Confirmar Compartilhamento",
+  "sharingSuccess": "Credencial compartilhada com sucesso",
+  "sharingError": "Erro ao compartilhar credencial. Tente novamente.",
+  "noActiveCredentials": "Nenhuma credencial ativa disponível",
+  "credentialShared": "Compartilhada",
+
   "documentNotFound": "Documento não encontrado",
   "signOut": "Sair da conta",
 

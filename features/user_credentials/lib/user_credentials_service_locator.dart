@@ -8,6 +8,8 @@ import 'src/consent/data/repositories/consent_repository_impl.dart';
 import 'src/consent/domain/repositories/consent_repository.dart';
 import 'src/credential_detail/data/repositories/credential_detail_repository_impl.dart';
 import 'src/credential_detail/domain/repositories/credential_detail_repository.dart';
+import 'src/credential_sharing/data/repositories/credential_sharing_repository_impl.dart';
+import 'src/credential_sharing/domain/repositories/credential_sharing_repository.dart';
 import 'src/credentials_list/data/repositories/credentials_repository_impl.dart';
 import 'src/credentials_list/data/repositories/user_session_repository_impl.dart';
 import 'src/credentials_list/domain/repositories/credentials_repository.dart';
@@ -39,5 +41,9 @@ Future<void> initServiceLocator() async {
 
   di.registerFactory<CredentialDetailRepository>(
     () => CredentialDetailRepositoryImpl(httpClient: di<HttpClient>()),
+  );
+
+  di.registerFactory<CredentialSharingRepository>(
+    () => CredentialSharingRepositoryImpl(httpClient: di<HttpClient>()),
   );
 }

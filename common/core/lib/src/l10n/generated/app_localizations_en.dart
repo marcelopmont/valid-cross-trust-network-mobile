@@ -187,6 +187,33 @@ class AppLocalizationsEn extends AppLocalizations {
   String get positionQrCode => 'Position the QR code within the frame';
 
   @override
+  String get shareCredential => 'Share Credential';
+
+  @override
+  String get requestedFields => 'Requested fields';
+
+  @override
+  String get selectCredential => 'Select credential';
+
+  @override
+  String get verificationPurpose => 'Purpose';
+
+  @override
+  String get confirmSharing => 'Confirm Sharing';
+
+  @override
+  String get sharingSuccess => 'Credential shared successfully';
+
+  @override
+  String get sharingError => 'Error sharing credential. Please try again.';
+
+  @override
+  String get noActiveCredentials => 'No active credentials available';
+
+  @override
+  String get credentialShared => 'Shared';
+
+  @override
   String get documentNotFound => 'Document not found';
 
   @override

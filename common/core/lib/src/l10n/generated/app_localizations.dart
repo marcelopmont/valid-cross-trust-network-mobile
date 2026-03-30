@@ -434,6 +434,60 @@ abstract class AppLocalizations {
   /// **'Position the QR code within the frame'**
   String get positionQrCode;
 
+  /// No description provided for @shareCredential.
+  ///
+  /// In en, this message translates to:
+  /// **'Share Credential'**
+  String get shareCredential;
+
+  /// No description provided for @requestedFields.
+  ///
+  /// In en, this message translates to:
+  /// **'Requested fields'**
+  String get requestedFields;
+
+  /// No description provided for @selectCredential.
+  ///
+  /// In en, this message translates to:
+  /// **'Select credential'**
+  String get selectCredential;
+
+  /// No description provided for @verificationPurpose.
+  ///
+  /// In en, this message translates to:
+  /// **'Purpose'**
+  String get verificationPurpose;
+
+  /// No description provided for @confirmSharing.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm Sharing'**
+  String get confirmSharing;
+
+  /// No description provided for @sharingSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Credential shared successfully'**
+  String get sharingSuccess;
+
+  /// No description provided for @sharingError.
+  ///
+  /// In en, this message translates to:
+  /// **'Error sharing credential. Please try again.'**
+  String get sharingError;
+
+  /// No description provided for @noActiveCredentials.
+  ///
+  /// In en, this message translates to:
+  /// **'No active credentials available'**
+  String get noActiveCredentials;
+
+  /// No description provided for @credentialShared.
+  ///
+  /// In en, this message translates to:
+  /// **'Shared'**
+  String get credentialShared;
+
   /// No description provided for @documentNotFound.
   ///
   /// In en, this message translates to:

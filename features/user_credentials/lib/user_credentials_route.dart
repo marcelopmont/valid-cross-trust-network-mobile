@@ -8,6 +8,9 @@ import 'src/consent/presentation/bloc/consent_bloc.dart';
 import 'src/consent/presentation/containers/consent_container.dart';
 import 'src/credential_detail/presentation/bloc/credential_detail_bloc.dart';
 import 'src/credential_detail/presentation/containers/credential_detail_container.dart';
+import 'src/credential_sharing/domain/entities/verifier_request_entity.dart';
+import 'src/credential_sharing/presentation/bloc/credential_sharing_bloc.dart';
+import 'src/credential_sharing/presentation/containers/credential_sharing_container.dart';
 import 'src/credentials_list/domain/entities/verifiable_credential_entity.dart';
 import 'src/credentials_list/presentation/bloc/credentials_list_bloc.dart';
 import 'src/credentials_list/presentation/containers/credentials_list_container.dart';
@@ -40,6 +43,19 @@ class UserCredentialsRoute extends GoRoute {
           );
         },
         routes: [
+          GoRoute(
+            name: RouteNames.credentialSharing,
+            path: 'share',
+            pageBuilder: (context, state) {
+              final request = state.extra as VerifierRequestEntity;
+              return NoTransitionPage(
+                child: CredentialSharingBlocProvider(
+                  verifierRequest: request,
+                  child: CredentialSharingContainer(),
+                ),
+              );
+            },
+          ),
           GoRoute(
             name: RouteNames.credentialDetail,
             path: 'detail',

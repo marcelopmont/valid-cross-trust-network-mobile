@@ -1,13 +1,11 @@
-import 'package:core/core.dart';
 import 'package:dependencies/dependencies.dart';
 import 'package:flutter/material.dart';
 import 'package:user_credentials/user_credentials.dart';
 
-import 'root/screens/root_screen.dart';
-import 'scanner/screens/qr_scanner_screen.dart';
+import 'root_screen.dart';
 
-class HomeRoute extends StatefulShellRoute {
-  HomeRoute()
+class AppShellRoute extends StatefulShellRoute {
+  AppShellRoute()
     : super(
         builder: (context, state, navigationShell) {
           return RootScreen(navigationShell: navigationShell);
@@ -20,19 +18,7 @@ class HomeRoute extends StatefulShellRoute {
         },
         branches: [
           StatefulShellBranch(routes: [UserCredentialsRoute()]),
-          StatefulShellBranch(
-            routes: [
-              GoRoute(
-                name: RouteNames.scan,
-                path: '/scan',
-                pageBuilder: (context, state) {
-                  return const NoTransitionPage(
-                    child: Material(child: QrScannerScreen()),
-                  );
-                },
-              ),
-            ],
-          ),
+          StatefulShellBranch(routes: [QrScannerRoute()]),
         ],
       );
 }

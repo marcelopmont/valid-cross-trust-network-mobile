@@ -13,6 +13,7 @@ import 'src/credentials_list/presentation/bloc/credentials_list_bloc.dart';
 import 'src/credentials_list/presentation/containers/credentials_list_container.dart';
 import 'src/liveness/presentation/bloc/liveness_verification_bloc.dart';
 import 'src/liveness/presentation/containers/liveness_verification_container.dart';
+import 'src/scanner/screens/qr_scanner_screen.dart';
 
 class UserCredentialsRoute extends GoRoute {
   UserCredentialsRoute()
@@ -43,8 +44,7 @@ class UserCredentialsRoute extends GoRoute {
             name: RouteNames.credentialDetail,
             path: 'detail',
             pageBuilder: (context, state) {
-              final credential =
-                  state.extra as VerifiableCredentialEntity;
+              final credential = state.extra as VerifiableCredentialEntity;
               return CustomTransitionPage(
                 child: CredentialDetailBlocProvider(
                   credential: credential,
@@ -56,11 +56,8 @@ class UserCredentialsRoute extends GoRoute {
                 ),
                 transitionsBuilder:
                     (context, animation, secondaryAnimation, child) {
-                  return FadeTransition(
-                    opacity: animation,
-                    child: child,
-                  );
-                },
+                      return FadeTransition(opacity: animation, child: child);
+                    },
               );
             },
           ),
@@ -115,5 +112,18 @@ class UserCredentialsRoute extends GoRoute {
             ],
           ),
         ],
+      );
+}
+
+class QrScannerRoute extends GoRoute {
+  QrScannerRoute()
+    : super(
+        name: RouteNames.scan,
+        path: '/scan',
+        pageBuilder: (context, state) {
+          return const NoTransitionPage(
+            child: Material(child: QrScannerScreen()),
+          );
+        },
       );
 }

@@ -13,8 +13,8 @@ dependencies:
   dependencies: ^0.0.1
   flutter:
     sdk: flutter
-  home: ^0.0.1
   network: ^0.0.1
+  shell: ^0.0.1
   user_credentials: ^0.0.1
   wallet: ^0.0.1
 

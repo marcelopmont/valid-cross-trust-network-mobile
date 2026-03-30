@@ -13,8 +13,8 @@ workspace:
   - common/dependencies
   - common/core
   - common/network
+  - common/shell
   - features/authentication
-  - features/home
   - features/user_credentials
 dependencies:
   glassmorphism: ^3.0.0

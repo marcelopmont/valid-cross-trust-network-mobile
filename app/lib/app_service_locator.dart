@@ -3,7 +3,6 @@ import 'package:authentication/authentication_service_locator.dart' as auth;
 import 'package:core/core.dart';
 import 'package:core/core_service_locator.dart' as core;
 import 'package:dependencies/dependencies.dart';
-import 'package:home/home_service_locator.dart' as home;
 import 'package:network/network.dart';
 import 'package:network/network_service_locator.dart' as network;
 import 'package:user_credentials/user_credentials_service_locator.dart'
@@ -19,7 +18,6 @@ Future<void> initAppDependencies() async {
   await network.initServiceLocator();
   await auth.initServiceLocator();
   await user_credentials.initServiceLocator();
-  await home.initServiceLocator();
   await _registerSplashDependencies();
   _registerAuthInterceptor();
   _registerSessionManager();

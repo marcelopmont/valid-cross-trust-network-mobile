@@ -6,46 +6,70 @@
 
 ## Stack Tecnológica
 
-| Pacote                  | Finalidade                                |
-|-------------------------|-------------------------------------------|
-| `flutter_bloc`          | Gerenciamento de estado (BLoC pattern)    |
-| `get_it`                | Injeção de dependência (Service Locator)  |
-| `go_router`             | Navegação declarativa                     |
-| `equatable`             | Comparação de objetos (Entities & States) |
-| `http`                  | Cliente HTTP                              |
-| `flutter_secure_storage`| Persistência segura local                 |
+| Pacote                   | Finalidade                                |
+| ------------------------ | ----------------------------------------- |
+| `flutter_bloc`           | Gerenciamento de estado (BLoC pattern)    |
+| `get_it`                 | Injeção de dependência (Service Locator)  |
+| `go_router`              | Navegação declarativa                     |
+| `equatable`              | Comparação de objetos (Entities & States) |
+| `http`                   | Cliente HTTP                              |
+| `flutter_secure_storage` | Persistência segura local                 |
 
 **Dev dependencies:**
 
-| Pacote          | Finalidade          |
-|-----------------|---------------------|
-| `bloc_test`     | Testes de BLoC      |
-| `mocktail`      | Mocks               |
-| `faker`         | Geração de dados    |
-| `flutter_lints` | Lint rules           |
+| Pacote          | Finalidade       |
+| --------------- | ---------------- |
+| `bloc_test`     | Testes de BLoC   |
+| `mocktail`      | Mocks            |
+| `faker`         | Geração de dados |
+| `flutter_lints` | Lint rules       |
 
 ---
 
 ## Estrutura de Pastas
 
 ```
-lib/
-├── main.dart
+├── app/                                    # Aplicação principal
+│   └── lib/
+│       ├── main.dart
+│       ├── app_service_locator.dart
+│       └── src/
+│           └── router/
+│               └── app_router.dart
 │
-├── core/
-│   ├── dependency_injection.dart      # Instância global do GetIt
-│   ├── core_service_locator.dart      # Registro de dependências globais
-│   ├── routes.dart                    # Constantes de rotas
-│   ├── infra/
-│   │   └── http_adapter.dart          # Abstração do cliente HTTP
-│   ├── theme/
-│   │   └── color_scheme.dart          # Design system / cores
-│   └── utils/
-│       └── dimension_utils.dart       # Utilitários compartilhados
+├── common/
+│   ├── core/                               # Pacote compartilhado (design system, l10n, DI, utils)
+│   │   ├── l10n.yaml                       # Configuração do gen-l10n
+│   │   └── lib/
+│   │       ├── core.dart                   # Barrel file (exports)
+│   │       ├── l10n/
+│   │       │   ├── app_en.arb              # Strings em inglês (template)
+│   │       │   └── app_pt.arb              # Strings em português
+│   │       └── src/
+│   │           ├── di/
+│   │           │   └── dependency_injection.dart
+│   │           ├── design_system/
+│   │           │   ├── colors/
+│   │           │   ├── theme/
+│   │           │   └── widgets/
+│   │           ├── l10n/
+│   │           │   ├── credential_type_l10n.dart   # Mapeamento de tipos localizados
+│   │           │   └── generated/                  # Gerado automaticamente (gen-l10n)
+│   │           │       ├── app_localizations.dart
+│   │           │       ├── app_localizations_en.dart
+│   │           │       └── app_localizations_pt.dart
+│   │           ├── navigation/
+│   │           │   └── route_names.dart
+│   │           └── utils/
+│   │
+│   ├── dependencies/                       # Dependências centralizadas
+│   ├── network/                            # Cliente HTTP e adaptadores
+│   └── shell/                              # Shell (bottom nav, root screen)
 │
 └── features/
     └── <feature_name>/
-        ├── <feature_name>_navigator.dart         # GoRoute da feature
+        ├── pubspec.yaml                           # Pacote independente
+        ├── <feature_name>_navigator.dart          # GoRoute da feature
         ├── <feature_name>_service_locator.dart    # DI da feature
         │
         ├── domain/
@@ -72,12 +96,6 @@ lib/
         │
         └── ui/
             ├── <feature>_container.dart           # BlocConsumer (ponte)
-            ├── l10n/
-            │   ├── <feature>_l10n.dart            # Fábrica de strings
-            │   └── strings/
-            │       ├── <feature>_strings.dart     # Interface abstrata
-            │       ├── <feature>_en.dart           # Inglês
-            │       └── <feature>_pt_br.dart        # Português BR
             └── screens/
                 ├── <feature>_screen.dart          # Widget puro (stateless)
                 └── widgets/
@@ -286,6 +304,7 @@ class ShortenUrl extends UrlShortenerBlocEvent {
 
 > [!NOTE]
 > **Por que self-executing events?**
+>
 > - O BLoC fica limpo — sem `switch/case` gigante.
 > - Cada event é um arquivo isolado, fácil de localizar e testar.
 > - A lógica fica coesa: o evento sabe como se executar.
@@ -424,39 +443,117 @@ class UrlShortenerScreen extends StatelessWidget {
 
 Widgets específicos ficam em `screens/widgets/`.
 
-#### 4.3 — L10n (`l10n/`)
+#### 4.3 — Internacionalização (L10n) — `intl` + `gen-l10n`
 
-Internacionalização manual por feature, sem dependência de codegen:
+A internacionalização é **centralizada** no pacote `common/core` usando o sistema oficial do Flutter (`gen-l10n`) com o pacote `intl`. **Não existe L10n por feature** — todas as strings ficam nos arquivos ARB do `core`.
+
+##### Estrutura
 
 ```
-l10n/
-├── <feature>_l10n.dart         # Factory que resolve o locale
-└── strings/
-    ├── <feature>_strings.dart  # Contrato abstrato (interface)
-    ├── <feature>_en.dart       # Implementação inglês
-    └── <feature>_pt_br.dart    # Implementação pt-BR
+common/core/
+├── l10n.yaml                          # Configuração do gen-l10n
+└── lib/
+    ├── l10n/
+    │   ├── app_en.arb                 # Strings em inglês (template)
+    │   └── app_pt.arb                 # Strings em português
+    └── src/
+        └── l10n/
+            ├── credential_type_l10n.dart       # Mapeamento de tipos (runtime)
+            └── generated/                      # Gerado automaticamente
+                ├── app_localizations.dart       # Classe abstrata + delegates
+                ├── app_localizations_en.dart    # Implementação inglês
+                └── app_localizations_pt.dart    # Implementação português
 ```
 
-```dart
-// Interface
-abstract class UrlShortenerStrings {
-  String get urlInputHint;
-  String get shortenButtonText;
-  String get timeOutError;
-  String get unknownError;
-}
+##### Configuração (`l10n.yaml`)
 
-// Factory
-abstract class UrlShortenerL10n {
-  static UrlShortenerStrings of(BuildContext context) {
-    final locale = View.of(context).platformDispatcher.locale;
-    switch (locale.languageCode) {
-      case 'pt': return UrlShortenerPtBr();
-      default:   return UrlShortenerEn();
+```yaml
+arb-dir: lib/l10n
+template-arb-file: app_en.arb
+output-localization-file: app_localizations.dart
+output-dir: lib/src/l10n/generated
+nullable-getter: false
+```
+
+- **`arb-dir`** — Diretório dos arquivos `.arb` (Application Resource Bundle).
+- **`template-arb-file`** — Arquivo de referência que define todas as chaves. Novas strings devem ser adicionadas aqui primeiro.
+- **`output-dir`** — Diretório dos arquivos gerados (não editar manualmente).
+- **`nullable-getter: false`** — `AppLocalizations.of(context)` retorna `AppLocalizations` (não nullable), evitando `!` no código.
+
+##### Adicionando novas strings
+
+1. Adicione a chave no arquivo template (`app_en.arb`):
+
+```json
+{
+  "greeting": "Hello, {name}!",
+  "@greeting": {
+    "placeholders": {
+      "name": { "type": "String" }
     }
   }
 }
 ```
+
+2. Adicione a tradução no `app_pt.arb`:
+
+```json
+{
+  "greeting": "Olá, {name}!"
+}
+```
+
+3. Rode o gerador:
+
+```bash
+cd common/core
+fvm flutter gen-l10n
+```
+
+> [!TIP]
+> O `gen-l10n` também roda automaticamente durante `fvm flutter run` e `fvm flutter build` quando `generate: true` está no `pubspec.yaml`.
+
+##### Uso nos widgets
+
+```dart
+import 'package:core/core.dart';
+
+// Em qualquer widget com acesso ao BuildContext:
+final l10n = AppLocalizations.of(context);
+Text(l10n.greeting('Maria'));
+```
+
+##### Configuração no `MaterialApp`
+
+O `core` exporta `AppLocalizations` via barrel file. A configuração no `main.dart`:
+
+```dart
+import 'package:core/core.dart';
+
+MaterialApp(
+  localizationsDelegates: AppLocalizations.localizationsDelegates,
+  supportedLocales: AppLocalizations.supportedLocales,
+  // ...
+);
+```
+
+##### Mapeamento de tipos localizados (runtime)
+
+Para strings que dependem de valores dinâmicos (ex: tipo de credencial vindo de API), use funções de mapeamento:
+
+```dart
+// common/core/lib/src/l10n/credential_type_l10n.dart
+String localizedCredentialType(AppLocalizations l10n, String credentialType) {
+  return switch (credentialType) {
+    'AgeVerificationCredential' => l10n.credentialTypeAgeVerification,
+    'CofenNursingLicenseCredential' => l10n.credentialTypeCofenNursingLicense,
+    _ => credentialType,
+  };
+}
+```
+
+> [!IMPORTANT]
+> **Features não possuem arquivos de L10n próprios.** Todas as strings ficam centralizadas nos `.arb` do `core`. Isso garante consistência e evita duplicação de traduções entre módulos. Para adicionar strings de uma nova feature, basta editar os arquivos `.arb` existentes no `core`.
 
 ---
 
@@ -540,14 +637,14 @@ Future<void> main() async {
 
 Recursos compartilhados entre todas as features:
 
-| Pasta/Arquivo            | Conteúdo                                           |
-|--------------------------|-----------------------------------------------------|
-| `dependency_injection.dart` | Instância global `GetIt di`                       |
-| `core_service_locator.dart` | Registro de dependências globais (HTTP, storage)  |
-| `routes.dart`             | Classe com constantes de rotas (`static const`)    |
-| `infra/`                  | Adaptadores de infraestrutura (HTTP, etc.)          |
-| `theme/`                  | Design system (cores, tipografia, etc.)             |
-| `utils/`                  | Funções utilitárias compartilhadas                  |
+| Pasta/Arquivo               | Conteúdo                                         |
+| --------------------------- | ------------------------------------------------ |
+| `dependency_injection.dart` | Instância global `GetIt di`                      |
+| `core_service_locator.dart` | Registro de dependências globais (HTTP, storage) |
+| `routes.dart`               | Classe com constantes de rotas (`static const`)  |
+| `infra/`                    | Adaptadores de infraestrutura (HTTP, etc.)       |
+| `theme/`                    | Design system (cores, tipografia, etc.)          |
+| `utils/`                    | Funções utilitárias compartilhadas               |
 
 ---
 
@@ -589,16 +686,15 @@ Use esta checklist ao criar uma nova feature:
   - [ ] `<feature>_container.dart` — BlocConsumer
   - [ ] `screens/<feature>_screen.dart` — Widget puro
   - [ ] `screens/widgets/` — Widgets específicos
-  - [ ] `l10n/strings/<feature>_strings.dart` — Contrato
-  - [ ] `l10n/strings/<feature>_en.dart` — Inglês
-  - [ ] `l10n/strings/<feature>_pt_br.dart` — Português
-  - [ ] `l10n/<feature>_l10n.dart` — Factory
+- [ ] **l10n (centralizado no `common/core`)**
+  - [ ] Adicionar strings em `common/core/lib/l10n/app_en.arb`
+  - [ ] Adicionar traduções em `common/core/lib/l10n/app_pt.arb`
+  - [ ] Rodar `cd common/core && fvm flutter gen-l10n`
 - [ ] `<feature>_navigator.dart` — GoRoute
 - [ ] `<feature>_service_locator.dart` — DI da feature
 - [ ] Registrar no `main.dart`:
-  - [ ] `initServiceLocator()` 
+  - [ ] `initServiceLocator()`
   - [ ] Adicionar rota ao `GoRouter`
 - [ ] Adicionar rota em `core/routes.dart`
 
 ---
-

@@ -16,7 +16,7 @@ final class InitializeSharing extends CredentialSharingEvent {
       final result = await bloc.credentialsRepository.getCredentials(offset: 0);
 
       final matching = result.credentials
-          .where((c) => c.status == 'active')
+          .where((c) => c.status == 'issued')
           .toList();
 
       emit(

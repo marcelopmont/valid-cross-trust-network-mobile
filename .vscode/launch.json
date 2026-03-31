@@ -52,6 +52,24 @@
       "program": "lib/main.dart",
       "deviceId": "chrome",
       "args": ["--dart-define=ENV=prod"]
+    },
+    {
+      "name": "iPhone 16 Pro (Simulator) - HML",
+      "cwd": "app",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main.dart",
+      "deviceId": "AEABA131-B0CC-4470-B331-338B0B4C0999",
+      "args": ["--dart-define=ENV=hml"]
+    },
+    {
+      "name": "iPhone 16 Pro (Simulator) - Prod",
+      "cwd": "app",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main.dart",
+      "deviceId": "AEABA131-B0CC-4470-B331-338B0B4C0999",
+      "args": ["--dart-define=ENV=prod"]
     }
   ]
 }

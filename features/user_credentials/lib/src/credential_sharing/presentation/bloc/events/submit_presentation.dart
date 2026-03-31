@@ -19,7 +19,7 @@ final class SubmitPresentation extends CredentialSharingEvent {
         verifierDid: request.verifierDid,
         credentials: [
           (
-            credentialId: credential.credentialId,
+            credentialId: credential.credentialId.replaceFirst('urn:uuid:', ''),
             fields: request.requestedFields,
           ),
         ],
